@@ -1,18 +1,48 @@
-# React + Vite
+# 📦 StockMight – ระบบจัดการสต็อกสินค้าขนาดเล็ก
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**[MINI-PROJECT | Web Application Development]**
 
-Currently, two official plugins are available:
+StockMight คือเว็บแอปสำหรับจัดการสต็อกสินค้าขนาดเล็ก
+ออกแบบมาเพื่อช่วยให้การบริหารจัดการสินค้าในคลังเป็นเรื่องง่าย ลดความผิดพลาดของตัวเลข และรองรับการทำงานพื้นฐานที่จำเป็นต่อระบบคลังสินค้า
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🎯 วัตถุประสงค์ของโปรเจกต์
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+* ฝึกพัฒนา Web Application ตามหลัก CRUD
+* ออกแบบระบบจัดการสต็อกที่ **ใช้งานง่าย และแม่นยำ**
+* เหมาะสำหรับร้านค้าขนาดเล็ก หรือใช้เป็นต้นแบบระบบคลังสินค้า
 
-Note: This will impact Vite dev & build performances.
+---
 
-## Expanding the ESLint configuration
+## ✨ ฟีเจอร์หลัก (CRUD)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* ➕ **เพิ่มสินค้าใหม่**
+* 👀 **ดูรายการสินค้าและจำนวนคงเหลือ**
+* 🔄 **อัปเดตจำนวนสินค้า (สต็อกเข้า / สต็อกออก)**
+* 🗑️ **ลบสินค้าที่เลิกจำหน่าย**
+
+> 🔍 **จุดเด่น:** เน้นความแม่นยำของข้อมูลตัวเลข และลดความผิดพลาดจากการจัดการสต็อกด้วยมือ
+
+---
+
+## 🛠️ เทคโนโลยีที่ใช้
+
+* Frontend: HTML / CSS / JavaScript
+* Backend: 
+* Database:
+
+---
+
+## 👨‍💻 สมาชิกผู้พัฒนา
+
+* **67025954** กิตติณัฏฐ์ ครรชิตานุรักษ์
+* **67020780** จิรกิตต์ หมูหล้า
+* **67026067** ทรงวุฒิ โพธิ์ศรี
+
+---
+
+## 📌 หมายเหตุ
+
+โปรเจกต์นี้เป็นส่วนหนึ่งของรายวิชา
+**Web Application Development (Mini Project)**
