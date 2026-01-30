@@ -6,9 +6,11 @@ export default function Login() {
         <div className="login-container">
             <div className="wrapper">
                 <div className="logo-container">
-                    <img src="#" alt="logo"/>
-                    <h1>StockMight</h1>
-                    <h4>ระบบจัดการคลังสินค้า</h4>
+                    <img src="public\Icon\0-Login\Icon-4.svg" alt="logo"/>
+                    <div>
+                        <h1>StockMight</h1>
+                        <h4>ระบบจัดการคลังสินค้า</h4>
+                    </div>
                 </div>
                 <form className="login-form">
                     <div>
@@ -19,19 +21,18 @@ export default function Login() {
                     <div className="username-container">
                         <h3>ชื่อผู้ใช้</h3>
                         <div className="input">
-                            <label htmlFor="username"></label>
+                            <label htmlFor="username"><img src="public\Icon\0-Login\Icon-3.svg"/></label>
                             <input type="text" id="username" name="username" placeholder="กรอกชื่อผู้ใช้" />
                         </div>
                     </div>
                     <div className="password-container">
                         <h3>รหัสผ่าน</h3>
                         <div className="input">
-                            <label htmlFor="password"></label>
+                            <label htmlFor="password"><img src="public\Icon\0-Login\Icon-2.svg"/></label>
                             <input type="password" id="password" name="password" placeholder="กรอกรหัสผ่าน" />
-                            <img src="#" alt="eye-icon" className="eye-icon"/>
                         </div>
                     </div>
-                    <button type="submit" className="login-button"><img src="#"/><h3>เข้าสู่ระบบ</h3></button>
+                    <button type="submit" className="login-button"><img src="public\Icon\0-Login\Icon.svg"/><h3>เข้าสู่ระบบ</h3></button>
                 </form>
             </div>
             <footer>© 2026 StockMight. ระบบจัดการคลังสินค้า</footer>
