@@ -10,8 +10,8 @@ import { Route, Routes, Link } from 'react-router-dom';
 export default function App() {
   return (
     <div>
-      <Link to="/login"><h1>Login</h1></Link>
-      <Link to="/pages"><h1>Pages</h1></Link>
+      {/* <Link to="/login"><h1>Login</h1></Link>
+      <Link to="/pages"><h1>Pages</h1></Link> */}
       <Routes>
         <Route path="/login" element= {<Login />} />
         <Route path="/pages" element= {<MainPage />} />
