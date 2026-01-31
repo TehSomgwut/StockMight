@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import './index.css';
 import Login from './pages/Login/Login';
 import Block from './components/Block/Block';
@@ -7,6 +6,7 @@ import Side from './components/Side/Side';
 import MainPage from './pages/MainPage';
 import { Route, Routes, Link } from 'react-router-dom';
 import './root.css';
+import GSAP from './pages/GSAP-test/GSAPBlock';
 
 export default function App() {
   return (
@@ -16,6 +16,7 @@ export default function App() {
       <Routes>
         <Route path="/login" element= {<Login />} />
         <Route path="/pages" element= {<MainPage />} />
+        <Route path="/test" element= { <GSAP /> } />
       </Routes>
     </div>
   )

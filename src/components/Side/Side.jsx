@@ -1,9 +1,11 @@
-import Menu from './menu/menu';
+import Menu from './menu/Menu';
 import sideStyles from './Side.module.css';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import gsap from 'gsap';
 
 export default function Side() {
     const [username, setUsername] = useState("ผู้ดูแลระบบ")
+    const [activeIndex, setActiveIndex] = useState(0)
     let profile = null
     const data = [
         {
@@ -47,6 +49,21 @@ export default function Side() {
             text:'จัดการผู้ใช้'
         }
     ]
+    const selected = useRef(null)
+    const menusContainerRef = useRef(null)
+
+    useEffect(() => {
+        // Set initial position of the selected indicator to the first menu
+        if (menusContainerRef.current && selected.current) {
+            const target = menusContainerRef.current.children[1]; // children[0] is the .selected element itself
+            if (target) gsap.set(selected.current, { y: target.offsetTop });
+        }
+    }, [])
+
+    const handleSelect = (index) => {
+        setActiveIndex(index)
+    }
+
     return (
         <aside>
             <div>
@@ -57,9 +74,10 @@ export default function Side() {
                         <p className={sideStyles.role}>ผู้ดูแลระบบ</p>
                     </div>
                 </div>
-                <div className={sideStyles.menus}>
+                <div className={sideStyles.menus} ref={menusContainerRef}>
+                    <div className={sideStyles.selected} ref={selected}></div>
                     { data.map((item, index)=> {
-                        return <Menu key={index} src={item.src} alt={item.alt} text={item.text} />
+                        return <Menu key={index} src={item.src} alt={item.alt} text={item.text} selected={ selected } index={index} active={ activeIndex === index } onSelect={ handleSelect } />
                     })}
                 </div>
             </div>

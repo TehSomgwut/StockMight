@@ -20,10 +20,32 @@ aside {
         }
     }
     .menus {
+        position: relative;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
         padding: 10px;
+        letter-spacing: 0.5px;
+        padding-left: 15px;
+    }
+    .selected {
+        position: absolute;
+        content: "";
+        width: 260px;
+        height: 40px;
+        border-radius: 10px;
+        background-color: var(--main);
+        left: 10px;
+        z-index: -1;
+    }
+    .exit {
+        display: flex;
+        gap: 10px;
+        border-top: 1px solid var(--light-gray);
+        padding-top: 10px;
+        img {
+            margin-left: 10px;
+        }
     }
 }
 

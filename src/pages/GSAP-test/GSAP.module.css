@@ -1,0 +1,17 @@
+.block {
+    width: 200px;
+    height: 80px;
+    background-color: red;
+    border-radius: 10px;
+    z-index: -1;
+    position: absolute;
+    mix-blend-mode: color;
+}
+
+.container {
+    padding: 20px;
+}
+
+.container > h1 {
+    
+}
