@@ -6,6 +6,7 @@ import Block from './components/Block/Block';
 import Side from './components/Side/Side';
 import MainPage from './pages/MainPage';
 import { Route, Routes, Link } from 'react-router-dom';
+import './root.css';
 
 export default function App() {
   return (
