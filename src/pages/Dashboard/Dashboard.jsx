@@ -1,5 +1,7 @@
 import dbStyles from './Dashboard.module.css';
 import Detail from './OverallDetail/OverallDetail';
+import BarC from './barChart/Bar';
+import LowStock from './LowStock/LowStock';
 
 export default function Dashboard() {
     const dashboardData = [
@@ -40,7 +42,7 @@ export default function Dashboard() {
         <div className={dbStyles.Dashboard}>
             <div>
                 <h1>แดชบอร์ดคลังสินค้า</h1>
-                <p>ภาพรวมและสถิติการจัดการคลังสินค้า</p>
+                <p className={dbStyles["dashboard-description"]}>ภาพรวมและสถิติการจัดการคลังสินค้า</p>
             </div>
             <div className={dbStyles["overall-container"]}>
                 {
@@ -48,6 +50,14 @@ export default function Dashboard() {
                         return <Detail key={index} src={item.src} text={item.text} data={item.data} alert={item.alert} />
                     })
                 }
+            </div>
+            <div className={dbStyles["weekly"]}>
+                <div className={dbStyles["bar-chart-container"]}>
+                    <BarC />
+                </div>
+                <div className={dbStyles["low-stock"]}>
+                    <LowStock />
+                </div>
             </div>
         </div>
     )

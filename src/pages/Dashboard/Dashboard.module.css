@@ -7,7 +7,7 @@
         font-size: 1.6em;
         font-weight: 600;
     }
-    p {
+    .dashboard-description {
         color: var(--gray);
         font-size: 0.85em;
     }
@@ -15,5 +15,28 @@
         display: flex;
         gap: 20px;
         flex-wrap: wrap;
+    }
+    .weekly {
+        display: flex;
+        gap: 20px;
+        .bar-chart-container {
+            box-sizing: border-box;
+            padding: 10px;
+            border: var(--light-gray) 1px solid;
+            overflow: visible;
+            width: Auto;
+            height: Auto;
+            flex-shrink: 200px;
+            flex-grow: 1.3;
+            flex-basis: 200px;
+        }
+        .low-stock {
+            box-sizing: border-box;
+            padding: 10px;
+            border: var(--light-gray) 1px solid;
+            flex-shrink: 200px;
+            flex-grow: 1;
+            flex-basis: 200px;
+        }
     }
 }
