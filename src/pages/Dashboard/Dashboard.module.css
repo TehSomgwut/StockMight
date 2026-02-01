@@ -1,0 +1,19 @@
+.Dashboard {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    h1 {
+        font-size: 1.6em;
+        font-weight: 600;
+    }
+    p {
+        color: var(--gray);
+        font-size: 0.85em;
+    }
+    .overall-container {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+}
