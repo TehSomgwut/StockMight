@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import menuStyles from './Menu.module.css';
 import gsap from 'gsap';
 import { Route, Link } from 'react-router-dom'

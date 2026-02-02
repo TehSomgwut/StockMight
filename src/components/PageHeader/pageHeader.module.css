@@ -1,0 +1,10 @@
+.header {
+    h1 {
+        font-size: 1.6em;
+        font-weight: 600;
+    }
+    p {
+        color: var(--gray);
+        font-size: 0.85em;
+    }
+}

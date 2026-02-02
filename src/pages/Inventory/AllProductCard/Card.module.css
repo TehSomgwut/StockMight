@@ -1,0 +1,53 @@
+.Card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 50%;
+    flex-grow: 1;
+    border: var(--card-border);
+    padding: 10px;
+    p {
+        color: var(--gray);
+        font-size: 0.85em;
+    }
+    img {
+        box-sizing: border-box;
+        padding: 10px;
+        border-radius: 50%;
+        width: 40px;
+    }
+
+}
+
+.blue {
+    h3 {
+        color: var(--main);
+    }
+    img {
+        background-color: var(--main10);
+    }
+}
+.green {
+    h3 {
+        color: var(--safe);
+    }
+    img {
+        background-color: var(--safe10);
+    }
+}
+.orange {
+    h3 {
+        color: var(--risky);
+    }
+    img {
+        background-color: var(--risky10);
+    }
+}
+.red {
+    h3 {
+        color: var(--danger);
+    }
+    img {
+        background-color: var(--danger10);
+    }
+}

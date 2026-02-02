@@ -9,6 +9,18 @@
 
 :root {
     --main: #1904FC;
+    --main10: rgba(25, 4, 252, 0.1);
     --gray: #4A5565;
     --light-gray: #E5E7EB;
+    --dark-gray: #364153;
+    --risky: #FF6200;
+    --risky10: rgba(255, 98, 0, 0.1);
+    --safe: #00A63E;
+    --safe10: rgba(0, 166, 62, 0.1);
+    --danger: #FF0000;
+    --danger10: rgba(255, 0, 0, 0.1);
+    --gray-background: #F9FAFB;
+
+
+    --card-border: 1px solid var(--light-gray);
 }
