@@ -29,19 +29,57 @@
     form {
         border: var(--card-border);
         display: flex;
+        gap: 15px;
         width: 100%;
         label {
+            display: flex;
+            padding: 10px;
+            gap: 10px;
             flex-grow: 1;
-            color: red;
-            height: 20px;
-            width: 20px;
+
+            input {
+                border: none;
+                font-size: 1rem;
+            }
+            input:focus {
+                outline: none;
+                border: none;
+            }
+            select {
+                flex-grow: 1;
+                border: none;
+                width: 100%;
+                background-color: white;
+                color: var(--gray);
+                option {
+                    color: var(--gray);
+                    font-family:'Prompt';
+                }
+                
+            }
         }
-        select, input {
-            display: none;
+    
+    }
+    .product-table {
+        display: grid;
+        grid-template-columns: 3fr 1fr 2fr 1fr 1fr 1fr 2fr;
+        border: var(--card-border);
+        .Thead {
+            background-color: var(--gray-background);
+            border: var(--card-border);
+            box-sizing: border-box;
+            padding: 5px;
+            color: var(--gray);
+            text-align: center;
+            font-size: 0.85em;
         }
     }
 }
 .card-container {
     display: flex;
-    gap: 15px;
+    gap: 20px;
+}
+
+.product-table {
+
 }

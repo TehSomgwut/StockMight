@@ -9,6 +9,30 @@ export default function Inventory() {
         {text: "สต๊อกต่ำ", value: "3", src:"/Icon/2-Inventory/Icon.svg", CN: "orange"},
         {text: "หมดสต๊อก", value: "0", src:"/Icon/2-Inventory/Icon-20.svg", CN:"red"}
     ]
+
+    const products = [
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ปกติ", status: "กำลังใช้งาน"},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ต่ำกว่าจุดสั่งซื้อ", status: "กำลังใช้งาน"},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ต่ำกว่าจุดสั่งซื้อ", status: ""},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ปกติ", status: "กำลังใช้งาน"},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ต่ำกว่าจุดสั่งซื้อ", status: "กำลังใช้งาน"},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ต่ำกว่าจุดสั่งซื้อ", status: ""},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ปกติ", status: "กำลังใช้งาน"},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ต่ำกว่าจุดสั่งซื้อ", status: "กำลังใช้งาน"},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ต่ำกว่าจุดสั่งซื้อ", status: ""},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ปกติ", status: "กำลังใช้งาน"},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ต่ำกว่าจุดสั่งซื้อ", status: "กำลังใช้งาน"},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ต่ำกว่าจุดสั่งซื้อ", status: ""},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ปกติ", status: "กำลังใช้งาน"},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ต่ำกว่าจุดสั่งซื้อ", status: "กำลังใช้งาน"},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ต่ำกว่าจุดสั่งซื้อ", status: ""},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ปกติ", status: "กำลังใช้งาน"},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ต่ำกว่าจุดสั่งซื้อ", status: "กำลังใช้งาน"},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ต่ำกว่าจุดสั่งซื้อ", status: ""},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ปกติ", status: "กำลังใช้งาน"},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ต่ำกว่าจุดสั่งซื้อ", status: "กำลังใช้งาน"},
+        {name: "เครื่องพิมพ์เลเซอร์ HP LaserJet Pro", src:"/Icon/2-Inventory/Icon.svg", unit: "ชิ้น", productID: "ELC-001", category: "อิเล็กทรอนิกส์", remain: "15", stockStatus: "ต่ำกว่าจุดสั่งซื้อ", status: ""},
+    ]
     return (
         <div className={styleI["inventory-container"]}>
             <div className={styleI["header-container"]}>
@@ -19,18 +43,22 @@ export default function Inventory() {
                 </button>
             </div>
             <div className={styleI["card-container"]}>
-                {cards.map((item, index) => {
-                    return <Card key={index} {...item} />
-                })}
+                {cards ? 
+                
+                    cards.map((item, index) => {
+                        return <Card key={index} {...item} />
+                    })
+            : "ไม่มีข้อมูลสินค้า" }
             </div>
             <form>
                 <label htmlFor='product-search'>
-                    <img src="" />
+                    <img src="/Icon/2-Inventory/Icon-4.svg" />
                     <input type='text' id='product-search' name='product-search' placeholder='ค้นหารหัสสินค้า หรือชื่อสินค้า' />
                 </label>
-                <label htmlFor=".">
-                    <img src="" />
-                    <select>
+                <label htmlFor="search-filter">
+                    <img src="/Icon/2-Inventory/Icon-3.svg" />
+                    <select id="search-filter" name="search-filter">
+                        <option value="">กรุณาเลือก</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -45,6 +73,10 @@ export default function Inventory() {
                 <p className={styleI.Thead}>สถานะสต๊อก</p>
                 <p className={styleI.Thead}>สถานะ</p>
                 <p className={styleI.Thead}>จัดการ</p>
+
+                {products.map((item, index) => {
+                    return <Product key={index} {...item} />
+                })}
             </div>
         </div>
     )

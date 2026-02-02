@@ -19,6 +19,7 @@
     --safe10: rgba(0, 166, 62, 0.1);
     --danger: #FF0000;
     --danger10: rgba(255, 0, 0, 0.1);
+    --gray-background: #F9FAFB;
 
 
     --card-border: 1px solid var(--light-gray);
