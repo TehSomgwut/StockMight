@@ -4,10 +4,10 @@ import Card from './AllProductCard/Card';
 import Product from './Product/Product';
 export default function Inventory() {
     const cards = [
-        {text: "สินค้าทั้งหมด", value: "7", src:""},
-        {text: "สินค้าใช้งาน", value: "1", src:""},
-        {text: "สต๊อกต่ำ", value: "3", src:""},
-        {text: "หมดสต๊อก", value: "0", src:""}
+        {text: "สินค้าทั้งหมด", value: "7", src:"/Icon/2-Inventory/Icon-7.svg", CN:"blue"},
+        {text: "สินค้าใช้งาน", value: "1", src:"/Icon/2-Inventory/Icon-6.svg", CN:"green"},
+        {text: "สต๊อกต่ำ", value: "3", src:"/Icon/2-Inventory/Icon.svg", CN: "orange"},
+        {text: "หมดสต๊อก", value: "0", src:"/Icon/2-Inventory/Icon-20.svg", CN:"red"}
     ]
     return (
         <div className={styleI["inventory-container"]}>
@@ -18,7 +18,7 @@ export default function Inventory() {
                     <p>เพิ่มสินค้าใหม่</p>
                 </button>
             </div>
-            <div className={styleI["class-container"]}>
+            <div className={styleI["card-container"]}>
                 {cards.map((item, index) => {
                     return <Card key={index} {...item} />
                 })}

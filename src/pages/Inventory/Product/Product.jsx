@@ -1,6 +1,6 @@
 import styleP from './Product.module.css'
 
-export default function Product({name, src, unit, productID, catagory, remain, stockStatus, status, manage}) {
+export default function Product({name, src, unit, productID, catagory, remain, stockStatus, status}) {
     return (
         <div className={styleP.Product}>
             <div className={styleP["product-name"]}>
@@ -13,13 +13,16 @@ export default function Product({name, src, unit, productID, catagory, remain, s
             <p>{productID}</p>
             <p>{catagory}</p>
             <p>{remain}</p>
-            {stockStatus=="ปกติ" ? 
-                <div>
-                    
+            {stockStatus==="ปกติ" ? 
+                <div className={styleP.normal}>
+                    <img src="/Icon/2-Inventory/Vector/svg" />
+                    <p>ปกติ</p>
                 </div>
             : 
-                <div>
-                    
+
+                <div className={styleP.normal}>
+                    <img src="/Icon/2-Inventory/Icon.svg" />
+                    <p>ต่ำกว่าจุดสั่งซื้อ</p>
                 </div>
              }
             <div>{status}</div>
