@@ -7,6 +7,9 @@ nav.nav {
     border-bottom: 1px solid #E5E7EB;
     padding-bottom: 0;
     padding-top: 0;
+    position: sticky;
+    top: 0;
+    background-color: white;
 }
 
 div.logo {

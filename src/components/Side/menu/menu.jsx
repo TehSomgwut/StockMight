@@ -1,38 +1,34 @@
-import menuStyles from './menu.module.css';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
+import menuStyles from './Menu.module.css';
 import gsap from 'gsap';
+import { Route, Link } from 'react-router-dom'
 
-export default function Menu(props) {
-    const src = props.src
-    const alt = props.alt
-    const text = props.text
-    const selected = props.selected
-    const index = props.index
-    const active = props.active
-    const onSelect = props.onSelect
+export default function Menu({ src, alt, text, selectedRef, index, onSelect, linkTo }) {
     const menuRef = useRef(null);
-    const menuText = useRef(null);
-    const menuIcon = useRef(null);
-    function show() {
-        console.log(selected.current.offsetTop, menuRef.current.offsetLeft, menuRef.current.offsetTop)
-    }
 
-    function move() {
-        // move the highlighted selector
-        gsap.to(selected.current, {
-            y: menuRef.current.offsetTop,
-            duration: 0.1,
-        })
-        // notify parent so it can mark this index as active
-        if (typeof onSelect === 'function') onSelect(index)
+    function handleClick() {
+        if (selectedRef.current && menuRef.current) {
+            // สั่งให้กล่องสีแดง (Indicator) วิ่งมาที่ตำแหน่ง Y ของเมนูนี้
+            gsap.to(selectedRef.current, {
+                y: menuRef.current.offsetTop - selectedRef.current.offsetHeight/2 + 14,
+                duration: 0.15,
+            });
+            // แจ้ง Component แม่ว่าเลือกเมนูไหน
+            onSelect(index);
+        }
     }
-
-    const containerClass = `${menuStyles["menu-container"]} ${active ? menuStyles.active : ''}`
 
     return (
-        <div ref={menuRef} onClick={move} className={containerClass}>
-            <img ref={menuIcon} className={menuStyles["menus-icon"]} src={src} alt={alt} />
-            <p onClick={show} ref={menuText}>{ text }</p>
-        </div>
+        <Link to={linkTo} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <div 
+                ref={menuRef} 
+                onClick={handleClick} 
+                className={menuStyles["menu-container"]}
+            >
+                {/* เลเยอร์ปกติ (มองเห็นเป็นสีดำบนพื้นขาว) */}
+                <img className={menuStyles["menus-icon"]} src={src} alt={alt} />
+                <p className={menuStyles["text-black"]}>{text}</p>
+            </div>
+        </Link>
     );
 }

@@ -1,0 +1,20 @@
+.OverallBlock {
+    border: 1px solid var(--light-gray);
+    padding: 15px;
+    height: 80px;
+    min-width: fit-content;
+    display: flex;
+    flex-basis: 250px;
+    flex-grow: 1;
+    flex-shrink: 150px;
+    .detail {
+        p {
+            color: var(--gray);
+            font-size: 0.85em;
+        }
+        h3 {
+            font-weight: 600;
+            font-size: 1.3em;
+        }
+    }
+}

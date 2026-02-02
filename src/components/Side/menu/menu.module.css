@@ -1,30 +1,33 @@
 .menu-container {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    width: 100%;
-    height: 40px;
-    padding-left: 10px;
-    cursor: pointer;
-}
-
-.menu-container p {
-    margin: 0;
-    color: var(--text-color, #111827);
+  position: relative;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 7px 15px;
+  cursor: pointer;
+  z-index: 2;
 }
 
 .menus-icon {
-    width: 20px;
-    height: 20px;
-    transition: filter 0.15s ease;
+  width: 20px;
+  height: 20px;
+  margin-right: 15px;
 }
 
-/* active state */
-.active p {
-    color: #ffffff;
+.text-black {
+  color: #333;
+  margin: 0;
 }
 
-.active .menus-icon {
-    /* invert icon color for simple white effect; works for SVG/PNG icons where appropriate */
-    filter: brightness(0) invert(1);
+.text-white-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 55px;
+  color: white;
+  pointer-events: none;
 }

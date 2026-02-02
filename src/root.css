@@ -11,4 +11,7 @@
     --main: #1904FC;
     --gray: #4A5565;
     --light-gray: #E5E7EB;
+    --dark-gray: #364153;
+    --risky: #FF6200;
+    --risky10: rgba(255, 98, 0, 0.1);
 }

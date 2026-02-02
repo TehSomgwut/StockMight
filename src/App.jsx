@@ -15,7 +15,7 @@ export default function App() {
       <Link to="/pages"><h1>Pages</h1></Link> */}
       <Routes>
         <Route path="/login" element= {<Login />} />
-        <Route path="/pages" element= {<MainPage />} />
+        <Route path="/pages/*" element= {<MainPage />} />
         <Route path="/test" element= { <GSAP /> } />
       </Routes>
     </div>
