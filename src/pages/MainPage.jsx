@@ -3,6 +3,7 @@ import Nav from '../components/Nav/Nav'
 import Side from '../components/Side/Side'
 import Dashboard from './Dashboard/Dashboard';
 import mainStyles from './MainPage.module.css';
+import Inventory from './Inventory/Inventory';
 
 export default function MainPage() {
     return (
@@ -12,6 +13,7 @@ export default function MainPage() {
                 <Side />
                 <Routes>
                     <Route path={"/home"} element={<Dashboard />} />
+                    <Route path={"/inventory"} element={<Inventory />} />
                 </Routes>
                 {/* <Dashboard /> */}
             </div>

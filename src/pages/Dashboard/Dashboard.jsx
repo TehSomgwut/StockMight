@@ -2,6 +2,7 @@ import dbStyles from './Dashboard.module.css';
 import Detail from './OverallDetail/OverallDetail';
 import BarC from './barChart/Bar';
 import LowStock from './LowStock/LowStock';
+import Header from '../../components/PageHeader/PageHeader'
 
 export default function Dashboard() {
     const dashboardData = [
@@ -40,10 +41,7 @@ export default function Dashboard() {
     ]
     return (
         <div className={dbStyles.Dashboard}>
-            <div>
-                <h1>แดชบอร์ดคลังสินค้า</h1>
-                <p className={dbStyles["dashboard-description"]}>ภาพรวมและสถิติการจัดการคลังสินค้า</p>
-            </div>
+            <Header header="แดชบอร์ดคลังสินค้า" description="ภาพรวมและสถิติการจัดการคลังสินค้า" />
             <div className={dbStyles["overall-container"]}>
                 {
                     dashboardData.map((item, index) => {
