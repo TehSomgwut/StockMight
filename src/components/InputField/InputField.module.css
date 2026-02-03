@@ -1,0 +1,19 @@
+.input-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    input {
+        border: var(--card-border);
+        padding: 10px;
+        height: 30px;
+    }
+    .description {
+        color: var(--gray);
+        font-size: 0.85rem;
+    }
+    &.long {
+        input {
+            min-height: 60px;
+        }
+    }
+}

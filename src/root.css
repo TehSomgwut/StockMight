@@ -7,6 +7,11 @@
     font-family: Prompt;
 }
 
+input[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
 :root {
     --main: #1904FC;
     --main10: rgba(25, 4, 252, 0.1);
