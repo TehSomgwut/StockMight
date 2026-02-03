@@ -62,6 +62,7 @@ export default function Side() {
                             selectedRef={selectedRef}
                             index={index}
                             onSelect={setActiveIndex}
+                            active={activeIndex === index}
                         />
                     ))}
                 </div>
