@@ -1,12 +1,22 @@
 import StyleInputField from './InputField.module.css'
 
-export default function InputField({name, placeholder, description, isReq, addClass}) {
+export default function InputField({ name, placeholder, description, isReq, addClass }) {
     
+    const isLong = addClass === StyleInputField.long;
+    const InputTag = isLong ? 'textarea' : 'input';
+
     return (
-         <div className={`${StyleInputField["input-field"]} ${addClass}`}>
+        <div className={`${StyleInputField["input-field"]} ${addClass}`}>
             <p>{name}</p>
-            { isReq ? <input type='text' placeholder={placeholder} required /> : <input type='text' placeholder={placeholder} />  }   
-            <p  className={StyleInputField.description}>{description}</p>
-         </div>
+            
+            {/* 2. ใช้ Tag ที่เลือกไว้ และใส่ attributes แบบ Dynamic */}
+            <InputTag 
+                type={isLong ? undefined : 'text'}
+                placeholder={placeholder} 
+                required={isReq}
+            />
+            
+            <p className={StyleInputField.description}>{description}</p>
+        </div>
     )
 }
