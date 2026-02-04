@@ -1,0 +1,31 @@
+.Request {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    .options {
+        display: flex;
+        gap: 20px;
+
+        .import-option, .export-option {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-size: 0.9em;
+            padding: 5px;
+        }
+    }
+    .active {
+        color: var(--main);
+        background-color: var(--light-gray);
+    }
+    .active::before {
+        width: 80px;
+        height: 3px;
+        content: "";
+        position: relative;
+        background-color: var(--main);
+
+    }
+}
