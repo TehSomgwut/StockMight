@@ -1,3 +1,21 @@
+    .number-input {
+        display: flex;
+        width: 100%;
+        gap: 10px;
+        span {
+            background-color: var(--light-gray);
+            border: none;
+            padding: 10px;
+            font-size: 1.3em;
+            text-align: center;
+            width: 30px;
+            cursor: pointer;
+        }
+        input {
+            width: 100%;
+        }
+    }
+
 .addProduct {
     display: flex;
     flex-direction: column;
@@ -30,7 +48,7 @@
     }
     label {
         width: 100%;
-        height: 120px;
+        height: 20vw;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -109,4 +127,44 @@
         color: var(--gray);
         font-size: 0.85rem;
     }
+}
+
+
+
+
+
+.input-container  {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    input {
+        flex-grow:1 ;
+    }
+    button {
+        flex-grow: 1;
+        height: 50px;
+        border: none;
+        cursor: pointer;
+    }
+    button[type="submit"] {
+        background-color: var(--main);
+        color: white;
+    }
+    button[type="reset"] {
+        background-color: white;
+        border: 2px solid var(--main);
+        color: var(--main)
+    }
+    button[type="reset"]:hover {
+        flex-grow: 1.1;
+        border: 2px solid var(--danger);
+        color: var(--danger)
+    }
+    button[type="submit"]:hover {
+        flex-grow: 1.1;
+        background-color: var(--safe)
+    }
+}
+.input-container > div {
+    flex-grow: 1;
 }

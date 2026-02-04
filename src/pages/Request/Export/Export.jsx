@@ -10,7 +10,7 @@ export default function Export() {
     const addA = () => setAmount(prev => prev + 1);
     const minusA = () => setAmount(prev => (prev > 0 ? prev - 1 : 0));
     return (
-         <form className={`{${StyleExport["export-form"]} ${StyleAddProduct["addProduct"]}}`}>
+         <form className={StyleExport["export-form"]}>
             <div className={StyleExport.search}>
                 <p>เลือกสินค้า</p>
                 <label htmlFor="search-request">

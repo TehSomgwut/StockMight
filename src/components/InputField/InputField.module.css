@@ -16,4 +16,9 @@
             min-height: 60px;
         }
     }
+    textarea, textarea:focus {
+        border: var(--card-border);
+        padding: 10px;
+        outline: none;
+    }
 }

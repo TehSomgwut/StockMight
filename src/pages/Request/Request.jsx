@@ -33,7 +33,8 @@ export default function Request() {
                     </Link>
                 </div>
                 <Routes>
-                    <Route path="import" element={<Import/>} />
+                    <Route path="/" element={<Export/>} />
+                    <Route path="import" element={<Export/>} />
                     <Route path="export" element={<Export/>} />
                 </Routes>
             </div>

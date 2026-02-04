@@ -1,0 +1,41 @@
+.export-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: var(--card-border);
+    padding: 20px;
+    width: 90%;
+    .detail {
+        background-color: var(--light-gray);
+        padding: 10px;
+        p {
+            color: var(--gray);
+            font-size: 0.9em;
+        }
+    }
+    
+}
+.search {
+    p {
+        color: var(--gray);
+        font-size: 0.9em;
+    }
+    label {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        border-radius: 0;
+        border: var(--card-border);
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        input {
+            border: none;
+            font-size: 1.1em;
+        }
+        input:focus {
+            border: none;
+            outline: none;
+        }
+    }
+}

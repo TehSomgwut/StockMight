@@ -1,0 +1,12 @@
+.log {
+    display: contents;
+    div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    .normalText {
+        font-size: 0.85em;
+        color: var(--gray);
+    }
+}
