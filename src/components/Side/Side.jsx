@@ -13,8 +13,8 @@ export default function Side() {
         { src: '/Icon/Navigator/Icon-15.svg', alt: 'add-menu', text: 'เพิ่มเมนู', linkTo:'/pages/add-product' },
         { src: '/Icon/Navigator/Icon-15.svg', alt: 'imported-exported', text: 'รับเข้า / เบิกออก', linkTo:'/pages/request' },
         { src: '/Icon/Navigator/Icon-14.svg', alt: 'history', text: 'ประวัติการเคลื่อนไหว', linkTo:'/pages/history' },
-        { src: '/Icon/Navigator/Icon-13.svg', alt: 'catagory', text: 'หมวดหมู่สินค้า', linkTo:'/pages/home' },
-        { src: '/Icon/Navigator/Icon-12.svg', alt: 'metrics', text: 'หน่วยนับ', linkTo:'/pages/home' },
+        { src: '/Icon/Navigator/Icon-13.svg', alt: 'category', text: 'หมวดหมู่สินค้า', linkTo:'/pages/categories' },
+        { src: '/Icon/Navigator/Icon-12.svg', alt: 'metrics', text: 'หน่วยนับ', linkTo:'/pages/metric' },
         { src: '/Icon/Navigator/Icon-11.svg', alt: 'report', text: 'รายงาน', linkTo:'/pages/home' },
         { src: '/Icon/Navigator/Icon-9.svg', alt: 'user-manage', text: 'จัดการผู้ใช้', linkTo:'/pages/home' }
     ];

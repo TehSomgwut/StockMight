@@ -1,0 +1,43 @@
+.Categories {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .header {
+        display: flex;
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: space-between;
+        .add-button {
+            display: flex;
+            gap: 10px;
+            box-sizing: border-box;
+            background-color: var(--main);
+            color: white;
+            white-space: nowrap;
+            align-items: center;
+            padding: 10px;
+            height: fit-content;
+            border-radius: 10px;
+            img {
+                width: 25px;
+            }
+        }
+
+    }
+    .Thead {
+        display: grid;
+        grid-template-columns:2fr 1fr 1fr 1fr;
+        background-color: var(--light-gray);
+        gap: 10px;
+        padding: 10px;
+    }
+    .Tbody {
+        display: grid;
+        grid-template-columns:2fr 1fr 1fr 1fr;
+        gap: 20px;
+        padding: 10px;
+        border: var(--card-border);
+    }
+}
