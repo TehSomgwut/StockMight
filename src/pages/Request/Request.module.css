@@ -16,7 +16,9 @@
     .options {
         display: flex;
         gap: 20px;
-
+        position: sticky;
+        top: 0;
+        background-color: white;
         .import-option, .export-option {
             display: flex;
             justify-content: center;
