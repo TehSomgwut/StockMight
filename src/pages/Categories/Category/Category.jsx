@@ -1,6 +1,6 @@
-import StyleCategory from './StyleCategory.css'
+import StyleCategory from './Category.module.css'
 
-export default function StyleCategory() {
+export default function Category() {
     return (
          <div></div>
     )

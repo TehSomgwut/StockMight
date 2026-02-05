@@ -1,12 +1,48 @@
 .log {
     display: contents;
+    font-size: 0.9em;
     div {
         display: flex;
         flex-direction: column;
         gap: 5px;
+        font-size: 0.9em;
     }
     .normalText {
         font-size: 0.85em;
         color: var(--gray);
+    }
+    .import-type {
+        color: var(--safe);
+        background-color: var(--safe10);
+        width: fit-content;
+        height: fit-content;
+        padding: 2px 10px;
+        border-radius: 10px;
+    }
+    .export-type {
+        color: var(--main);
+        background-color: var(--main10);
+        width: fit-content;
+        height: fit-content;
+        padding: 2px 10px;
+        border-radius: 10px;
+    }
+    .import-amount {
+        color: var(--safe);
+        position: relative;
+    }
+    .export-amount {
+        color: var(--danger);
+        position: relative;
+    }
+    .import-amount::after {
+        position: absolute;
+        content: "+";
+        left: -0.5em;
+    }
+    .export-amount::after {
+        position: absolute;
+        content: "-";
+        left: -0.5em;
     }
 }

@@ -5,6 +5,17 @@
     gap: 20px;
     width: 100%;
     box-sizing: border-box;
+    .Thead {
+        display: grid;
+        grid-template-columns:1fr 1fr 0.8fr 2fr 0.8fr 0.8fr 0.8fr 1fr;
+        margin-top: 20px;
+        padding: 20px;
+        border: var(--card-border);
+        margin-bottom: -20px;
+        background-color: var(--light-gray);
+        font-size: 0.95em;
+
+    }
     .table{
         display: grid;
         grid-template-columns:1fr 1fr 0.8fr 2fr 0.8fr 0.8fr 0.8fr 1fr;
@@ -12,11 +23,6 @@
         padding: 20px;
         gap: 15px;
         position: relative;
-        .Thead {
-            display: contents;
-            position: relative;
-            font-size: 0.9em;
-        }
         .pseudo {
             position: absolute;
             content: "";

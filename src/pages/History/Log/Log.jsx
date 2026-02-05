@@ -14,12 +14,12 @@ export default function Log({date, manager: {name, role}, type, product: {produc
          <div className={StyleLog.log}>
             <p className={StyleLog.normalText}>{thaiDate}</p>
             <p className={StyleLog.normalText}>{name} | {role}</p>
-            <p>{type}</p>
+            <p className={type=="รับเข้า" ? StyleLog["import-type"] : StyleLog["export-type"]}>{type}</p>
             <div>
                 <p className={StyleLog.productID}>{productID}</p>
                 <p className={StyleLog.normalText}>{pname}</p>
             </div>
-            <p>{amount}</p>
+            <p className={type=="รับเข้า" ? StyleLog["import-amount"] : StyleLog["export-amount"]}>{amount}</p>
             <p className={StyleLog.normalText}>{stock}</p>
             <p>{remain}</p>
             <div>
