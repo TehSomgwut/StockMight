@@ -18,7 +18,7 @@ export default function History() {
                     <img src="/Icon/4-Receive-issue/Icon.svg" />
                     <input type='text' placeholder='ค้นหาด้วย SKU หรือชื่อสินค้า' required />
                 </label>
-            </div>
+            </div>fire
             <div className={StyleHistory.Thead}>
                 <p>วันเวลา</p>
                 <p>ผู้ทำรายการ</p>

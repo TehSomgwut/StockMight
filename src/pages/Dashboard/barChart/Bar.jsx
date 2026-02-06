@@ -6,7 +6,7 @@ export default function BarC({ data }) {
         key.push(K)
     }
     return (
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={400}>
             <BarChart data={data}>
                 <XAxis dataKey={key[0]} />
                 <YAxis />
