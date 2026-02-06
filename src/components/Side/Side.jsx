@@ -34,45 +34,48 @@ export default function Side() {
     }, []);
 
     return (
-        <aside className={sideStyles.sidebar}>
-            <div>
-                <div className={sideStyles["profile-container"]}>
-                    <div className={sideStyles["profile-text"]}>
-                        {username ? username.slice(0, 1) : "U"}
-                    </div>
-                    <div>
-                        <p className={sideStyles.username}>{username}</p>
-                        <p className={sideStyles.role}>ผู้ดูแลระบบ</p>
-                    </div>
-                </div>
-
-                <div className={sideStyles.menus} ref={menusContainerRef}>
-                    {/* ตัวเลื่อนสีแดง (Indicator) */}
-                    <div className={sideStyles.selected} ref={selectedRef}>
-                        {/* เทคนิคพิเศษ: ใส่ข้อความสีขาวไว้ในกล่องแดง 
-                            แล้วเลื่อนสวนทางกับกล่องแดงเพื่อให้ข้อความดูเหมือนอยู่กับที่ */}
-                        <div style={{ position: 'relative', height: '100%' }}>
-                            {/* ส่วนนี้สามารถเพิ่ม Logic การทำ Masking ได้ถ้าต้องการความเป๊ะของตัวอักษรขาว */}
+        <div>
+            <div className={sideStyles.before}></div>
+            <aside className={sideStyles.sidebar}>
+                <div>
+                    <div className={sideStyles["profile-container"]}>
+                        <div className={sideStyles["profile-text"]}>
+                            {username ? username.slice(0, 1) : "U"}
+                        </div>
+                        <div>
+                            <p className={sideStyles.username}>{username}</p>
+                            <p className={sideStyles.role}>ผู้ดูแลระบบ</p>
                         </div>
                     </div>
-                    
-                    {data.map((item, index) => (
-                        <Menu 
-                            key={index}
-                            {...item}
-                            selectedRef={selectedRef}
-                            index={index}
-                            onSelect={setActiveIndex}
-                            active={activeIndex === index}
-                        />
-                    ))}
-                </div>
-            </div>
 
-            <div className={sideStyles.exit}>
-                <img src="/Icon/Navigator/Icon-8.svg" alt="exit-icon" />
-                <p>ออกจากระบบ</p>
-            </div>
-        </aside>
+                    <div className={sideStyles.menus} ref={menusContainerRef}>
+                        {/* ตัวเลื่อนสีแดง (Indicator) */}
+                        <div className={sideStyles.selected} ref={selectedRef}>
+                            {/* เทคนิคพิเศษ: ใส่ข้อความสีขาวไว้ในกล่องแดง 
+                                แล้วเลื่อนสวนทางกับกล่องแดงเพื่อให้ข้อความดูเหมือนอยู่กับที่ */}
+                            <div style={{ position: 'relative', height: '100%' }}>
+                                {/* ส่วนนี้สามารถเพิ่ม Logic การทำ Masking ได้ถ้าต้องการความเป๊ะของตัวอักษรขาว */}
+                            </div>
+                        </div>
+                        
+                        {data.map((item, index) => (
+                            <Menu 
+                                key={index}
+                                {...item}
+                                selectedRef={selectedRef}
+                                index={index}
+                                onSelect={setActiveIndex}
+                                active={activeIndex === index}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                <div className={sideStyles.exit}>
+                    <img src="/Icon/Navigator/Icon-8.svg" alt="exit-icon" />
+                    <p>ออกจากระบบ</p>
+                </div>
+            </aside>
+        </div>
     );
 }
