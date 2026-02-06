@@ -1,0 +1,36 @@
+.Report {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    header {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        .export-report {
+            display: flex;
+            gap: 10px;
+            border: var(--card-border);
+            padding: 10px;;
+            align-items: center;
+            img {
+                width: 35px;
+            }
+        }
+    }
+    .risky-container {
+        display: flex;
+        gap: 20px;
+        
+    }
+    .chart-container {
+        border: var(--card-border);
+        padding: 20px;
+        p {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+    }
+}

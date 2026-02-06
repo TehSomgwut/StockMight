@@ -4,6 +4,12 @@ import Side from '../components/Side/Side'
 import Dashboard from './Dashboard/Dashboard';
 import mainStyles from './MainPage.module.css';
 import Inventory from './Inventory/Inventory';
+import AddProduct from './AddProduct/AddProduct';
+import Request from './Request/Request';
+import History from './History/History';
+import Categories from './Categories/Categories';
+import Metric from './Metric/Metric';
+import Reports from './Reports/Report';
 
 export default function MainPage() {
     return (
@@ -14,6 +20,12 @@ export default function MainPage() {
                 <Routes>
                     <Route path={"/home"} element={<Dashboard />} />
                     <Route path={"/inventory"} element={<Inventory />} />
+                    <Route path={"/add-product"} element={ <AddProduct /> } />
+                    <Route path={"/request/*"} element={ <Request /> } />
+                    <Route path={"/history"} element={ <History /> } />
+                    <Route path={"/categories"} element={ <Categories /> } />
+                    <Route path={"/metric"} element={ <Metric /> } />
+                    <Route path={"/reports"} element={ <Reports /> } />
                 </Routes>
                 {/* <Dashboard /> */}
             </div>

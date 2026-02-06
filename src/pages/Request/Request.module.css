@@ -1,0 +1,43 @@
+@keyframes activeBefore {
+        0% {
+            width: 0;
+        }
+        100% {
+            width: 45px;
+        }
+    }
+
+.Request {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    .options {
+        display: flex;
+        gap: 20px;
+        position: sticky;
+        top: 0;
+        background-color: white;
+        .import-option, .export-option {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-size: 0.9em;
+            padding: 5px;
+        }
+    }
+    .active {
+        color: var(--main);
+        position: relative;
+    }
+    .active::before {
+        width: 80px;
+        height: 3px;
+        content: "";
+        position: absolute;
+        background-color: var(--main);
+        top: 50px;
+    }
+}

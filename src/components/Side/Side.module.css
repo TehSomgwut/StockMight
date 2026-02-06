@@ -1,5 +1,8 @@
+.before {
+    width: 270px;
+}
 aside {
-    height: calc(93vh);
+    height: calc(100vh - 70px);
     box-sizing: border-box;
     border-right: 1px solid #E5E7EB;
     padding: 10px;
@@ -10,8 +13,8 @@ aside {
     flex-direction: column;
     justify-content: space-between;
     overflow: scroll;
-    position: sticky;
-    top: 40px;
+    position: fixed;
+    top: 71px;
     .profile-container {
         display: flex;
         gap: 10px;

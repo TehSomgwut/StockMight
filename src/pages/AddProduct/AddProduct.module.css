@@ -1,0 +1,170 @@
+    .number-input {
+        display: flex;
+        width: 100%;
+        gap: 10px;
+        span {
+            background-color: var(--light-gray);
+            border: none;
+            padding: 10px;
+            font-size: 1.3em;
+            text-align: center;
+            width: 30px;
+            cursor: pointer;
+        }
+        input {
+            width: 100%;
+        }
+    }
+
+.addProduct {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 30px;
+    width: 100%;
+    header {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        img {
+            width: 35px;
+            padding: 3px;
+            box-sizing: border-box;
+            background-color: var(--light-gray);
+            border-radius: 50%;
+        }
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        border: var(--card-border);
+        padding: 20px;
+    }
+    p {
+        font-weight: 400;
+        font-size: 0.9em;
+        letter-spacing: 0.5px;
+    }
+    label {
+        width: 100%;
+        height: 20vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: var(--card-border);
+        input {
+            display: none;
+        }
+        .description {
+        color: var(--gray);
+        font-size: 0.85rem;
+        }
+    }
+    select {
+        background-color: white;
+        border: var(--card-border);
+        height: 50px;
+        color: var(--gray);
+        padding: 5px;
+    }
+    .input-container  {
+        display: flex;
+        width: 100%;
+        gap: 20px;
+        input {
+            flex-grow:1 ;
+        }
+    }
+    .input-container > div {
+        flex-grow: 1;
+    }
+
+    .number-input::-webkit-outer-spin-button, .number-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+
+    .number-input {
+        display: flex;
+        width: 100%;
+        gap: 10px;
+        span {
+            background-color: var(--light-gray);
+            border: none;
+            padding: 10px;
+            font-size: 1.3em;
+            text-align: center;
+            width: 30px;
+            cursor: pointer;
+        }
+    }
+    button {
+        flex-grow: 1;
+        height: 50px;
+        border: none;
+        cursor: pointer;
+    }
+    button[type="submit"] {
+        background-color: var(--main);
+        color: white;
+    }
+    button[type="reset"] {
+        background-color: white;
+        border: 2px solid var(--main);
+        color: var(--main)
+    }
+    button[type="reset"]:hover {
+        flex-grow: 1.1;
+        border: 2px solid var(--danger);
+        color: var(--danger)
+    }
+    button[type="submit"]:hover {
+        flex-grow: 1.1;
+        background-color: var(--safe)
+    }
+    .description {
+        color: var(--gray);
+        font-size: 0.85rem;
+    }
+}
+
+
+
+
+
+.input-container  {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    input {
+        flex-grow:1 ;
+    }
+    button {
+        flex-grow: 1;
+        height: 50px;
+        border: none;
+        cursor: pointer;
+    }
+    button[type="submit"] {
+        background-color: var(--main);
+        color: white;
+    }
+    button[type="reset"] {
+        background-color: white;
+        border: 2px solid var(--main);
+        color: var(--main)
+    }
+    button[type="reset"]:hover {
+        flex-grow: 1.1;
+        border: 2px solid var(--danger);
+        color: var(--danger)
+    }
+    button[type="submit"]:hover {
+        flex-grow: 1.1;
+        background-color: var(--safe)
+    }
+}
+.input-container > div {
+    flex-grow: 1;
+}

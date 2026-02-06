@@ -1,0 +1,51 @@
+.LowStock {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+    border: var(--card-border);
+    padding: 20px;
+    box-sizing: border-box;
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    hr {
+        height: 1px;
+        border: solid 1px var(--light-gray);
+        border-top: none;
+    }
+    .item-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+.safe {
+    color: var(--safe);
+}
+div.safe {
+    background-color: var(--safe10);
+    padding: 10px;
+    border-radius: 5px;
+}
+.risky {
+    color: var(--risky);
+    fill: var(--risky);
+}
+div.risky {
+    background-color: var(--risky10);
+    padding: 10px;
+    border-radius: 5px;
+}
+.danger {
+    color: var(--danger);
+    fill: var(--danger);
+}
+div.danger {
+    background-color: var(--danger10);
+    padding: 10px;
+    border-radius: 5px;
+}

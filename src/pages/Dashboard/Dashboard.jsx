@@ -39,6 +39,15 @@ export default function Dashboard() {
         },
 
     ]
+    const chartData = [
+        { date: "1 ก.พ. ", Import: 60, Export: 30},
+        { date: "2 ก.พ. ", Import: 40, Export: 50},
+        { date: "3 ก.พ. ", Import: 70, Export: 40},
+        { date: "4 ก.พ. ", Import: 50, Export: 30},
+        { date: "5 ก.พ. ", Import: 50, Export: 40},
+        { date: "6 ก.พ. ", Import: 30, Export: 20},
+        { date: "7 ก.พ. ", Import: 20, Export: 30}
+    ]
     return (
         <div className={dbStyles.Dashboard}>
             <Header header="แดชบอร์ดคลังสินค้า" description="ภาพรวมและสถิติการจัดการคลังสินค้า" />
@@ -51,7 +60,7 @@ export default function Dashboard() {
             </div>
             <div className={dbStyles["weekly"]}>
                 <div className={dbStyles["bar-chart-container"]}>
-                    <BarC />
+                    <BarC data={chartData} />
                 </div>
                 <div className={dbStyles["low-stock"]}>
                     <LowStock />

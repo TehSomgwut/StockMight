@@ -1,6 +1,6 @@
-import StyleImport from './StyleImport.css'
+import StyleImport from './Import.module.css'
 
-export default function StyleImport() {
+export default function Import() {
     return (
          <div></div>
     )

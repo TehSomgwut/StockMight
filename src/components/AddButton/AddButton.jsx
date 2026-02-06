@@ -1,6 +1,6 @@
-import StyleAddButton from './StyleAddButton.css'
+import StyleAddButton from './AddButton.module.css'
 
-export default function StyleAddButton() {
+export default function AddButton() {
     return (
         <div></div>
     )
