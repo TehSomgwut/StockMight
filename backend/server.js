@@ -1,0 +1,40 @@
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+require('dotenv').config();
+const TestDB = require('./models/test-for-teach')
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+mongoose.connect(process.env.MONGO_URI).then(() => console.log("DB connected.")).catch((err) => {
+    console.log(err)
+})
+
+app.get("/", (req, res) => {
+    res.send("API Working");
+});
+
+app.get(("/api/posts"), async (req, res) => {
+    const gets = await TestDB.find();
+    res.json(gets)
+})
+
+app.post(("/api/posts"), async (req, res) => {
+    const newTest = new TestDB({
+        title: "TEST1",
+        name: "TAE",
+        history: {
+            activity: "Coding",
+            amount: 1
+        }
+    })
+
+    await newTest.save();
+    res.json(newTest);
+})
+
+app.listen(3000, () => {
+    console.log("Server running at PORT 3000");
+})
