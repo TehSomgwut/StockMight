@@ -5,10 +5,9 @@ const productSchema = new mongoose.Schema({
   name: {type: String, required: true},
   code: {type: String, unique: true},
   category: {type: mongoose.Schema.Types.ObjectId, ref: "Category"},
-  unit: {type: String},
+  metric: {type: mongoose.Schema.Types.ObjectId, ref: "Metric"},
   quantity: {type: Number, default: 0},
   minStock: {type: Number, default: 10},
-
   createdAt: {type: Date, default: Date.now}
 
 });
