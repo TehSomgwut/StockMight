@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const metricSchema = new mongoose.Schema({
+
   name: {type: String, required: true, unique: true},
 
   symbol: {type: String},
