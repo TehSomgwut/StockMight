@@ -18,7 +18,7 @@ export default function History() {
                     <img src="/Icon/4-Receive-issue/Icon.svg" />
                     <input type='text' placeholder='ค้นหาด้วย SKU หรือชื่อสินค้า' required />
                 </label>
-            </div>fire
+            </div>
             <div className={StyleHistory.Thead}>
                 <p>วันเวลา</p>
                 <p>ผู้ทำรายการ</p>
@@ -30,7 +30,6 @@ export default function History() {
                 <p>เหตุผล / หมายเหตุ</p>
             </div>
             <div className={StyleHistory.table}>
-                {/* <div className={StyleHistory.pseudo}></div> */}
                 {
                     data.map((item, index) => {
                         return <Log {...item} key={index} />

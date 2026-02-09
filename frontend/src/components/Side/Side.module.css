@@ -15,6 +15,7 @@ aside {
     overflow: scroll;
     position: fixed;
     top: 71px;
+    background-color: white;
     .profile-container {
         display: flex;
         gap: 10px;
