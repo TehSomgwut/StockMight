@@ -1,0 +1,53 @@
+.User {
+    display: contents;
+    text-align: center;
+    padding: 15px 5px;
+    width: 100%;
+    box-sizing: border-box;
+    div {
+        display: flex;
+        gap: 10px;
+        h4, img {
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            align-items: center;
+        }
+        img {
+            background-size: cover;
+        }
+        h4 {
+            background-color: var(--main);
+            color: white;
+            padding: 5px;
+        }
+    }
+    .thin {
+        font-size: 0.9em;
+        color: var(--gray);
+    }
+    .green {
+        color: var(--safe);
+        background-color: var(--safe10);
+        padding: 5px;
+        width: fit-content;
+        height: fit-content;
+        border-radius: 10px;
+    }
+    .gray {
+        color: var(--gray);
+        background-color: var(--light-gray);
+        padding: 5px;
+        width: fit-content;
+        height: fit-content;
+        border-radius: 10px;
+    }
+    .blue {
+        color: var(--main);
+        background-color: var(--main10);
+        padding: 5px;
+        width: fit-content;
+        height: fit-content;
+        border-radius: 10px;
+    }
+}

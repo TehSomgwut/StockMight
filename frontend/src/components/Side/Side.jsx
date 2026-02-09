@@ -16,7 +16,7 @@ export default function Side() {
         { src: '/Icon/Navigator/Icon-13.svg', alt: 'category', text: 'หมวดหมู่สินค้า', linkTo:'/pages/categories' },
         { src: '/Icon/Navigator/Icon-12.svg', alt: 'metrics', text: 'หน่วยนับ', linkTo:'/pages/metric' },
         { src: '/Icon/Navigator/Icon-11.svg', alt: 'report', text: 'รายงาน', linkTo:'/pages/reports' },
-        { src: '/Icon/Navigator/Icon-9.svg', alt: 'user-manage', text: 'จัดการผู้ใช้', linkTo:'/pages/home' }
+        { src: '/Icon/Navigator/Icon-9.svg', alt: 'user-manage', text: 'จัดการผู้ใช้', linkTo:'/pages/users' }
     ];
 
     const selectedRef = useRef(null);

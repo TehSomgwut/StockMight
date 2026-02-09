@@ -10,6 +10,7 @@ import History from './History/History';
 import Categories from './Categories/Categories';
 import Metric from './Metric/Metric';
 import Reports from './Reports/Report';
+import Users from './Users/Users';
 
 export default function MainPage() {
     return (
@@ -26,6 +27,7 @@ export default function MainPage() {
                     <Route path={"/categories"} element={ <Categories /> } />
                     <Route path={"/metric"} element={ <Metric /> } />
                     <Route path={"/reports"} element={ <Reports /> } />
+                    <Route path={"/users"} element={ <Users /> } />
                 </Routes>
                 {/* <Dashboard /> */}
             </div>
