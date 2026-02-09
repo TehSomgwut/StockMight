@@ -6,11 +6,13 @@ const TestDB = require('./models/test-for-teach') // import
 const User = require('./models/User');
 
 const userRoutes = require("./routes/userRoutes")
+const categoryRouter = require("./routes/categoryRouter")
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api/users", userRoutes);
+app.use("/api/category", categoryRouter);
 
 mongoose.connect(process.env.MONGO_URI).then(() => console.log("DB connected.")).catch((err) => {
     console.log(err)
