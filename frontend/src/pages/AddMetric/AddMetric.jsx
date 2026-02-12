@@ -3,11 +3,13 @@ import PageHeader from '../../components/PageHeader/PageHeader'
 import InputField from '../../components/InputField/InputField'
 import { useState } from 'react'
 import StyleInputField from '../../components/InputField/InputField.module.css';
+import { useNavigate } from 'react-router-dom'
 
 export default function AddMetric() {
     const [active, setActive] = useState("ใช้งาน");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [form, setForm] = useState({ ชื่อหน่วยนับ: "", คำอธิบาย: "" });
+    const navigate = useNavigate();
 
     const handleConfirm = async () => {
         setIsModalOpen(false);
@@ -28,6 +30,7 @@ export default function AddMetric() {
             
             if (res.ok) {
                 window.alert(`${resform.name} ถูกบันทึกเรียบร้อย`);
+                navigate('/pages/metric')
             }
         } catch {
             window.alert("เกิดข้อผิดพลาด โปรดลองใหม่ภายหลัง");
