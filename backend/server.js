@@ -7,12 +7,18 @@ const User = require('./models/User');
 
 const userRoutes = require("./routes/userRoutes")
 const categoryRouter = require("./routes/categoryRouter")
+const MetricRouter = require('./routes/metricRouter')
+const productRouter = require('./routes/productRouter')
+const TransactionRouter = require('./routes/transactionRouter')
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/category", categoryRouter);
+app.use("/api/metric", MetricRouter);
+app.use("/api/product", productRouter);
+app.use("/api/transaction", TransactionRouter);
 
 mongoose.connect(process.env.MONGO_URI).then(() => console.log("DB connected.")).catch((err) => {
     console.log(err)
@@ -21,25 +27,6 @@ mongoose.connect(process.env.MONGO_URI).then(() => console.log("DB connected."))
 app.get("/", (req, res) => {
     res.send("API Working");
 });
-
-app.get(("/api/posts"), async (req, res) => { // ขอข้อมูล
-    const gets = await TestDB.find();
-    res.json(gets)
-})
-
-app.post(("/api/posts"), async (req, res) => {
-    const newTest = new TestDB({
-        title: req.body.title,
-        name: req.body.name,
-        history: {
-            activity: req.body.history.activity,
-            amount: req.body.history.amount
-        }
-    })
-
-    await newTest.save();
-    res.json(newTest);
-})
 
 // app.post(("/api/post/user"), async (req, res) => {
 //     const newUser = new User({

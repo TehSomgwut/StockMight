@@ -1,11 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import loginStyles from "./Login.module.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+    const navigate = useNavigate();
+    const [isSubmitable, setIsSubmitable] = useState(false);
+    const [form, setForm] = useState({
+        username: "",
+        password: ""
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setForm((prev) => {
+            const newForm = { ...prev, [name]: value };
+            
+            if (newForm.username.trim() !== "" && newForm.password.trim() !== "") {
+                setIsSubmitable(true);
+            } else {
+                setIsSubmitable(false);
+            }
+            
+            return newForm;
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        if (!isSubmitable) return;
+
+        try {
+            const res = await fetch("http://localhost:3000/api/users/", {
+                method: "POST", // ปกติ Login หรือตรวจสอบข้อมูลควรใช้ POST
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(form)
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                console.log("Login Success:", data);
+                navigate("/pages/home");
+            } else {
+                alert("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
+            }
+        } catch (error) {
+            console.error("Fetch Error:", error);
+            alert("SERVER ไม่ตอบสนอง")
+        }
+    };
+
     return (
         <div className={loginStyles["login-container"]}>
             <div className={loginStyles.wrapper}> 
-                
                 <div className={loginStyles["logo-container"]}>
                     <img src="/Icon/0-Login/Icon-4.svg" alt="logo"/> 
                     <div>
@@ -14,13 +61,10 @@ export default function Login() {
                     </div>
                 </div>
 
-                <form className={loginStyles["login-form"]}>
+                <form className={loginStyles["login-form"]} onSubmit={handleSubmit}>
                     <div>
                         <h2>เข้าสู่ระบบ</h2>
                         <p className={loginStyles.description}>กรุณาระบุข้อมูลเพื่อเข้าใช้งาน</p>
-                    </div>
-                    <div className={loginStyles.alert}>
-                        <p>กรุณาระบุชื่อผู้ใช้และรหัสผ่าน</p>
                     </div>
 
                     <div className={loginStyles["username-container"]}>
@@ -29,7 +73,8 @@ export default function Login() {
                             <label htmlFor="username">
                                 <img src="/Icon/0-Login/Icon-3.svg" alt="user-icon"/>
                             </label>
-                            <input type="text" id="username" name="username" placeholder="กรอกชื่อผู้ใช้" />
+                            {/* name ต้องตรงกับใน State (username) */}
+                            <input type="text" id="username" name="username" placeholder="กรอกชื่อผู้ใช้" onChange={handleChange} />
                         </div>
                     </div>
 
@@ -39,11 +84,15 @@ export default function Login() {
                             <label htmlFor="password">
                                 <img src="/Icon/0-Login/Icon-2.svg" alt="pass-icon"/>
                             </label>
-                            <input type="password" id="password" name="password" placeholder="กรอกรหัสผ่าน" />
+                            <input type="password" id="password" name="password" placeholder="กรอกรหัสผ่าน" onChange={handleChange} />
                         </div>
                     </div>
-
-                    <button type="submit" className={loginStyles["login-button"]}>
+                    <button 
+                        type="submit" 
+                        className={loginStyles["login-button"]} 
+                        disabled={!isSubmitable}
+                        style={!isSubmitable ? { filter: 'grayscale(1)', opacity: 0.5, cursor: 'not-allowed' } : {cursor: 'pointer'}}
+                    >
                         <img src="/Icon/0-Login/Icon.svg" alt="login-icon"/>
                         <h3>เข้าสู่ระบบ</h3>
                     </button>

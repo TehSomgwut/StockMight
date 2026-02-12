@@ -22,3 +22,11 @@
         outline: none;
     }
 }
+.input-field:required::after {
+    content: "*";
+    color: red;
+    position: absolute;
+    font-size: larger;
+    width: 10px;
+    height: 10px;
+}

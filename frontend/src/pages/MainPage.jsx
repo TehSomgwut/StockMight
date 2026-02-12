@@ -11,6 +11,8 @@ import Categories from './Categories/Categories';
 import Metric from './Metric/Metric';
 import Reports from './Reports/Report';
 import Users from './Users/Users';
+import AddCategory from './AddCategory/AddCategory';
+import AddMetric from './AddMetric/AddMetric';
 
 export default function MainPage() {
     return (
@@ -24,10 +26,12 @@ export default function MainPage() {
                     <Route path={"/add-product"} element={ <AddProduct /> } />
                     <Route path={"/request/*"} element={ <Request /> } />
                     <Route path={"/history"} element={ <History /> } />
-                    <Route path={"/categories"} element={ <Categories /> } />
-                    <Route path={"/metric"} element={ <Metric /> } />
+                    <Route path={"/categories/*"} element={ <Categories /> } />
+                    <Route path={"/metric/*"} element={ <Metric /> } />
                     <Route path={"/reports"} element={ <Reports /> } />
                     <Route path={"/users"} element={ <Users /> } />
+                    <Route path={"/categories/add"} element={ <AddCategory />} />
+                    <Route path={"/metric/add"} element={ <AddMetric />} />
                 </Routes>
                 {/* <Dashboard /> */}
             </div>
