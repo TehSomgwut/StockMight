@@ -1,6 +1,8 @@
 import StyleCategories from './Categories.module.css'
 import Category from './Category/Category'
 import Header from '../../components/PageHeader/PageHeader'
+import { Link, Route, Routes } from 'react-router-dom'
+import AddCategory from '../AddCategory/AddCategory'
 
 export default function Categories() {
     const data = [
@@ -12,10 +14,12 @@ export default function Categories() {
          <div className={StyleCategories.Categories}>
             <div className={StyleCategories.header}>
                 <Header header="หมวดหมู่สินค้า" description="จัดการหมวดหมู่สินค้า" />
-                <div className={StyleCategories["add-button"]}>
-                    <img src="\Icon\6-Categories\Icon-2.svg" />
-                    <p>เพิ่มหมวดหมู่</p>
-                </div>
+                <Link to="add">
+                    <div className={StyleCategories["add-button"]}>
+                        <img src="\Icon\6-Categories\Icon-2.svg" />
+                        <p>เพิ่มหมวดหมู่</p>
+                    </div>
+                </Link>
             </div>
             <div className={StyleCategories.table}>
                 <div className={StyleCategories.Thead}>

@@ -1,6 +1,6 @@
 import StyleInputField from './InputField.module.css'
 
-export default function InputField({ name, placeholder, description, isReq, addClass }) {
+export default function InputField({ name, placeholder, description, isReq, addClass, onChange, value }) {
     
     const isLong = addClass === StyleInputField.long;
     const InputTag = isLong ? 'textarea' : 'input';
@@ -14,6 +14,9 @@ export default function InputField({ name, placeholder, description, isReq, addC
                 type={isLong ? undefined : 'text'}
                 placeholder={placeholder} 
                 required={isReq}
+                name={ name }
+                onChange= { onChange }
+                value = { value }
             />
             
             <p className={StyleInputField.description}>{description}</p>

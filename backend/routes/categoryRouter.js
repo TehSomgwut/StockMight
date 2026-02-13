@@ -15,12 +15,14 @@ router.post("/", async (req, res) => {
     try {
         const newCategory = new Category({
             name: req.body.name,
-            description: req.body.description
+            description: req.body.description,
+            status: req.body.status
         })
-        await newCategory.save().then(() => {console.log(req.body.name, "saved")})
+        await newCategory.save()
+        console.log(req.body.name ,"saved")
         res.json(newCategory)
-    } catch {
-        console.log("Something wrong!!")
+    } catch (err) {
+        console.log("Something wrong!!", err)
     }
 })
 

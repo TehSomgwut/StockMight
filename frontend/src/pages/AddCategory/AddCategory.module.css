@@ -1,0 +1,137 @@
+.AddCategory {
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    width: 100%;
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    div.input {
+        border: var(--card-border);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        .status {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9em;
+            align-items: center;
+            cursor: pointer;
+        }
+        .note {
+            display: flex;
+            background-color: var(--main10);
+            padding: 15px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            color: var(--main);
+            font-size: 0.8em;
+            width: fit-content;
+            border: var(--main) 1px solid;
+            h4 {
+                font-weight: 600;
+            }
+            p {
+                font-weight: 200;
+            }
+        }
+    }
+    img {
+        width: 25px;
+    }
+    .button {
+        display: flex;
+        gap: 25px;
+        button {
+            border: none;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            gap: 10px;
+            background-color: var(--main);
+            border-radius: 5px;
+            color: white;
+            align-items: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        button[type="reset"] {
+            background-color: white;
+            border: var(--card-border);
+            color: var(--gray);
+        }
+        button[type="reset"]:hover {
+            background-color: var(--danger10);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+    }
+    .active {
+        color: white;
+        background-color: var(--main);
+        padding: 5px 15px;
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+
+    .alert {
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        .alert-wrapper {
+            background-color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            h2 {
+                font-weight: 600;
+                font-size: 1.5em;
+            }
+            div:has(.spaceB) {
+                background-color: var(--main10);
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .spaceB {
+                display: flex;
+                justify-content: space-between;
+            }
+            .description {
+                font-size: 0.85em;
+                color: var(--gray);
+                margin-top: -20px
+            }
+            .button-container {
+                display: flex;
+                gap: 20px;
+                button {
+                    padding: 5px 15px;
+                    box-sizing: border-box;
+                    border: none;
+                    cursor: pointer;
+                }
+                button[type="submit"] {
+                    background-color: var(--main);
+                    color: white;
+                }
+                button[type="reset"] {
+                    background-color: white;
+                    border: var(--card-border);
+                }
+            }
+        }
+    }
+}
