@@ -2,7 +2,7 @@
 
 **[MINI-PROJECT | Web Application Development]**
 
-StockMight คือเว็บแอปสำหรับจัดการสต็อกสินค้าขนาดเล็ก
+**StockMight** คือเว็บแอปสำหรับจัดการสต็อกสินค้าขนาดเล็ก
 ออกแบบมาเพื่อช่วยให้การบริหารจัดการสินค้าในคลังเป็นเรื่องง่าย ลดความผิดพลาดของตัวเลข และรองรับการทำงานพื้นฐานที่จำเป็นต่อระบบคลังสินค้า
 
 ---
@@ -28,13 +28,18 @@ StockMight คือเว็บแอปสำหรับจัดการส
 
 ## 🛠️ เทคโนโลยีที่ใช้
 
-* Frontend: React (Vite) + React Router
-* Backend และ Database: Node.js + Express + MongoDB, cors/dotenv
-* Deploy : <img src="./icons/Vercel-Dark.svg" width="48">
+* **Frontend** : React (Vite) + React Router
+  <br><img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Vite-Dark.svg" width="30"> <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/React-Dark.svg" width="30"> 
+* **Backend** และ **Database** : Node.js + Express + MongoDB, cors/dotenv
+  <br> <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/NodeJS-Dark.svg" width="30"> <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/ExpressJS-Dark.svg" width="30"> <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/MongoDB.svg" width="30">
+* **Deploy** : Vercel
+  <br><img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Vercel-Dark.svg" width="30">
+* **UX/UI Design** : Figma
+  <br><img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Figma-Dark.svg" width="30">
 
 ---
 
-## 👨‍💻 สมาชิกผู้พัฒนา
+## 👨‍💻 ผู้พัฒนา
 
 * **67026067** ทรงวุฒิ โพธิ์ศรี
 * **67025954** กิตติณัฏฐ์ ครรชิตานุรักษ์
