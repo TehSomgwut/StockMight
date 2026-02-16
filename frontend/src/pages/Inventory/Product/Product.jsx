@@ -12,7 +12,7 @@ export default function Product({name, src, unit, productID, category, remain, s
     return (
         <div className={styleP.Product}>
             <div className={styleP["product-name"]}>
-                <img src={src} alt={name} />
+                <img src={src ? src : '/Icon/2-Inventory/Icon.svg'} alt={name} />
                 <div>
                     <h5>{name}</h5>
                     <p>{ unit }</p>

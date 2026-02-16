@@ -1,12 +1,13 @@
 import styleC from './AddCategory.module.css'
 import PageHeader from '../../components/PageHeader/PageHeader'
 import InputField from '../../components/InputField/InputField'
-import { Link } from 'react-router-dom'
 import { useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function AddCategory() {
+    const navigate = useNavigate();
     const [active, setActive] = useState("ใช้งาน");
-    const [from, setForm] = useState({ชื่อหมวดหมู่: "", status: active});
+    const [from, setForm] = useState({ชื่อหมวดหมู่: ""});
     const alert = useRef(null);
 
     const handleConfirm = async () => {
@@ -24,10 +25,10 @@ export default function AddCategory() {
                 body: JSON.stringify(resFrom)
             })
             console.log("Save: ", res);
-            alert(resFrom.ชื่อหมวดหมู่, "ถูกบันทึกเรียบร้อย")
+            navigate('/pages/categories')
         }
         catch {
-            alert ("เกิดข้อผิดพลาดโปรดลองใหม่ภายหลัง")
+            window.alert ("เกิดข้อผิดพลาดโปรดลองใหม่ภายหลัง")
         }
     }
 
