@@ -168,3 +168,10 @@
 .input-container > div {
     flex-grow: 1;
 }
+
+.preview-image {
+    background-image: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+}

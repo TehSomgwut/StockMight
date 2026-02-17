@@ -2,7 +2,9 @@ import styleI from './Inventory.module.css';
 import Header from '../../components/PageHeader/PageHeader';
 import Card from './AllProductCard/Card';
 import Product from './Product/Product';
+import { Link } from 'react-router-dom'
 export default function Inventory() {
+
     const cards = [
         {text: "สินค้าทั้งหมด", value: "7", src:"/Icon/2-Inventory/Icon-7.svg", CN:"blue"},
         {text: "สินค้าใช้งาน", value: "1", src:"/Icon/2-Inventory/Icon-6.svg", CN:"green"},
@@ -19,10 +21,12 @@ export default function Inventory() {
         <div className={styleI["inventory-container"]}>
             <div className={styleI["header-container"]}>
                 <Header header="สินค้าคงคลัง" description="จัดการข้อมูลสินค้าทั้งหมด" />
-                <button>
-                    <img src="/Icon/2-Inventory/Icon-9.svg" />
-                    <p>เพิ่มสินค้าใหม่</p>
-                </button>
+                <Link to={'/pages/add-product'} style={{textDecoration: 'none'}}>
+                    <button>
+                        <img src="/Icon/2-Inventory/Icon-9.svg" />
+                        <p>เพิ่มสินค้าใหม่</p>
+                    </button>
+                </Link>
             </div>
             <div className={styleI["card-container"]}>
                 {cards ? 

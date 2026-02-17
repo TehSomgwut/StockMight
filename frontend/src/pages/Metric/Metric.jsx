@@ -4,7 +4,6 @@ import StyleCategories from '../Categories/Categories.module.css'
 import Header from '../../components/PageHeader/PageHeader'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 export default function Metric() {
     

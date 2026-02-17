@@ -1,9 +1,15 @@
 import StyleCategory from './Category.module.css'
 
-export default function Category({Cname, amount, status}) {
+export default function Category({name, amount, status}) {
+    if (status=='active') {
+        status = "ใช้งาน"
+    }
+    else if (status=='inactive') {
+        status = "ไม่ใช้งาน"
+    }
     return (
          <div className={StyleCategory.Category}>
-            <p>{Cname}</p>
+            <p>{name}</p>
             <p style={{color: "var(--gray)"}}>{amount} รายการ</p>
             <p className={ status=="ใช้งาน" ? StyleCategory["in-use"] : StyleCategory["out-use"]}>{status}</p>
             <div className={StyleCategory.manage}>

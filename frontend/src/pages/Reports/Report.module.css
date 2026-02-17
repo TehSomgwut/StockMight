@@ -19,6 +19,9 @@
             }
         }
     }
+    .export-report:hover {
+        cursor: not-allowed;
+    }
     .risky-container {
         display: flex;
         gap: 20px;

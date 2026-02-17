@@ -4,6 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 const TestDB = require('./models/test-for-teach') // import
 const User = require('./models/User');
+const path = require('path')
 
 const userRoutes = require("./routes/userRoutes")
 const categoryRouter = require("./routes/categoryRouter")
@@ -14,6 +15,8 @@ const TransactionRouter = require('./routes/transactionRouter')
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use("/images", express.static(path.join(__dirname, "public/images")));
+
 app.use("/api/users", userRoutes);
 app.use("/api/category", categoryRouter);
 app.use("/api/metric", MetricRouter);
