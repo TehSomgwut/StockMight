@@ -36,6 +36,8 @@ router.get("/:id", async (req, res) => {
     }
 })
 
+
+
 // router.post("/", async (req, res) => {
 //     try {
 //         const newProduct = new Supply({
@@ -74,7 +76,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", upload.single('image'), async (req, res) => {
     try {        
-        const imagePath = req.file ? `/images/${req.file.filename}${Math.round(Math.random*100)}` : "";
+        const imagePath = req.file ? `/images/${req.file.filename}` : "";
         const newProduct = new Supply({
             ...req.body,
             image: imagePath

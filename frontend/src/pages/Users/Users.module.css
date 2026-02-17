@@ -4,6 +4,22 @@
     flex-direction: column;
     gap: 20px;
     width: 100%;
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .add-button {
+            background-color: var(--main);
+            color: white;
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+    }
+
     .card-container {
         display: flex;
         gap: 20px;
@@ -30,5 +46,108 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1.5fr 1fr 1fr 1fr 0.8fr;
         gap: 10px;
+    }
+}
+
+.add-user {
+    width: calc(100%);
+    height: calc(100%);
+    position: fixed;
+    display: none;
+    align-items: center;
+    .black-filter {
+        background-color: rgba(0, 0, 0, 0.3);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+    img {
+        width: 40px;
+        padding: 10px;
+        box-sizing: border-box;
+        background-color: var(--main10);
+        border-radius: 50%;
+    }
+    input {
+        border: var(--card-border);
+        padding: 15px;
+    }
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        min-width: 40%;
+        padding: 20px;
+        border-radius: 10px;
+        z-index: 1;
+        margin-left: 20%;
+        gap: 20px;
+        div {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+        header {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            div {
+                flex-direction: column;
+                gap: -5;
+                h4 {
+                    font-weight: 600;
+                }
+                p {
+                    color: var(--gray);
+                    margin-top: -10px;
+                    font-size: 0.9em;
+                }
+            }
+        }
+        .passwordField {
+            flex-direction: column;
+        }
+
+    }
+    .selectField > div {
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    select {
+        border: none;
+        background-color: white;
+        width: 100%;
+        border: var(--card-border);
+        padding: 15px;
+        color: var(--gray)
+    }
+    .button-container {
+        width: 100%;
+        button {
+            flex-grow: 1;
+            height: 50px;
+            border: none;
+            font-size: 0.9em;
+        }
+        button:hover {
+            flex-grow: 1.1;
+        }
+        button[type="submit"] {
+            background-color: var(--main);
+            color: white;
+        }
+        button[type="reset"] {
+            background-color: white;
+            border: 1px solid var(--main);
+            color: var(--main);
+        }
+        button[type="submit"]:hover {
+            background-color: var(--safe);
+        }
+        button[type="reset"]:hover {
+            background-color: white;
+            border: 1px solid var(--danger);
+            color: var(--danger);
+        }
     }
 }

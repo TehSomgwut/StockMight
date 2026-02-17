@@ -3,15 +3,10 @@ const User = require('../models/User');
 
 router.post("/", async (req, res) => { // Create user link. /api/users/
     try {
-        counterUser = (await User.find({role: req.body.role})).length + 1;
-        const newUser = new User({
-            userId: `${req.body.role}00${counterUser}${Math.round(Math.random()*100)}`,
-            name: req.body.name,
-            password: req.body.password, // ยังไม่ได้แฮช
-            role: req.body.role
-        })
-        await newUser.save().then(() => console.log(req.body.name, "saved"))
-        res.send(newUser)
+        // counterUser = (await User.find({role: req.body.role})).length + 1;
+        const newUser = new User({ ...req.body })
+        console.log(newUser)
+        await newUser.save().then(() => console.log(req.body.username, "saved"))
     }
     catch (err) {
         console.log("newUser error: ", err);
@@ -20,8 +15,9 @@ router.post("/", async (req, res) => { // Create user link. /api/users/
 
 // Read Users ✅
 // Read One User ✅
-// Update User
-// Delete User
+// Update User ✅
+// Delete User ✅
+// Create User 
 
 router.get("/", async (req, res) => {
     const users = await User.find();
