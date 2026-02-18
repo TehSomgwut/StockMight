@@ -18,7 +18,6 @@ export default function Metric() {
     
                 if (res.ok) {
                     const dataMetric = await res.json();
-                    console.log("Fetch Success:", dataMetric);
                     setData(dataMetric)
                 } else {
                     alert("SERVER ผิดปกติ");

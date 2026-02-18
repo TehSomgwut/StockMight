@@ -84,16 +84,15 @@ export default function Users() {
                     <input type='text' placeholder='ค้นหาผู้ใช้ด้วยชื่อ หรืออีเมล' required />
                 </label>
             </div>
-            <div className={StyleUsers.Thead}>
-                <p>ชื่อผู้ใช้</p>
-                <p>ชื่อ-นามสกุล</p>
-                <p>อีเมล</p>
-                <p>บทบาท</p>
-                <p>สถานะ</p>
-                <p>เข้าสู่ระบบล่าสุด</p>
-                <p>จัดการ</p>
-            </div>
-            <div className={StyleUsers.Tbody}>
+            <div className={StyleUsers["Users-table"]}>
+                <p className={StyleUsers.Thead}>ชื่อผู้ใช้</p>
+                <p className={StyleUsers.Thead}>ชื่อ-นามสกุล</p>
+                <p className={StyleUsers.Thead}>อีเมล</p>
+                <p className={StyleUsers.Thead}>บทบาท</p>
+                <p className={StyleUsers.Thead}>สถานะ</p>
+                <p className={StyleUsers.Thead}>เข้าสู่ระบบล่าสุด</p>
+                <p className={StyleUsers.Thead}>จัดการ</p>
+
                 { userData.length != 0 ? userData.map((item, index) => {
                     return <User key={index} {...item} />
                 }) : <p style={{color: 'var(--gray)', position: 'absolute', fontSize: '1.2em', marginLeft: '33%'}}>ไม่พบข้อมูลผู้ใช้งาน</p>}

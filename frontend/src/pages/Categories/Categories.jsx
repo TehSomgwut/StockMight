@@ -17,7 +17,6 @@ export default function Categories() {
                 })
                 if (res.ok) {
                     const dataC = await res.json();
-                    console.log("Fetch Success:", dataC);
                     setData(dataC)
                 } else {
                     alert("SERVER ผิดปกติ");
