@@ -17,7 +17,6 @@ export default function Categories() {
                 })
                 if (res.ok) {
                     const dataC = await res.json();
-                    console.log("Fetch Success:", dataC);
                     setData(dataC)
                 } else {
                     alert("SERVER ผิดปกติ");
@@ -31,7 +30,6 @@ export default function Categories() {
 
         getC();
     }, [])
-    console.log(data)
 
     // const data = [
     //     {Cname: "อิเล็กทรอนิกส์", amount: "45", status: "ใช้งาน"},

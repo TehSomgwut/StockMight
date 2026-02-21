@@ -1,10 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const http = require('http');
+const { Server } = require('socket.io')
 const cors = require('cors');
 require('dotenv').config();
 const TestDB = require('./models/test-for-teach') // import
 const User = require('./models/User');
 const path = require('path')
+const session = require('express-session')
 
 const userRoutes = require("./routes/userRoutes")
 const categoryRouter = require("./routes/categoryRouter")
@@ -13,9 +16,20 @@ const productRouter = require('./routes/productRouter')
 const TransactionRouter = require('./routes/transactionRouter')
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}));
 app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "public/images")));
+
+app.use(session({
+    secret: "supersecret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false}
+}))
 
 app.use("/api/users", userRoutes);
 app.use("/api/category", categoryRouter);
@@ -27,27 +41,15 @@ mongoose.connect(process.env.MONGO_URI).then(() => console.log("DB connected."))
     console.log(err)
 })
 
+const server = http.createServer(app); // หุ้มด้วย http
+const io = new Server(server, {cors: {origin: "*"}})
+app.set('io', io);
+
+
 app.get("/", (req, res) => {
     res.send("API Working");
 });
 
-// app.post(("/api/post/user"), async (req, res) => {
-//     const newUser = new User({
-//         userId: req.body.userId,
-//         name: req.body.name,
-//         password: req.body.password,
-//         role: req.body.role
-//     })
-
-//     await newUser.save().then(() => {
-//         console.log(req.body.name, "user saved!")
-//     }).catch((err) => {
-//         console.log("error: ", err);
-//     });
-
-//     res.json(await User.find());
-// })
-
-app.listen(3000, () => {
+server.listen(3000, () => {
     console.log("Server running at PORT 3000");
 })

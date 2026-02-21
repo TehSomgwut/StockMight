@@ -130,3 +130,15 @@
     color: white;
     font-weight: 400;
 }
+
+.message-container {
+    box-sizing: border-box;
+    width: 100%;
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    background-color: var(--danger10);
+    font-size: 0.9em;
+    padding: 10px;
+    border-radius: 7px;
+    font-weight: 300;
+}

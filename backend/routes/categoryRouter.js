@@ -1,9 +1,12 @@
 const Category = require('../models/Category');
 const router = require('express').Router();
+// const hash = require('bcrypt')
 
 
 router.get("/", async (req, res) => {
     try {
+        // const result = await hash.hash("1", 15)
+        // console.log("HASH: ",result, "Compare to 1",await hash.compare("1", result));
         res.json(await Category.find());
     }
     catch (err) {

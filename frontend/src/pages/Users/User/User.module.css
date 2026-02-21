@@ -12,6 +12,8 @@
             width: 25px;
             height: 25px;
             align-items: center;
+            margin-left: 20px;
+            margin-bottom: 20px;
         }
         img {
             background-size: cover;

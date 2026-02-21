@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import loginStyles from "./Login.module.css";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
     const navigate = useNavigate();
     const [isSubmitable, setIsSubmitable] = useState(false);
+    const [ message, setMessage ] = useState(null)
     const [form, setForm] = useState({
         username: "",
         password: ""
@@ -31,19 +32,22 @@ export default function Login() {
         if (!isSubmitable) return;
 
         try {
-            const res = await fetch("http://localhost:3000/api/users/", {
+            const res = await fetch("http://localhost:3000/api/users/login", {
                 method: "POST", // ปกติ Login หรือตรวจสอบข้อมูลควรใช้ POST
                 headers: { "Content-Type": "application/json" },
+                credentials: "include",
                 body: JSON.stringify(form)
             });
 
-            if (res.ok) {
-                const data = await res.json();
-                console.log("Login Success:", data);
+            const data = await res.json();
+            console.log(data)
+            if (data.message === "Login สำเร็จ") {
                 navigate("/pages/home");
-            } else {
-                alert("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
             }
+            else {
+                setMessage(data.message);
+            }
+
         } catch (error) {
             console.error("Fetch Error:", error);
             alert("SERVER ไม่ตอบสนอง")
@@ -67,6 +71,7 @@ export default function Login() {
                         <p className={loginStyles.description}>กรุณาระบุข้อมูลเพื่อเข้าใช้งาน</p>
                     </div>
 
+                    <div className={ message !== null ? loginStyles["message-container"] : {}}><p>{message}</p></div>
                     <div className={loginStyles["username-container"]}>
                         <h3>ชื่อผู้ใช้</h3>
                         <div className={loginStyles.input}>

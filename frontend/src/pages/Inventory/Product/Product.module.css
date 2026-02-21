@@ -8,12 +8,15 @@
         align-items: center;
         h5 {
             font-weight: 500;
-            color: var(--gray)
         }
         img {
             width: 30px;
             height: 30px;
             object-fit: cover;
+        }
+        p {
+            color: var(--gray);
+            font-size: 1em;
         }
     }
     .manage {

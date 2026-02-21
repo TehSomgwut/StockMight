@@ -1,7 +1,6 @@
 import StyleLog from './Log.module.css'
 
 export default function Log({date, manager: {name, role}, type, product: {productID, pname}, amount, stock, remain, note: {noteName, noteDescription}}) {
-    console.log(date)
     const thaiDate = date.toLocaleDateString('th-TH', {
         year: 'numeric',
         month: 'long',
