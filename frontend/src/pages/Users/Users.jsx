@@ -5,6 +5,8 @@ import Card from '../Inventory/AllProductCard/Card'
 import StyleExport from '../Request/Export/Export.module.css'
 import InputField from '../../components/InputField/InputField';
 import { useState, useEffect } from 'react';
+import { io } from 'socket.io-client';
+const socket = io("http://localhost:3000");
 
 export default function Users() {
 
@@ -12,6 +14,8 @@ export default function Users() {
     const [ form, setForm ] = useState({role: "staff", status: "ใช้งาน"})
     const [ userData, setUserData ] =useState([])
     
+
+
     function handleChange(e) {
         const { name, value } = e.target
         setForm((prev) => ({...prev, [name]: value}))
@@ -25,7 +29,6 @@ export default function Users() {
                 headers: {"content-type": "application/json"},
                 body: JSON.stringify(form)
             })
-            window.alert(form.username ,"บันทึกเรียบร้อย")
             if (res.ok) {
                 setShowAdd(!showAdd);
             }
@@ -40,13 +43,12 @@ export default function Users() {
 
     
     useEffect(() => {
+
         async function getUsers() {
             try {
                 const res = await fetch('http://localhost:3000/api/users/', {method: "GET"});
                 if (res.ok) {
-                    console.log(res);
                     const userD = await res.json()
-                    console.log("JSON: ", userD)
                     setUserData(userD)
                 }
             }
@@ -55,6 +57,16 @@ export default function Users() {
             }
         }
         getUsers()
+
+
+        socket.on('userUpdate', () => {
+            getUsers()
+        })
+        socket.on('connect', () => getUsers())
+
+        return () => {
+            socket.off('userUpdate')
+        }
     }, [])
     // const userData = [
     //     {username: "Tae1231212121", realname: "Songwut Phosri", email: "Songwut123@example.com", role: "ผู้จัดการ", status: "กำลังใช้งาน", recent: new Date()},
@@ -95,7 +107,7 @@ export default function Users() {
 
                 { userData.length != 0 ? userData.map((item, index) => {
                     return <User key={index} {...item} />
-                }) : <p style={{color: 'var(--gray)', position: 'absolute', fontSize: '1.2em', marginLeft: '33%'}}>ไม่พบข้อมูลผู้ใช้งาน</p>}
+                }) : <p style={{color: 'var(--gray)', position: 'absolute', fontSize: '1.2em', marginLeft: '33%', marginTop: '40px'}}>ไม่พบข้อมูลผู้ใช้งาน</p>}
             </div>
             <div className={StyleUsers["add-user"]} style={showAdd ? {display: 'flex'} : {display: 'none'}}>
                 <div className={StyleUsers["black-filter"]}></div>
@@ -133,7 +145,7 @@ export default function Users() {
                         </div>
                     </div>
                     <div className={StyleUsers["button-container"]}>
-                        <button type="submit">เพิ่มผู้ใช้งาน</button>
+                        <button type="submit" onClick={() => setShowAdd(!showAdd)}>เพิ่มผู้ใช้งาน</button>
                         <button type="reset" onClick={() => setShowAdd(!showAdd)}>ยกเลิก</button>
                     </div>
                 </form>

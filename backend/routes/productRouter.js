@@ -2,6 +2,7 @@ const router = require('express').Router()
 const Supply = require('../models/Product')
 const multer = require('multer')
 const path = require('path')
+const fs = require('fs')
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -91,9 +92,23 @@ router.post("/", upload.single('image'), async (req, res) => {
     }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", upload.single("image"), async (req, res) => {
     try {
-        const Update = await Supply.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        // const Update = await Supply.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        const Update = { ...req.body }
+        
+        if (req.file) {
+            if (Update.image) {
+                const oldPath = path.join(__dirname, "..", product.image)
+                
+                if (fs.existsSync(oldPath)) {
+                    fs.unlinkSync(oldPath)
+                }
+            }
+        }
+        
+        Update.image = "/images/" + req.file.filename
+        await Supply.findByIdAndUpdate(req.params.id, Update, {new: true})
         res.json(Update)
     }
     catch {
@@ -104,7 +119,14 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     try {
-        await Supply.findByIdAndDelete(req.params.id)
+        // await Supply.findByIdAndDelete(req.params.id)
+        const target = await Supply.findById(req.params.id)
+        await Supply.findByIdAndDelete(req.params.id).then(() =>{
+            const oldPath = path.join(__dirname, "..", target.image)
+            if (fs.existsSync(oldPath)) {
+                fs.unlinkSync(oldPath)
+            }
+        })
         res.json({message: (req.params.id, "has been deleted")})
     }
     catch {

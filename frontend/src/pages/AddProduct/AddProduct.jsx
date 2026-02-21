@@ -106,7 +106,6 @@ export default function AddProduct() {
     
                 if (res.ok) {
                     const dataMetric = await res.json();
-                    console.log("Fetch Success:", dataMetric);
                     setMetric(dataMetric)
                 } else {
                     alert("SERVER ผิดปกติ");
@@ -124,7 +123,6 @@ export default function AddProduct() {
                 })
                 if (res.ok) {
                     const dataCategory = await res.json();
-                    console.log("Fetch Success: ", dataCategory)
                     setCategories(dataCategory)
                 } else {
                     window.alert("SERVER ผิดปกติ")

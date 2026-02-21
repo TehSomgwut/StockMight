@@ -1,0 +1,83 @@
+.DeleteComponent {
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    div {
+        gap: 10px;
+        display: flex;
+    }
+    .blank {
+        background-color: rgba(0, 0, 0, 0.3);
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+    .wrapper {
+        background-color: white;
+        z-index: 1;
+        display: flex;
+        padding: 20px;
+        justify-content: center;
+        width: 25%;
+        height: fit-content;
+        svg {
+            box-sizing: border-box;
+            background-color: var(--danger10);
+            border-radius: 50%;
+            height: 50px;
+            width: 80px;
+            padding: 10px;
+        }
+        .content {
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            text-align: start;
+            gap: 15px;
+            p {
+                color: var(--gray);
+                margin-top: -10px;
+            }
+            h3 {
+                font-weight: 600;
+            }
+            .button-container {
+                display: flex;
+                width: 100%;
+                button {
+                    flex-grow: 1;
+                    border: none;
+                    height: 40px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+                button[type="submit"] {
+                    background-color: var(--danger);
+                    color: white;
+                }
+                button[type="reset"] {
+                    background-color: white;
+                    border: 1px solid var(--safe);
+                    color: var(--safe);
+                }
+                button[type="submit"]:hover {
+                    background-color: white;
+                    color: var(--danger);
+                    border: 1px solid var(--danger);
+                }
+                button[type="reset"]:hover {
+                    background-color: var(--safe);
+                    border: 1px solid var(--safe);
+                    color: white;
+                }
+            }
+        }
+    }
+}

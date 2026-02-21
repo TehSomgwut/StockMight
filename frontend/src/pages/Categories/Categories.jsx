@@ -30,7 +30,6 @@ export default function Categories() {
 
         getC();
     }, [])
-    console.log(data)
 
     // const data = [
     //     {Cname: "อิเล็กทรอนิกส์", amount: "45", status: "ใช้งาน"},
