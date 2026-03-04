@@ -1,29 +1,29 @@
 import StyleItem from './Item.module.css';
 
-export default function Item({productID, name, quantity, alert, expired, type}) {
-    const  addStatus = () => {
+export default function Item({ code, name, quantity, minStock, expired, type }) {
+    const addStatus = () => {
         switch(type) {
             case "LowStock":
-                if(quantity <= alert*0.2) {
-                    return "danger"
+                if(quantity <= minStock * 0.2) {
+                    return "danger";
                 }
                 else {
-                    return "risky"
+                    return "risky";
                 }
             default:
                 return "";
         }
     }
+
     return(
         <div className={StyleItem.Item}>
             <div>
-
-                <h3>{productID}</h3>
-                <p>{name}</p>
+                <h3>{code || "-"}</h3>
+                <p>{name || "ไม่ระบุชื่อ"}</p>
             </div>
             <div className={StyleItem.shift}>
-                <h4 className={StyleItem[addStatus()]}>{quantity}</h4>
-                { type=="LowStock" ? <p>จุดแจ้งเตือน: {alert}</p> : <p>วันหมดอายุ: {expired}</p>}
+                <h4 className={StyleItem[addStatus()]}>{quantity || 0}</h4>
+                { type === "LowStock" ? <p>จุดแจ้งเตือน: {minStock || 0}</p> : <p>วันหมดอายุ: {expired || "-"}</p>}
             </div>
         </div>
     )

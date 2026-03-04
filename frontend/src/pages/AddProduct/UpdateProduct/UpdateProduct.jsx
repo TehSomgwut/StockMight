@@ -1,11 +1,11 @@
-import StyleAddProduct from './AddProduct.module.css';
-import Header from '../../components/PageHeader/PageHeader';
-import InputField from '../../components/InputField/InputField';
-import StyleInputField from '../../components/InputField/InputField.module.css';
+import StyleAddProduct from '../AddProduct.module.css';
+import Header from '../../../components/PageHeader/PageHeader';
+import InputField from '../../../components/InputField/InputField';
+import StyleInputField from '../../../components/InputField/InputField.module.css';
 import { useState, useEffect } from 'react'
-import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { Link, Route, Routes, useNavigate, useParams } from 'react-router-dom';
 
-export default function AddProduct() {
+export default function UpdateProduct() {
     const [starterValue, setStarterValue] = useState(0);
     const [alertValue, setAlertValue] = useState(0);
     const [form, setForm] = useState({quantity: starterValue, minStock: alertValue});
@@ -13,6 +13,8 @@ export default function AddProduct() {
     const [metric, setMetric] = useState([])
     const [isShow, setIsShow] = useState(false)
     const [image, setImage] = useState(null)
+    const [product, setProduct] = useState({})
+    const { id } = useParams()
     const navigate = useNavigate()
     
     const addA = () => setAlertValue(prev => prev + 1);
@@ -31,36 +33,6 @@ export default function AddProduct() {
         setImage(file);
         setIsShow(URL.createObjectURL(file))
     }
-
-    // async function handleSubmit(e) {
-    //     e.preventDefault();
-    //     const payload = {
-    //         ...form,
-    //         minStock: alertValue,
-    //         quantity: starterValue,
-    //         image: image
-    //     };
-    //     setForm(payload);
-    //     console.log("Data to send:", payload);
-    //     try {
-    //         const res = fetch('http://localhost:3000/api/product/', {
-    //             method: "POST",
-    //             // headers: {"content-type": "application/json"},
-    //             body: form
-    //         })
-
-    //         if (res.ok) {
-    //             window.alert(form.name, " บันทึกเสร็จสิ้น")
-    //             navigate('/pages/inventory')
-    //         }
-
-    //         else {
-    //             window.alert(res.message)
-    //         }
-    //     } catch (err) {
-    //         console.log("ERR : ", err)
-    //     }
-    // }
 
     async function handleSubmit(e) { //เต้ลืมว่า object FormData มีอยู่จริง เลยเพิ่งมาใช้
         e.preventDefault();
@@ -82,8 +54,8 @@ export default function AddProduct() {
         }
 
         try {
-            const res = await fetch('http://localhost:3000/api/product/', {
-                method: "POST",
+            const res = await fetch(`http://localhost:3000/api/product/${id}`, {
+                method: "PUT",
                 // Browser จะใส่ 'multipart/form-data' พร้อม Boundary ให้เอง
                 body: formData 
             });
@@ -97,6 +69,14 @@ export default function AddProduct() {
         }
     }
 
+    const [DateMFG, setDateMFG] = useState(new Date);
+    const [DateEXP, setDateEXP] = useState(new Date);
+    const formatForInput = (dateString) => {
+        if (!dateString) return "";
+        
+        return new Date(dateString).toISOString().split('T')[0];
+    };
+
     useEffect(()=> {
         async function getMetric() {
             try {
@@ -107,7 +87,6 @@ export default function AddProduct() {
                 if (res.ok) {
                     const dataMetric = await res.json();
                     const activeM = dataMetric.filter((item) => item.status == 'active')
-                    console.log(activeM)
                     setMetric(activeM)
                 } else {
                     alert("SERVER ผิดปกติ");
@@ -136,46 +115,61 @@ export default function AddProduct() {
             }
         }
 
+        async function getProduct() {
+            const res = await fetch(`http://localhost:3000/api/product/${id}`, { method: "GET"})
+            if (res.ok) {
+                const target = await res.json()
+                setProduct(target)
+                setStarterValue(target.quantity)
+                setAlertValue(target.minStock)
+                setDateMFG(target.MFG)
+                setDateEXP(target.EXP)
+                setForm(target)
+            }
+            else {
+                window.alert(`NOT FOUND ${id}`)
+            }
+            
+        }
+
         getMetric();
         getCategories();
+        getProduct();
     }, [])
 
     return (
          <div className={StyleAddProduct.addProduct}>
             <header>
                 <img src="\Icon\3-Inventory-addnew\inventory\Icon-12.svg" />
-                <Header header="เพิ่มสินค้าใหม่" description="เพิ่มสินค้าใหม่เข้าสู่ระบบ" />
+                <Header header={`แก้ไขสินค้า ${product.name}`} description={`แก้ไขสินค้า ${product.name} ลงสู่ระบบ`} />
             </header>
             <form onSubmit={handleSubmit}>
-                <InputField name="รหัสสินค้า (SKU/GTIN)" placeholder="เช่น ELC-001" description="รหัสต้องไม่ซ้ำกับสินค้าอื่น" isReq={true} formName="code" onChange={handleChange} />
-                <InputField name="ชื่อสินค้า" placeholder="ระบุชื่อสินค้า" isReq={true} formName="name" onChange={handleChange} />
-                <InputField name="คำอธิบายสินค้า" placeholder="ระบุรายระเอียดสินค้า" isReq={true} addClass={StyleInputField.long} formName="description" onChange={handleChange} />
+                <InputField name="รหัสสินค้า (SKU/GTIN)" placeholder={product.code} description="รหัสต้องไม่ซ้ำกับสินค้าอื่น" formName="code" onChange={handleChange} />
+                <InputField name="ชื่อสินค้า" placeholder={product.name} formName="name" onChange={handleChange} />
+                <InputField name="คำอธิบายสินค้า" placeholder="ระบุรายระเอียดสินค้า" addClass={StyleInputField.long} formName="description" onChange={handleChange} />
                 <div>
                     <p>รูปสินค้า</p>
                     <label htmlFor='input-product-image'>
-                        <img src="/Icon/3-Inventory-addnew/inventory/Icon.svg" style={ isShow ? {display: 'none'} : {}} />
-                        <p style={ isShow ? {display: 'none'} : {}}>คลิปเพื่ออัปโหลดรูปภาพ หรือลากไฟล์มาวาง</p>
-                        <p className={StyleAddProduct.description} style={ isShow ? {display: 'none'} : {}}>รองรับไฟล์ PNG, JPG, JPEG (ขนาดไม่เกิน 5MB)</p>
                         <input type="file" id="input-product-image" name="image" onChange={handleImageChange} />
-                        { isShow ? <img className={StyleAddProduct["preview-image"]} src={isShow} /> : <div></div> }
+                        { isShow ? <img className={StyleAddProduct["preview-image"]} src={isShow} /> : <img className={StyleAddProduct["preview-image"]} src={`http://localhost:3000${product.image}`} /> }
                     </label>
                 </div>
                 <div className={StyleAddProduct["input-container"]}>
                     <div className={StyleInputField["input-field"]}>
                         <p>หมวดหมู่สินค้า</p>
-                        <select className={StyleAddProduct.category} require name="category" onChange={handleChange} >
+                        <select className={StyleAddProduct.category} require name="category" onChange={handleChange} value={form.category} >
                             <option value="">เลือกหมวดหมู่</option>
                             { categories.map((item) => {
-                                return <option value={item._id}>{item.name}</option>
+                                return <option key={item._id} value={item._id}>{item.name}</option>
                             }) }
                         </select>
                     </div>
                     <div className={StyleInputField["input-field"]}>
                         <p>หน่วยนับ</p>
-                        <select className={StyleAddProduct.metric} required name="metric" onChange={handleChange} >
+                        <select className={StyleAddProduct.metric} name="metric" onChange={handleChange} value={form.metric} >
                             <option value="">เลือกหน่วยนับ</option>
                             { metric.map((item) => {
-                                return <option value={item._id}>{item.name}</option>
+                                return <option key={item._id} value={item._id}>{item.name}</option>
                             }) }
                         </select>
                     </div>
@@ -185,7 +179,7 @@ export default function AddProduct() {
                         <p>จำนวนเริ่มต้น</p>
                         <div className={StyleAddProduct["number-input"]}>
                             <span onClick={minusS}>-</span>
-                            <input type="number" min={0} required value={starterValue} onChange={(e) => setStarterValue(Number(e.target.value))} name="quantity" />
+                            <input type="number" min={0} value={starterValue} onChange={(e) => setStarterValue(Number(e.target.value))} name="quantity" />
                             <span onClick={addS}>+</span>
                         </div>
                     </div>
@@ -193,7 +187,7 @@ export default function AddProduct() {
                         <p>จุดแจ้งเตือนสต๊อกต่ำ</p>
                         <div className={StyleAddProduct["number-input"]}>
                             <span onClick={minusA}>-</span>
-                            <input type="number" min={0} required value={alertValue} onChange={(e) => setAlertValue(Number(e.target.value))} name="minStock" />
+                            <input type="number" min={0} value={alertValue} onChange={(e) => setAlertValue(Number(e.target.value))} name="minStock" />
                             <span onClick={addA}>+</span>
                         </div>
                         <p className={StyleAddProduct.description}>แจ้งเตือนเมื่อสต๊อกต่ำกว่าจำนวนนี้</p>
@@ -202,16 +196,16 @@ export default function AddProduct() {
                 <div className={StyleAddProduct["input-container"]}>
                     <div className={StyleInputField["input-field"]}>
                         <p>วันผลิต</p>
-                        <input type="date" required name='MFG' onChange={handleChange} />
+                        <input type="date" name='MFG' onChange={handleChange} value={formatForInput(form.MFG)} />
                     </div>
                     <div className={StyleInputField["input-field"]}>
                         <p>วันหมดอายุ</p>
-                        <input type="date" required name='EXP' onChange={handleChange} />
+                        <input type="date" name='EXP' onChange={handleChange} value={formatForInput(form.EXP)} />
                     </div>
                 </div>
                 <div className={StyleInputField["input-field"]}>
                     <p>สถานะ</p>
-                    <select className={StyleAddProduct.metric} required onChange={handleChange} name="status" >
+                    <select className={StyleAddProduct.metric} onChange={handleChange} name="status" value={form.status} >
                         <option value="">เลือกสถานะ</option>
                         <option value="active">ใช้งาน</option>
                         <option value="inactive">ไม่ใช้งาน</option>
@@ -219,7 +213,7 @@ export default function AddProduct() {
                 </div>
                 <div className={StyleAddProduct["input-container"]}>
                     <button type="reset">ยกเลิก</button>
-                    <button type="submit">เพิ่มสินค้า</button>
+                    <button type="submit">แก้ไขสินค้า</button>
                 </div>
             </form>
          </div>

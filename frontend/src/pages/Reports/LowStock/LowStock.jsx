@@ -1,7 +1,7 @@
 import StyleLS from './LowStock.module.css'
 import Item from './Item/Item'
 
-export default function LowStock({header: {hName, hDescription, svg}, total, ItemData}) {
+export default function LowStock({ header: { hName, hDescription, svg }, total, ItemData = [] }) {
     const color = () => {
         if(total < 3) {
             return "safe"
@@ -13,6 +13,7 @@ export default function LowStock({header: {hName, hDescription, svg}, total, Ite
             return 'danger'
         }
     }
+    
     return (
          <div className={StyleLS.LowStock}>
             <header>
@@ -25,9 +26,13 @@ export default function LowStock({header: {hName, hDescription, svg}, total, Ite
             <h1 className={StyleLS[color()]}>{total} รายการ</h1>
             <hr />
             <div className={StyleLS["item-container"]}>
-                {ItemData.map((item, index) => {
-                    return <Item key={index} {...item} />
-                })}
+                {ItemData.length > 0 ? (
+                    ItemData.map((item, index) => {
+                        return <Item key={item._id || index} {...item} />
+                    })
+                ) : (
+                    <p style={{ color: 'var(--gray)', padding: '10px 0', fontSize: '14px' }}>ไม่มีรายการในหมวดหมู่นี้</p>
+                )}
             </div>
          </div>
     )

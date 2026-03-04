@@ -47,6 +47,11 @@ export default function AddMetric() {
         setForm(prev => ({ ...prev, [name]: value }));
     }
 
+    function handleReset() {
+        setForm({ ชื่อหน่วยนับ: "", คำอธิบาย: "" })
+        navigate('/pages/metric')
+    }
+
     return (
         <div className={styleC.AddCategory}>
             <PageHeader header="เพิ่มหน่วยนับ" description="เพิ่มหน่วยนับสินค้า" />
@@ -70,7 +75,7 @@ export default function AddMetric() {
                         <img src="/Icon/10-Save-Category/Icon-1.svg" alt="save" />
                         <p>บันทึกการแก้ไข</p>
                     </button>
-                    <button type="reset" onClick={() => setForm({ ชื่อหน่วยนับ: "", คำอธิบาย: "" })}>
+                    <button type="reset" onClick={() => handleReset()}>
                         <p>ยกเลิก</p>
                     </button>
                 </div>

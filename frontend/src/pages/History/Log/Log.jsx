@@ -1,7 +1,9 @@
 import StyleLog from './Log.module.css'
 
-export default function Log({date, manager: {name, role}, type, product: {productID, pname}, amount, stock, remain, note: {noteName, noteDescription}}) {
-    const thaiDate = date.toLocaleDateString('th-TH', {
+export default function Log({ date, user, type, product, quantity, previous, current, note, reason }) {
+    const dateObj = new Date(date);
+    
+    const thaiDate = dateObj.toLocaleDateString('th-TH', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -9,22 +11,23 @@ export default function Log({date, manager: {name, role}, type, product: {produc
         minute: '2-digit',
         second: '2-digit',
     });
+
     return (
-         <div className={StyleLog.log}>
+        <div className={StyleLog.log}>
             <p className={StyleLog.normalText}>{thaiDate}</p>
-            <p className={StyleLog.normalText}>{name} | {role}</p>
-            <p className={type=="รับเข้า" ? StyleLog["import-type"] : StyleLog["export-type"]}>{type}</p>
+            <p className={StyleLog.normalText}>{user?.realname || "ไม่ระบุชื่อ"} | {user?.role || "-"}</p>
+            <p className={type === "import" ? StyleLog["import-type"] : StyleLog["export-type"]}>{type === "import" ? "รับเข้า" : "เบิกออก"}</p>
             <div>
-                <p className={StyleLog.productID}>{productID}</p>
-                <p className={StyleLog.normalText}>{pname}</p>
+                <p className={StyleLog.productID}>{product?.code || "N/A"}</p>
+                <p className={StyleLog.normalText}>{product?.name}</p>
             </div>
-            <p className={type=="รับเข้า" ? StyleLog["import-amount"] : StyleLog["export-amount"]}>{amount}</p>
-            <p className={StyleLog.normalText}>{stock}</p>
-            <p>{remain}</p>
+            <p className={type === "import" ? StyleLog["import-amount"] : StyleLog["export-amount"]}>{quantity}</p>
+            <p className={StyleLog.normalText}>{previous}</p>
+            <p>{current}</p>
             <div>
-                <p>{noteName}</p>
-                <p className={StyleLog.normalText}>{noteDescription}</p>
+                <p>{note}</p>
+                <p className={StyleLog.normalText}>{reason}</p>
             </div>
-         </div>
-    )
+        </div>
+    );
 }

@@ -23,6 +23,8 @@ router.post("/", async (req, res) => {
         })
         await newCategory.save()
         console.log(req.body.name ,"saved")
+        const io = req.app.get('io')
+        io.emit('updateCategory')
         res.json(newCategory)
     } catch (err) {
         console.log("Something wrong!!", err)
@@ -53,9 +55,13 @@ router.delete("/:id", async (req, res) => {
     try {
         await Category.findByIdAndDelete(req.params.id)
         console.log("Category has been deleted")
+        const io = req.app.get('io')
+        io.emit('updateCategory')
+        res.json({message: "deleted"})
     }
     catch {
         console.log("Not found")
+        res.json({message: "Not Found"})
     }
 })
 

@@ -4,6 +4,8 @@ import Header from '../../components/PageHeader/PageHeader'
 import { Link, Route, Routes } from 'react-router-dom'
 import AddCategory from '../AddCategory/AddCategory'
 import { useState, useEffect } from 'react'
+import { io } from 'socket.io-client'
+const socket = io("http://localhost:3000")
 
 export default function Categories() {
 
@@ -29,6 +31,14 @@ export default function Categories() {
         }
 
         getC();
+
+        socket.on('updateCategory',() => {
+            getC();
+        })
+
+        return () => {
+            socket.off('updateCategory')
+        }
     }, [])
 
     // const data = [

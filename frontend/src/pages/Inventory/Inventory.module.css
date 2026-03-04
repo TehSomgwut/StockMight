@@ -4,6 +4,9 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    img {
+        width: 20px;
+    }
     .header-container {
         display: flex;
         justify-content: space-between;
@@ -31,6 +34,39 @@
         display: flex;
         gap: 15px;
         width: 100%;
+        span {
+            color: var(--gray);
+            white-space: nowrap;
+            font-size: 0.85em;
+        }
+        span[name="filter1"] {
+            position: relative;
+            background-color: red;
+            .checkbox-container {
+                position: absolute;
+                top: 30px;
+                right: 0vw;
+                border: var(--card-border);
+                background-color: white;
+                padding: 10px;
+                width: 20vw;
+                box-sizing: border-box;
+                display: flex;
+                gap: 0px;
+                flex-direction: column;
+                label {
+                    white-space: nowrap;
+                    display: flex;
+                    font-size: 0.9em;
+                    color: var(--gray);
+                    align-items: center;
+                    input[type='checkbox'] {
+                        width: 30px;
+                        height: 30px;
+                    }
+                }
+            }
+        }
         label {
             display: flex;
             padding: 10px;

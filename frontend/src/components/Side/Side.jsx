@@ -2,10 +2,12 @@ import React, { useState, useRef, useLayoutEffect } from 'react';
 import Menu from './menu/Menu';
 import sideStyles from './Side.module.css';
 import gsap from 'gsap';
+import { useNavigate } from 'react-router-dom'
 
-export default function Side() {
-    const [username] = useState("ผู้ดูแลระบบ");
+export default function Side({ user }) {
     const [activeIndex, setActiveIndex] = useState(0);
+    const currentUser = user
+    const navigate = useNavigate()
     
     const data = [
         { src: '/Icon/Navigator/Icon-17.svg', alt: 'dashboard', text: 'แดชบอร์ด', linkTo:'/pages/home' },
@@ -16,7 +18,9 @@ export default function Side() {
         { src: '/Icon/Navigator/Icon-13.svg', alt: 'category', text: 'หมวดหมู่สินค้า', linkTo:'/pages/categories' },
         { src: '/Icon/Navigator/Icon-12.svg', alt: 'metrics', text: 'หน่วยนับ', linkTo:'/pages/metric' },
         { src: '/Icon/Navigator/Icon-11.svg', alt: 'report', text: 'รายงาน', linkTo:'/pages/reports' },
-        { src: '/Icon/Navigator/Icon-9.svg', alt: 'user-manage', text: 'จัดการผู้ใช้', linkTo:'/pages/users' }
+        ...(currentUser?.role === 'admin' ? [
+            { src: '/Icon/Navigator/Icon-9.svg', alt: 'user-manage', text: 'จัดการผู้ใช้', linkTo:'/pages/users' }
+        ] : [])
     ];
 
     const selectedRef = useRef(null);
@@ -31,8 +35,37 @@ export default function Side() {
                 gsap.set(selectedRef.current, { y: 0 });
             }
         }
+
+        async function authen() {
+            const res = await fetch('http://localhost:3000/api/users/me', {method: "GET", credentials: "include"})
+            if (res.status == 401) {
+                return null
+            }
+            else {
+                const target = await res.json();
+                setUser(target)
+            }
+        }
+
+        authen()
+
     }, []);
 
+    const handleLogout = async () => {
+        try {
+            const res = await fetch('http://localhost:3000/api/users/logout', {
+                method: "POST",
+                credentials: "include"
+            });
+
+            if (res.ok) {
+                navigate('/login');
+            }
+        } catch (error) {
+            console.error("Logout Failed:", error);
+            alert("ไม่สามารถออกจากระบบได้");
+        }
+    }
     return (
         <div>
             <div className={sideStyles.before}></div>
@@ -40,21 +73,17 @@ export default function Side() {
                 <div>
                     <div className={sideStyles["profile-container"]}>
                         <div className={sideStyles["profile-text"]}>
-                            {username ? username.slice(0, 1) : "U"}
+                            {user.username ? user.username.slice(0, 1) : "U"}
                         </div>
                         <div>
-                            <p className={sideStyles.username}>{username}</p>
-                            <p className={sideStyles.role}>ผู้ดูแลระบบ</p>
+                            <p className={sideStyles.username}>{user.username}</p>
+                            <p className={sideStyles.role}>{ user.role }</p>
                         </div>
                     </div>
 
                     <div className={sideStyles.menus} ref={menusContainerRef}>
-                        {/* ตัวเลื่อนสีแดง (Indicator) */}
                         <div className={sideStyles.selected} ref={selectedRef}>
-                            {/* เทคนิคพิเศษ: ใส่ข้อความสีขาวไว้ในกล่องแดง 
-                                แล้วเลื่อนสวนทางกับกล่องแดงเพื่อให้ข้อความดูเหมือนอยู่กับที่ */}
                             <div style={{ position: 'relative', height: '100%' }}>
-                                {/* ส่วนนี้สามารถเพิ่ม Logic การทำ Masking ได้ถ้าต้องการความเป๊ะของตัวอักษรขาว */}
                             </div>
                         </div>
                         
@@ -71,7 +100,7 @@ export default function Side() {
                     </div>
                 </div>
 
-                <div className={sideStyles.exit}>
+                <div className={sideStyles.exit} onClick={ handleLogout }>
                     <img src="/Icon/Navigator/Icon-8.svg" alt="exit-icon" />
                     <p>ออกจากระบบ</p>
                 </div>

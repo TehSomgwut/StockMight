@@ -33,6 +33,8 @@ router.post("/", async (req, res) => {
             status: req.body.status,
         })
         await newUnit.save().then(() => {console.log(req.body.name, "saved")})
+        const io = req.app.get('io')
+        io.emit('updateMetric')
         res.json(newUnit)
     } catch (err) {
         console.log("CANNOT POST : ", err)
@@ -53,6 +55,8 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
     try {
         await Metric.findByIdAndDelete(req.params.id)
+        const io = req.app.get('io')
+        io.emit('updateMetric')
         console.log("DELETED")
         res.json({message: "ลบสำเร็จ"})
     }

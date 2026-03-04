@@ -1,17 +1,17 @@
 import ItemStyles from './Item.module.css'
 
-export default function Item({SKU, name, remain, danger, status}) {
+export default function Item({code, name, quantity, minStock}) {
     return (
         <div className={ItemStyles.Item}>
-            <p className={ItemStyles.SKU}>{SKU}</p>
+            <p className={ItemStyles.SKU}>{code}</p>
             <p className={ItemStyles.name}>{name}</p>
-            <p className={ItemStyles.remain}>{remain}</p>
-            <p className={ItemStyles.danger}>{danger}</p>
+            <p className={ItemStyles.remain}>{quantity}</p>
+            <p className={ItemStyles.danger}>{minStock}</p>
             <div className={ItemStyles.status}>
-                {status ? <div className={ItemStyles.status2}>
-                    <img src={status.src} />
-                    <p>{status.text}</p>
-                </div> : " - "}
+                <div className={ItemStyles.status2}>
+                    <img src={'/Icon/1-Home/Icon.svg'} />
+                    <p>ใกล้หมด</p>
+                </div>
             </div>
         </div>
     )

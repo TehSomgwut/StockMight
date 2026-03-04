@@ -8,7 +8,7 @@ export default function Nav() {
             </div>
             <div className={navStyles.date}>
                 <img src="\Icon\Navigator\Icon-7.svg" alt="bell" className={navStyles.bell} />
-                <p>28 มกราคม 2569</p>
+                <p>{ new Date().toLocaleDateString('th-TH', {year: 'numeric',month: 'long',day: 'numeric' })}</p>
             </div>
         </nav>
     )

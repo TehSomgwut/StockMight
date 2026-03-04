@@ -49,6 +49,7 @@ aside {
         gap: 10px;
         border-top: 1px solid var(--light-gray);
         padding-top: 10px;
+        cursor: pointer;
         img {
             margin-left: 10px;
         }

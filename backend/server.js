@@ -18,7 +18,7 @@ const TransactionRouter = require('./routes/transactionRouter')
 const app = express();
 app.use(cors({
     origin: "http://localhost:5173",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true
 }));
 app.use(express.json());
@@ -28,7 +28,7 @@ app.use(session({
     secret: "supersecret",
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false}
+    cookie: { secure: false, maxAge: 1000*60*60*12}
 }))
 
 app.use("/api/users", userRoutes);

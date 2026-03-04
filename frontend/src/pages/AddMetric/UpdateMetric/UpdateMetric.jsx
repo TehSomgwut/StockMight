@@ -1,57 +1,85 @@
 import styleC from '../../AddCategory/AddCategory.module.css'
 import PageHeader from '../../../components/PageHeader/PageHeader'
 import InputField from '../../../components/InputField/InputField'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import StyleInputField from '../../../components/InputField/InputField.module.css';
 
-export default function AddMetric() {
+export default function UpdateMetric() {
+    const navigate = useNavigate();
     const [active, setActive] = useState("ใช้งาน");
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [form, setForm] = useState({ ชื่อหน่วยนับ: "", คำอธิบาย: "" });
+    const alert = useRef(null);
+    const [metric, setMetric] = useState({});
+    const { id } = useParams();
 
     const handleConfirm = async () => {
-        setIsModalOpen(false);
-        const statusRes = active === "ใช้งาน" ? "active" : "inactive";
+        alert.current.style.display = 'none';
         
-        const resform = {
-            name: form.ชื่อหน่วยนับ,
-            status: statusRes,
-            description: form.คำอธิบาย
+        let statusRes = active === "ใช้งาน" ? "active" : "inactive";
+        
+        const resForm = {
+            name: form.ชื่อหน่วยนับ ? form.ชื่อหน่วยนับ : metric.name,
+            description: form.คำอธิบาย ? form.คำอธิบาย : metric.description,
+            status: statusRes
         }
 
         try {
-            const res = await fetch('http://localhost:3000/api/metric/', {
-                method: "POST",
+            const res = await fetch(`http://localhost:3000/api/metric/${id}`, {
+                method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(resform)
+                body: JSON.stringify(resForm)
             });
             
             if (res.ok) {
-                window.alert(`${resform.name} ถูกบันทึกเรียบร้อย`);
+                navigate('/pages/metric');
             }
         } catch {
-            window.alert("เกิดข้อผิดพลาด โปรดลองใหม่ภายหลัง");
+            window.alert("เกิดข้อผิดพลาดโปรดลองใหม่ภายหลัง");
         }
     }
 
+    useEffect(() => {
+        async function getMetric() {
+            const res = await fetch(`http://localhost:3000/api/metric/${id}`, { method: "GET" })
+            const target = await res.json()
+            setMetric(target)
+            setActive(target.status === "inactive" ? "ไม่ใช้งาน" : "ใช้งาน")
+        }
+
+        getMetric()
+    }, [id]); // ป้องกัน Infinite Loop
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        setIsModalOpen(true);
+        alert.current.style.display = 'flex';
+    }
+
+    const cancelConfirm = () => {
+        alert.current.style.display = 'none';
     }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setForm(prev => ({ ...prev, [name]: value }));
+        setForm((prev) => {
+            const newForm = { ...prev, [name]: value }
+            return newForm;
+        });
+    }
+
+    function handleReset() {
+        setForm({ ชื่อหน่วยนับ: "", คำอธิบาย: "" });
+        navigate('/pages/metric');
     }
 
     return (
         <div className={styleC.AddCategory}>
-            <PageHeader header="แก้ไขหน่วยนับ" description="แก้ไขข้อมูลหน่วยนับสินค้า" />
+            <PageHeader header="แก้ไขหน่วยนับ" description={`แก้ไขข้อมูลหน่วยนับสินค้า ${metric.name || ""}`} />
             
-            <form onSubmit={handleSubmit}>
+            <form>
                 <div className={styleC.input}>
-                    <InputField name="ชื่อหน่วยนับ" placeholder="ชิ้น" isReq={true} onChange={handleChange} />
-                    <InputField name="คำอธิบาย" addClass={StyleInputField.long} onChange={handleChange} />
+                    <InputField name="ชื่อหน่วยนับ" placeholder={metric.name} onChange={handleChange} />
+                    <InputField name="คำอธิบาย" addClass={StyleInputField.long} placeholder={metric.description} onChange={handleChange} />
                     
                     <p>สถานะ</p>
                     <div className={styleC.status}>
@@ -63,47 +91,47 @@ export default function AddMetric() {
                 </div>
 
                 <div className={styleC.button}>
-                    <button type="submit">
+                    <button onClick={handleSubmit} type="submit">
                         <img src="/Icon/10-Save-Category/Icon-1.svg" alt="save" />
                         <p>บันทึกการแก้ไข</p>
                     </button>
-                    <button type="reset" onClick={() => setForm({ ชื่อหน่วยนับ: "", คำอธิบาย: "" })}>
+                    <button type="reset" onClick={handleReset}>
                         <p>ยกเลิก</p>
                     </button>
                 </div>
             </form>
-            {isModalOpen && (
-                <div className={styleC.alert} style={{ display: 'flex' }}>
-                    <div className={styleC["alert-wrapper"]}>
-                        <h2>ยืนยันการบันทึก</h2>
-                        <p className={styleC.description}>คุณต้องการบันทึกข้อมูลหน่วยนับหรือไม่?</p>
-                        
-                        <div className={styleC.summary}>
-                            <div className={styleC.spaceB}>
-                                <p>ชื่อหน่วยนับ:</p>
-                                <p>{form.ชื่อหน่วยนับ}</p>
-                            </div>
-                            <div className={styleC.spaceB}>
-                                <p>คำอธิบาย:</p>
-                                <p style={{ width: '50%', fontSize: '0.9em', color: 'var(--gray)', textAlign: 'right' }}>
-                                    {form.คำอธิบาย || "-"}
-                                </p>
-                            </div>
-                            <div className={styleC.spaceB}>
-                                <p>สถานะ:</p>
-                                <p style={active === "ใช้งาน" ? { color: 'var(--safe)' } : { color: 'var(--danger)' }}>
-                                    {active}
-                                </p>
-                            </div>
-                        </div>
 
-                        <div className={styleC["button-container"]}>
-                            <button onClick={handleConfirm} type="submit">ยืนยัน</button>
-                            <button onClick={() => setIsModalOpen(false)} type="reset">ยกเลิก</button>
+            {/* Modal แจ้งเตือนยืนยัน */}
+            <div ref={alert} className={styleC.alert} style={{ display: 'none' }}>
+                <div className={styleC["alert-wrapper"]}>
+                    <h2>ยืนยันการบันทึก</h2>
+                    <p className={styleC.description}>คุณต้องการบันทึกข้อมูลหน่วยนับ "{metric.name}" หรือไม่?</p>
+                    
+                    <div className={styleC.summary}>
+                        <div className={styleC.spaceB}>
+                            <p>ชื่อหน่วยนับ:</p>
+                            <p>{form.ชื่อหน่วยนับ ? form.ชื่อหน่วยนับ : metric.name}</p>
+                        </div>
+                        <div className={styleC.spaceB}>
+                            <p>คำอธิบาย:</p>
+                            <p style={{ width: '50%', fontSize: '0.9em', color: 'var(--gray)', textAlign: 'right' }}>
+                                {form.คำอธิบาย ? form.คำอธิบาย : (metric.description || "-")}
+                            </p>
+                        </div>
+                        <div className={styleC.spaceB}>
+                            <p>สถานะ:</p>
+                            <p style={active === "ใช้งาน" ? { color: 'var(--safe)' } : { color: 'var(--danger)' }}>
+                                {active}
+                            </p>
                         </div>
                     </div>
+
+                    <div className={styleC["button-container"]}>
+                        <button onClick={handleConfirm} type="button">ยืนยัน</button>
+                        <button onClick={cancelConfirm} type="reset">ยกเลิก</button>
+                    </div>
                 </div>
-            )}
+            </div>
         </div>
     )
 }
