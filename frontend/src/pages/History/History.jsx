@@ -2,13 +2,35 @@ import StyleHistory from './History.module.css';
 import StyleExport from '../Request/Export/Export.module.css'
 import Log from './Log/Log'
 import Header from '../../components/PageHeader/PageHeader'
+import { useState, useEffect } from 'react'
+import io from 'socket.io-client';
+const socket = io('http://localhost:3000')
 
 export default function History() {
-    const data = [
-        {date: new Date(), manager:{name: "สมชาย ใจดี", role:"พนักงานคลัง"}, type: "รับเข้า", product: {productID: "ELC-001", pname: "เครื่องพิมพ์เลเซอร์ HP LaserJet"}, amount: 5, stock:10, remain: 15, note: {noteName: "ซื้อเพิ่ม", noteDescription: "รับสินค้าจากซัพพลายเออร์"}},
-        {date: new Date(), manager:{name: "สมหญิง รักงาน", role:"พนักงานคลัง"}, type: "เบิกออก", product: {productID: "OFF-001", pname: "กระดาษ A4 Double A 80 แกรม"}, amount: 2, stock:5, remain: 3, note: {noteName: "ขาย", noteDescription: "ส่งให้ลูกค้า บจก.ABC"}},
-        {date: new Date(), manager:{name: "สมชาย ใจดี", role:"พนักงานคลัง"}, type:"เบิกออก", product: {productID: "ELC-002", pname: "หมึกพิมพ์ Canon 810 สีดำ"}, amount: 3, stock:8, remain: 5, note: {noteName: "ขาย", noteDescription: ""}},
-    ]
+    const [ data, setData ] = useState([])
+    // const data = [
+    //     {date: new Date(), manager:{name: "สมชาย ใจดี", role:"พนักงานคลัง"}, type: "import", product: {productID: "ELC-001", pname: "เครื่องพิมพ์เลเซอร์ HP LaserJet"}, amount: 5, stock:10, remain: 15, note: {noteName: "ซื้อเพิ่ม", noteDescription: "รับสินค้าจากซัพพลายเออร์"}},
+    //     {date: new Date(), manager:{name: "สมหญิง รักงาน", role:"พนักงานคลัง"}, type: "export", product: {productID: "OFF-001", pname: "กระดาษ A4 Double A 80 แกรม"}, amount: 2, stock:5, remain: 3, note: {noteName: "ขาย", noteDescription: "ส่งให้ลูกค้า บจก.ABC"}},
+    //     {date: new Date(), manager:{name: "สมชาย ใจดี", role:"พนักงานคลัง"}, type:"export", product: {productID: "ELC-002", pname: "หมึกพิมพ์ Canon 810 สีดำ"}, amount: 3, stock:8, remain: 5, note: {noteName: "ขาย", noteDescription: ""}},
+    // ]
+
+    useEffect(() => {
+        async function getHistory() {
+            const res = await fetch('http://localhost:3000/api/transaction/', {method: 'GET'})
+            if (res.ok) {
+                const transaction = await res.json()
+                setData(transaction)
+            }
+            else {
+                window.alert('ไม่พบข้อมูล โปรดลองอีกครั้งภายหลัง')
+            }
+        }
+
+        getHistory()
+        socket.on('updateTransaction', () => getHistory())
+        return () => {socket.off('updateTransaction')}
+    }, [])
+
     return (
          <div className={StyleHistory.History}>
             <Header header="ประวัติการเคลื่อนไหวสต็อก" description="บันทึกการรับเข้า-เบิกออกทั้งหมดพร้อม Audit Trail" />
@@ -31,8 +53,8 @@ export default function History() {
             </div>
             <div className={StyleHistory.table}>
                 {
-                    data.map((item, index) => {
-                        return <Log {...item} key={index} />
+                    data.map((item) => {
+                        return <Log {...item} key={item._id} />
                     })
                 }
             </div>

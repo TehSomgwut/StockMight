@@ -34,8 +34,8 @@ export default function Request() {
                 </div>
                 <Routes>
                     <Route path="/" element={<Export/>} />
-                    <Route path="import" element={<Export/>} />
-                    <Route path="export" element={<Export/>} />
+                    <Route path="import" element={<Export type={"import"}/>} />
+                    <Route path="export" element={<Export type={"export"}/>} />
                 </Routes>
             </div>
          </div>

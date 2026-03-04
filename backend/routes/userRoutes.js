@@ -5,14 +5,17 @@ router.post("/", async (req, res) => { // Create user link. /api/users/
     try {
         // counterUser = (await User.find({role: req.body.role})).length + 1;
         const newUser = new User({ ...req.body })
-        console.log(newUser)
+        const users = await User.find()
+        if (req.body.username == await User.findOne({username: req.body.username}) ) {
+            return res.status(409).json({message: "มีผู้ใช้แล้ว"})
+        }
         await newUser.save().then(() => console.log(req.body.username, "saved"))
         const io = req.app.get('io')
         io.emit('userUpdate')
         res.json({message: `เพิ่ม ${req.body.username} สำเร็จ`})
     }
     catch (err) {
-        console.log("newUser error: ", err);
+        res.json({err})
     }
 })
 
@@ -31,7 +34,7 @@ router.post("/login", async (req, res) => {
 
         req.session.user = {
             secret: process.env.SESSION_SECRET,
-            id: user._id,
+            _id: user._id,
             username: user.username,
             role: user.role
         };
@@ -44,12 +47,24 @@ router.post("/login", async (req, res) => {
     }
 })
 
+router.post("/logout", (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error("Logout Error:", err);
+            return res.status(500).json({ message: "ไม่สามารถออกจากระบบได้" });
+        }
+        res.clearCookie('connect.sid'); 
+        
+        res.json({ message: "ออกจากระบบสำเร็จ" });
+    })
+})
+
 router.get("/me", (req, res) => {
-    if(req.session.id) {
+    if(!req.session.user) {
         return res.status(401).json({ user: null })
     }
 
-    res.json({ username: req.session.username, role: req.session.role })
+    res.json({ username: req.session.user.username, role: req.session.user.role, _id: req.session.user._id })
 })
 
 // Read Users ✅
@@ -80,6 +95,8 @@ router.put("/:id", async (req, res) => {
             req.body,
             { new: true }
         );
+        const io = req.app.get('io')
+        io.emit('userUpdate')
         res.json(updated);
     } catch (err) {
         console.log("User not found", err);

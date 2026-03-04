@@ -1,4 +1,8 @@
 import { Link, Route, Routes } from 'react-router-dom';
+import { useState, useEffect } from 'react'
+import { io } from 'socket.io-client'
+const socket = io('http://localhost:3000')
+
 import Nav from '../components/Nav/Nav'
 import Side from '../components/Side/Side'
 import Dashboard from './Dashboard/Dashboard';
@@ -13,6 +17,9 @@ import Reports from './Reports/Report';
 import Users from './Users/Users';
 import AddCategory from './AddCategory/AddCategory';
 import AddMetric from './AddMetric/AddMetric';
+import UpdateCategory from './AddCategory/UpdateCategory/UpdateCategory';
+import UpdateMetric from './AddMetric/UpdateMetric/UpdateMetric';
+import UpdateProduct from './AddProduct/UpdateProduct/UpdateProduct';
 
 export default function MainPage() {
     return (
@@ -32,6 +39,9 @@ export default function MainPage() {
                     <Route path={"/users"} element={ <Users /> } />
                     <Route path={"/categories/add"} element={ <AddCategory />} />
                     <Route path={"/metric/add"} element={ <AddMetric />} />
+                    <Route path={`/categories/update/:id`} element={ <UpdateCategory /> } />
+                    <Route path={`/unit/:id`} element={ <UpdateMetric /> } />
+                    <Route path={`/inventory/:id`} element={ <UpdateProduct /> } />
                 </Routes>
                 {/* <Dashboard /> */}
             </div>

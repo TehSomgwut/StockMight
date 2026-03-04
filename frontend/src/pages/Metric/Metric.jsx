@@ -4,6 +4,8 @@ import StyleCategories from '../Categories/Categories.module.css'
 import Header from '../../components/PageHeader/PageHeader'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { io } from 'socket.io-client'
+const socket = io('http://localhost:3000')
 
 export default function Metric() {
     
@@ -28,6 +30,14 @@ export default function Metric() {
             }
         }
         getMetric();
+
+        socket.on('updateMetric', () => {
+            getMetric()
+        })
+
+        return () => {
+            socket.off('updateMetric')
+        }
     }, [])
 
     // getMetric().map((item) => {
@@ -46,7 +56,7 @@ export default function Metric() {
                 <Link to='add'>
                     <div className={StyleCategories["add-button"]}>
                         <img src="\Icon\6-Categories\Icon-2.svg" />
-                        <p>เพิ่มหมวดหมู่</p>
+                        <p>เพิ่มหน่วยนับ</p>
                     </div>
                 </Link>
             </div>

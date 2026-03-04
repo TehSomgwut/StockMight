@@ -49,6 +49,11 @@ export default function AddCategory() {
         })
     }
 
+    function handleReset() {
+        setForm({ชื่อหมวดหมู่: ""})
+        navigate('/pages/categories')
+    }
+
     return (
         <div className={styleC.AddCategory}>
             <PageHeader header="เพิ่มหมวดหมู่" description="เพิ่มหมวดหมู่สินค้า" />
@@ -64,7 +69,7 @@ export default function AddCategory() {
                 </div>
                 <div className={styleC.button}>
                     <button onClick={handleSubmit} type="submit"><img src="/Icon/10-Save-Category/Icon-1.svg" /><p>บันทึกการแก้ไข</p></button>
-                    <button type="reset" onClick={() => setForm({ชื่อหมวดหมู่: ""})}><p>ยกเลิก</p></button>
+                    <button type="reset" onClick={() => handleReset()}><p>ยกเลิก</p></button>
                 </div>
             </form>
             <div ref={alert} className={styleC.alert}>
@@ -87,6 +92,7 @@ export default function AddCategory() {
                     </div>
                 </div>
             </div>
+            
         </div>
     )
 }

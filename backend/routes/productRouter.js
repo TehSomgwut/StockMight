@@ -18,7 +18,7 @@ const upload = multer({ storage })
 
 router.get("/", async (req, res) => {
     try {
-        const product = await Supply.find()
+        product = await Supply.find().populate('metric', 'name').populate('category', 'name');
         res.json(product)
     }
     catch {
@@ -83,8 +83,9 @@ router.post("/", upload.single('image'), async (req, res) => {
             image: imagePath
         });
         
-        console.log(newProduct)
         await newProduct.save();
+        const io = req.app.get('io')
+        io.emit("updateSupply")
         res.status(200).json({ message: "เพิ่มสำเร็จ" });
     } catch (err) {
         console.log("POST Error", err);
@@ -94,39 +95,46 @@ router.post("/", upload.single('image'), async (req, res) => {
 
 router.put("/:id", upload.single("image"), async (req, res) => {
     try {
-        // const Update = await Supply.findByIdAndUpdate(req.params.id, req.body, {new: true})
-        const Update = { ...req.body }
-        
+        const Update = { ...req.body };
+        const target = await Supply.findById(req.params.id);
+        if (!target) {
+            return res.status(404).json({ message: "ไม่พบสินค้า" });
+        }
         if (req.file) {
-            if (Update.image) {
-                const oldPath = path.join(__dirname, "..", product.image)
-                
+            if (target.image) {
+                const oldPath = path.join(__dirname, "../public", target.image);
+                console.log("1. ชื่อไฟล์ใน DB:", target.image);
+                console.log("2. พยายามจะลบไฟล์ที่:", oldPath);
                 if (fs.existsSync(oldPath)) {
-                    fs.unlinkSync(oldPath)
+                    fs.unlinkSync(oldPath);
                 }
             }
+            Update.image = "/images/" + req.file.filename;
         }
+        const updatedProduct = await Supply.findByIdAndUpdate(req.params.id, Update, { new: true });
         
-        Update.image = "/images/" + req.file.filename
-        await Supply.findByIdAndUpdate(req.params.id, Update, {new: true})
-        res.json(Update)
+        const io = req.app.get('io');
+        io.emit("updateSupply");
+        res.json(updatedProduct);
     }
-    catch {
-        console.log("Not Found")
-        res.json({message: "ไม่พบสินค้า"})
+    catch (err) {
+        console.log("Update Error: ", err);
+        res.status(500).json({ message: "เกิดข้อผิดพลาดในการอัปเดตข้อมูล" });
     }
-})
+});
 
 router.delete("/:id", async (req, res) => {
     try {
         // await Supply.findByIdAndDelete(req.params.id)
         const target = await Supply.findById(req.params.id)
         await Supply.findByIdAndDelete(req.params.id).then(() =>{
-            const oldPath = path.join(__dirname, "..", target.image)
+            const oldPath = path.join(__dirname, "../public", target.image)
             if (fs.existsSync(oldPath)) {
                 fs.unlinkSync(oldPath)
             }
         })
+        const io = req.app.get('io')
+        io.emit("updateSupply")
         res.json({message: (req.params.id, "has been deleted")})
     }
     catch {

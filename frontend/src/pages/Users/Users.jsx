@@ -11,10 +11,17 @@ const socket = io("http://localhost:3000");
 export default function Users() {
 
     const [showAdd, setShowAdd] = useState(false);
-    const [ form, setForm ] = useState({role: "staff", status: "ใช้งาน"})
-    const [ userData, setUserData ] =useState([])
+    const [form, setForm] = useState({role: "staff", status: "ใช้งาน"})
+    const [userData, setUserData] = useState([])
+    const [allUser, setAllUser] = useState([])
+    const [showFilter, setShowFilter] = useState(false)
     
-
+    // 🟢 1. State ถังเก็บเงื่อนไขการกรองและการค้นหาทั้งหมด
+    const [filters, setFilters] = useState({
+        keyword: "",
+        roles: [],
+        status: "all" 
+    });
 
     function handleChange(e) {
         const { name, value } = e.target
@@ -22,34 +29,32 @@ export default function Users() {
     }
 
     async function handleSubmit(e) {
-        e.preventDefault()
+        e.preventDefault();
         try {
             const res = await fetch('http://localhost:3000/api/users/', {
                 method: 'POST',
                 headers: {"content-type": "application/json"},
                 body: JSON.stringify(form)
             })
-            if (res.ok) {
-                setShowAdd(!showAdd);
+            if (res.status == 200) {
+                setShowAdd(false);
             }
-            else {
+            else if (res.status == 409) {
                 window.alert("ผู้ใช้นี้อาจมีอยู่แล้ว")
             }
         } catch {
-                window.alert("ไม่สามารถเชื่อมต่อได้")
+            window.alert("ไม่สามารถเชื่อมต่อได้")
+            setShowAdd(false);
         }
-        console.log(form)
     }
-
     
     useEffect(() => {
-
         async function getUsers() {
             try {
                 const res = await fetch('http://localhost:3000/api/users/', {method: "GET"});
                 if (res.ok) {
                     const userD = await res.json()
-                    setUserData(userD)
+                    setAllUser(userD) 
                 }
             }
             catch {
@@ -57,7 +62,6 @@ export default function Users() {
             }
         }
         getUsers()
-
 
         socket.on('userUpdate', () => {
             getUsers()
@@ -68,34 +72,97 @@ export default function Users() {
             socket.off('userUpdate')
         }
     }, [])
-    // const userData = [
-    //     {username: "Tae1231212121", realname: "Songwut Phosri", email: "Songwut123@example.com", role: "ผู้จัดการ", status: "กำลังใช้งาน", recent: new Date()},
-    //     {username: "BotaHaKeeTak", realname: "Kittinat K.", email: "BOBOBOBO@example.com", role: "ผู้จัดการ", status: "ไม่ได้ใช้งาน", recent: new Date()},
-    //     {username: "Jackkkkkkkkkkkkkson michael", realname: "Jirakrit mula", email: "Keerajid321@example.com", role: "พนักงานคลัง", status: "กำลังใช้งาน", recent: new Date()},
-    // ]
+
+    useEffect(() => {
+        let result = [...allUser];
+
+        if (filters.keyword) {
+            result = result.filter(item => 
+                item.username.toLowerCase().includes(filters.keyword) || 
+                item.email.toLowerCase().includes(filters.keyword)
+            );
+        }
+
+        // (Checkbox - OR Logic)
+        if (filters.roles.length > 0) {
+            result = result.filter(item => filters.roles.includes(item.role));
+        }
+
+        // Status (Radio)
+        if (filters.status !== "all") {
+            result = result.filter(item => item.status === filters.status);
+        }
+
+        setUserData(result);
+        
+    }, [filters, allUser]);
+
+
+    function handleSearchChange(e) {
+        const value = e.target.value.toLowerCase();
+        setFilters(prev => ({ ...prev, keyword: value }));
+    }
+
+    // 🟢 4. ฟังก์ชันจัดการเมื่อกด Checkbox (Role)
+    function handleRoleChange(e) {
+        const { value, checked } = e.target;
+        setFilters(prev => {
+            if (checked) {
+                return { ...prev, roles: [...prev.roles, value] };
+            } else {
+                return { ...prev, roles: prev.roles.filter(role => role !== value) };
+            }
+        });
+    }
+
+    // 🟢 5. ฟังก์ชันจัดการเมื่อกด Radio (Status)
+    function handleStatusChange(e) {
+        const { value } = e.target;
+        setFilters(prev => ({ ...prev, status: value }));
+    }
 
     return (
          <div className={StyleUsers.Users}>
             <div className={StyleUsers.header}>
-
                 <Header header="จัดการผู้ใช้" description="จัดการบัญชีผู้ใช้งานระบบ (สามารถจัดการ ผู้จัดการ และพนักงานคลัง)" />
                 <div className={StyleUsers["add-button"]} onClick={() => setShowAdd(!showAdd)}>
                     <img src="\Icon\6-Categories\Icon-2.svg" />
                     <p>เพิ่มผู้ใช้งานใหม่</p>
                 </div>
             </div>
+
             <div className={StyleUsers["card-container"]}>
-                <Card text="ผู้ใช้งานทั้งหมด" value={userData.length} src='/Icon/9-Users/Icon-6.svg' CN="blue" />
-                <Card text="ใช้งาน" value={userData.filter((item) => item.status === "ใช้งาน").length} src='/Icon/9-Users/Icon-5.svg' CN="green" />
-                <Card text="ปิดการใช้งาน" value={userData.filter((item) => item.status === "ปิดการใช้งาน").length} src='/Icon/9-Users/Icon-4.svg' />
+                <Card text="ผู้ใช้งานทั้งหมด" value={allUser.length} src='/Icon/9-Users/Icon-6.svg' CN="blue" />
+                <Card text="ใช้งาน" value={allUser.filter((item) => item.status === "ใช้งาน").length} src='/Icon/9-Users/Icon-5.svg' CN="green" />
+                <Card text="ปิดการใช้งาน" value={allUser.filter((item) => item.status === "ปิดการใช้งาน").length} src='/Icon/9-Users/Icon-4.svg' />
             </div>
-            <div className={StyleExport.search}>
-                <p>ค้าหาผู้ใช้</p>
-                <label htmlFor="search-request">
-                    <img src="/Icon/4-Receive-issue/Icon.svg" />
-                    <input type='text' placeholder='ค้นหาผู้ใช้ด้วยชื่อ หรืออีเมล' required />
-                </label>
+
+            <div className={`${StyleExport.search} ${StyleUsers.search}`}>
+                <p>ค้นหาผู้ใช้</p>
+                <div>
+                    <label>
+                        <img src="/Icon/4-Receive-issue/Icon.svg" />
+                        <input type='text' placeholder='ค้นหาผู้ใช้ด้วยชื่อ หรืออีเมล' required onChange={handleSearchChange} />
+                    </label>
+                    <label onClick={() => setShowFilter(!showFilter)} style={{cursor: 'pointer'}}>
+                        <img src="/Icon/2-Inventory/Icon-3.svg" />
+                        <p>กรองผู้ใช้</p>
+                    </label>
+                    <div className={StyleUsers["filter-container"]} style={showFilter ? {display: 'flex'} : {display: 'none'}}>
+                        <div className="role-filter">
+                            <label><input type='checkbox' value='manager' onChange={handleRoleChange} />manager</label>
+                            <label><input type='checkbox' value='staff' onChange={handleRoleChange} />staff</label>
+                            <label><input type='checkbox' value='admin' onChange={handleRoleChange} />admin</label>
+                        </div>
+                        <div className='status-filter'>
+                            <label><input type='radio' name='status' value='all' defaultChecked onChange={handleStatusChange} />ทั้งหมด</label>
+                            <label><input type='radio' name='status' value='ใช้งาน' onChange={handleStatusChange} />กำลังใช้งาน</label>
+                            <label><input type='radio' name='status' value='ปิดการใช้งาน' onChange={handleStatusChange} />ปิดการใช้งาน</label>
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <div className={StyleUsers["Users-table"]}>
                 <p className={StyleUsers.Thead}>ชื่อผู้ใช้</p>
                 <p className={StyleUsers.Thead}>ชื่อ-นามสกุล</p>
@@ -106,7 +173,7 @@ export default function Users() {
                 <p className={StyleUsers.Thead}>จัดการ</p>
 
                 { userData.length != 0 ? userData.map((item, index) => {
-                    return <User key={index} {...item} />
+                    return <User key={item._id || index} {...item} />
                 }) : <p style={{color: 'var(--gray)', position: 'absolute', fontSize: '1.2em', marginLeft: '33%', marginTop: '40px'}}>ไม่พบข้อมูลผู้ใช้งาน</p>}
             </div>
             <div className={StyleUsers["add-user"]} style={showAdd ? {display: 'flex'} : {display: 'none'}}>
@@ -145,8 +212,8 @@ export default function Users() {
                         </div>
                     </div>
                     <div className={StyleUsers["button-container"]}>
-                        <button type="submit" onClick={() => setShowAdd(!showAdd)}>เพิ่มผู้ใช้งาน</button>
-                        <button type="reset" onClick={() => setShowAdd(!showAdd)}>ยกเลิก</button>
+                        <button type="submit">เพิ่มผู้ใช้งาน</button>
+                        <button type="reset" onClick={() => setShowAdd(false)}>ยกเลิก</button>
                     </div>
                 </form>
             </div>

@@ -22,6 +22,7 @@
     }
     label {
         display: flex;
+        position: relative;
         gap: 10px;
         align-items: center;
         border-radius: 0;
@@ -29,6 +30,8 @@
         padding: 10px;
         width: 100%;
         box-sizing: border-box;
+        overflow-x: hidden;
+        z-index: 0;
         input {
             border: none;
             font-size: 1.1em;
@@ -38,5 +41,35 @@
             border: none;
             outline: none;
         }
+        .choose {
+            display: flex;
+            gap: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: var(--light-gray);
+            white-space: nowrap;
+        }
+    }
+}
+.find {
+    width: 100%;
+    padding: 10px;
+    max-height: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: white;
+    border: var(--card-border);
+    margin: 10px 0;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    cursor: pointer;
+    p {
+        padding: 5px;
+        border-radius: 5px;
+    }
+    p:hover {
+        background-color: var(--main);
+        color: white;
     }
 }
