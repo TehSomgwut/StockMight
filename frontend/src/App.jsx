@@ -12,6 +12,7 @@ import Switch from './pages/Switch-test/switch';
 
 export default function App() {
   const navigate = useNavigate()
+  const [ user, setUser ] = useState({})
   useEffect(() => { // Login
     async function aut() {
       const res = await fetch('http://localhost:3000/api/users/me', {
@@ -24,7 +25,8 @@ export default function App() {
         navigate('/login')
       }
       if (res.ok) {
-        console.log("200 : " + data.username)
+        console.log("200 : " + data)
+        setUser(data)
       }
     }
   aut()
@@ -37,7 +39,7 @@ export default function App() {
       <Link to="/pages"><h1>Pages</h1></Link> */}
       <Routes>
         <Route path="/login" element= {<Login />} />
-        <Route path="/pages/*" element= {<MainPage />} />
+        <Route path="/pages/*" element= {<MainPage authentication={user} />} />
         <Route path="/test-masking" element= { <GSAP /> } />
         <Route path="/test-switch" element= { <Switch /> } />
       </Routes>

@@ -1,12 +1,17 @@
 import LowStockStyles from './LowStock.module.css';
 import Item from './Item/Item';
+import { useState, useEffect } from 'react'
 
-export default function LowStock() {
-    const data = [
-        {SKU: "ELC-002", name: "หมึกพิมพ์ Cannon 810 สีดำ", remain: "5", danger: 15, status: {src: '/Icon/1-Home/Icon.svg', text: "ใกล้หมด"}},
-        {SKU: "OFF-001", name: "กระดาษ A4 Double A 80 แกรม", remain: "3", danger: 8, status: {src: '/Icon/1-Home/Icon.svg', text: "ใกล้หมด"}},
-        {SKU: "MAT-001", name: "ปูนซีเมนตราช้าง", remain: "150", danger: 200, status: {src: '/Icon/1-Home/Icon.svg', text: "ใกล้หมด"}}
-    ]
+export default function LowStock({items}) {
+    // const data = [
+    //     {SKU: "ELC-002", name: "หมึกพิมพ์ Cannon 810 สีดำ", remain: "5", danger: 15, status: {src: '/Icon/1-Home/Icon.svg', text: "ใกล้หมด"}},
+    //     {SKU: "OFF-001", name: "กระดาษ A4 Double A 80 แกรม", remain: "3", danger: 8, status: {src: '/Icon/1-Home/Icon.svg', text: "ใกล้หมด"}},
+    //     {SKU: "MAT-001", name: "ปูนซีเมนตราช้าง", remain: "150", danger: 200, status: {src: '/Icon/1-Home/Icon.svg', text: "ใกล้หมด"}}
+    // ]
+    const [ data, setData ] = useState([])
+    useEffect(() => {
+        setData(items)
+    }, [items])
     return (
         <div className={LowStockStyles["low-stock"]}>
             <div className={LowStockStyles.status}>
@@ -22,10 +27,10 @@ export default function LowStock() {
                 <p>คงเหลือ</p>
                 <p>จุดแจ้งเตือน</p>
                 <p>สถานะ</p>
-                {data ? data.map((item, index) => {
+                {data.length !== 0 ? data.map((item, index) => {
                     return <Item key={index}
                     {...item} />
-                }) : <p>ไม่พบข้อมูล</p>}
+                }) : <p style={{position: 'absolute', whiteSpace: 'nowrap', marginTop: '30px'}}>ไม่มีข้อมูลสินค้าใกล้หมด</p>}
             </div>
         </div>
     )

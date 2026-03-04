@@ -4,9 +4,9 @@ import sideStyles from './Side.module.css';
 import gsap from 'gsap';
 import { useNavigate } from 'react-router-dom'
 
-export default function Side() {
-    const [user, setUser] = useState({username: "ผู้ดูแลระบบ", role: "admin"});
+export default function Side({ user }) {
     const [activeIndex, setActiveIndex] = useState(0);
+    const currentUser = user
     const navigate = useNavigate()
     
     const data = [
@@ -18,7 +18,9 @@ export default function Side() {
         { src: '/Icon/Navigator/Icon-13.svg', alt: 'category', text: 'หมวดหมู่สินค้า', linkTo:'/pages/categories' },
         { src: '/Icon/Navigator/Icon-12.svg', alt: 'metrics', text: 'หน่วยนับ', linkTo:'/pages/metric' },
         { src: '/Icon/Navigator/Icon-11.svg', alt: 'report', text: 'รายงาน', linkTo:'/pages/reports' },
-        { src: '/Icon/Navigator/Icon-9.svg', alt: 'user-manage', text: 'จัดการผู้ใช้', linkTo:'/pages/users' }
+        ...(currentUser?.role === 'admin' ? [
+            { src: '/Icon/Navigator/Icon-9.svg', alt: 'user-manage', text: 'จัดการผู้ใช้', linkTo:'/pages/users' }
+        ] : [])
     ];
 
     const selectedRef = useRef(null);

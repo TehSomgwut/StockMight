@@ -39,6 +39,8 @@
             flex-shrink: 200px;
             flex-grow: 1;
             flex-basis: 200px;
+            max-height: 500px;
+            overflow-y: scroll;
         }
     }
 }
