@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { io } from 'socket.io-client'
 const socket = io('https://stockmight-backend.onrender.com')
 
-export default function Metric() {
+export default function Metric( {productsData} ) {
     
     const [data, setData] = useState([])
     

@@ -4,8 +4,18 @@ import { useState, useEffect } from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
 import UpdateCategory from '../../AddCategory/UpdateCategory/UpdateCategory'
 
-export default function Category({name, amount, status, _id}) {
+export default function Category({name, amount, status, _id, productsData}) {
     const [ isShow, setIsShow ] = useState(false)
+    const [productCount, setProductCount] = useState(0);
+
+    useEffect(() => {
+        if (productsData && Array.isArray(productsData)) {
+            const count = productsData.filter(p => p.category && p.category.$oid === _id).length;
+            setProductCount(count);
+        } else {
+            setProductCount(amount || 0);
+        }
+    }, [productsData, _id, amount])
 
     async function onConfirm() {
         await fetch(`https://stockmight-backend.onrender.com/api/category/${_id}`, {
@@ -23,7 +33,7 @@ export default function Category({name, amount, status, _id}) {
     return (
          <div className={StyleCategory.Category}>
             <p>{name}</p>
-            <p style={{color: "var(--gray)"}}>{amount} รายการ</p>
+            <p style={{color: "var(--gray)"}}>{productCount} รายการ</p>
             <p className={ status=="ใช้งาน" ? StyleCategory["in-use"] : StyleCategory["out-use"]}>{status}</p>
             <div className={StyleCategory.manage}>
                 <Link to={`/pages/categories/update/${_id}`} style={{textDecoration: 'none'}} >

@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react'
 import { io } from 'socket.io-client'
 const socket = io("https://stockmight-backend.onrender.com")
 
-export default function Categories() {
+export default function Categories({productsData}) {
 
     const [data, setData] = useState([])
 
@@ -66,7 +66,7 @@ export default function Categories() {
                 </div>
                 <div className={StyleCategories.Tbody}>
                     { data.length == 0 ? <p style={{fontSize: "0.9em", color: "var(--gray)"}}>ไม่พบหมวดหมู่ใดๆ ลองเพิ่มดูสิ</p> : data.map((item, index) => {
-                        return <Category key={index} {...item} />
+                        return <Category key={index} {...item} productsData={productsData} />
                     })}
                 </div>
             </div>

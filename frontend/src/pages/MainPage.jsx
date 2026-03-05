@@ -60,8 +60,8 @@ export default function MainPage({ authentication }) {
                     <Route path={"/add-product"} element={ <AddProduct /> } />
                     <Route path={"/request/*"} element={ <Request productsData={globalProducts} /> } />
                     <Route path={"/history"} element={ <History /> } />
-                    <Route path={"/categories/*"} element={ <Categories /> } />
-                    <Route path={"/metric/*"} element={ <Metric /> } />
+                    <Route path={"/categories/*"} element={ <Categories productsData={globalProducts} /> } />
+                    <Route path={"/metric/*"} element={ <Metric productsData={globalProducts} /> } />
                     <Route path={"/reports"} element={ <Reports productsData={globalProducts} /> } />
                     
                     { user?.role === 'admin' && (
