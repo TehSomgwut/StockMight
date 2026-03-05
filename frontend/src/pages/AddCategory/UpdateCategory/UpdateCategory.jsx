@@ -25,7 +25,7 @@ export default function UpdateCategory() {
         }
 
         try {
-            await fetch(`http://localhost:3000/api/category/${id}`, {
+            await fetch(`http://stockmight-backend.onrender.com/api/category/${id}`, {
                 method: "PUT",
                 headers: {"Content-Type" : "application/json"},
                 body: JSON.stringify(resFrom)
@@ -39,7 +39,7 @@ export default function UpdateCategory() {
 
     useEffect(() => {
         async function getCategory() {
-            const res = await fetch(`http://localhost:3000/api/category/${id}`, {method: "GET"})
+            const res = await fetch(`http://stockmight-backend.onrender.com/api/category/${id}`, {method: "GET"})
             const target = await res.json()
             setCategory(target)
         }

@@ -19,7 +19,7 @@ export default function Product({ name, image, metric, code, category, quantity,
     // 2. onConfirm: ฟังก์ชันลบสินค้า
     async function onConfirm() {
         try {
-            const res = await fetch(`http://localhost:3000/api/product/${_id}`, { method: 'DELETE' });
+            const res = await fetch(`http://stockmight-backend.onrender.com/api/product/${_id}`, { method: 'DELETE' });
             if (res.ok) {
                 setIsShow(false);
                 // แนะนำ: ควรมี callback เพื่อบอกตัวแม่ให้ดึงข้อมูลใหม่หลังจากลบสำเร็จ
@@ -44,7 +44,7 @@ export default function Product({ name, image, metric, code, category, quantity,
             <div className={styleP["product-name"]}>
                 {/* เช็ค Path รูปภาพ */}
                 <img 
-                    src={image && image !== "/" ? `http://localhost:3000${image}` : '/Icon/2-Inventory/Icon.svg'} 
+                    src={image && image !== "/" ? `http://stockmight-backend.onrender.com${image}` : '/Icon/2-Inventory/Icon.svg'} 
                     alt={name} 
                 />
                 <div>

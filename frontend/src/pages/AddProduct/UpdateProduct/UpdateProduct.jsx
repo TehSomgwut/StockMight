@@ -54,7 +54,7 @@ export default function UpdateProduct() {
         }
 
         try {
-            const res = await fetch(`http://localhost:3000/api/product/${id}`, {
+            const res = await fetch(`http://stockmight-backend.onrender.com/api/product/${id}`, {
                 method: "PUT",
                 // Browser จะใส่ 'multipart/form-data' พร้อม Boundary ให้เอง
                 body: formData 
@@ -80,7 +80,7 @@ export default function UpdateProduct() {
     useEffect(()=> {
         async function getMetric() {
             try {
-                const res = await fetch("http://localhost:3000/api/metric/", {
+                const res = await fetch("http://stockmight-backend.onrender.com/api/metric/", {
                     method: "GET"
                 });
     
@@ -99,7 +99,7 @@ export default function UpdateProduct() {
 
         async function getCategories() {
             try {
-                const res = await fetch("http://localhost:3000/api/category", {
+                const res = await fetch("http://stockmight-backend.onrender.com/api/category", {
                     method: "GET"
                 })
                 if (res.ok) {
@@ -116,7 +116,7 @@ export default function UpdateProduct() {
         }
 
         async function getProduct() {
-            const res = await fetch(`http://localhost:3000/api/product/${id}`, { method: "GET"})
+            const res = await fetch(`http://stockmight-backend.onrender.com/api/product/${id}`, { method: "GET"})
             if (res.ok) {
                 const target = await res.json()
                 setProduct(target)
@@ -151,7 +151,7 @@ export default function UpdateProduct() {
                     <p>รูปสินค้า</p>
                     <label htmlFor='input-product-image'>
                         <input type="file" id="input-product-image" name="image" onChange={handleImageChange} />
-                        { isShow ? <img className={StyleAddProduct["preview-image"]} src={isShow} /> : <img className={StyleAddProduct["preview-image"]} src={`http://localhost:3000${product.image}`} /> }
+                        { isShow ? <img className={StyleAddProduct["preview-image"]} src={isShow} /> : <img className={StyleAddProduct["preview-image"]} src={`http://stockmight-backend.onrender.com${product.image}`} /> }
                     </label>
                 </div>
                 <div className={StyleAddProduct["input-container"]}>

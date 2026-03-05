@@ -4,7 +4,7 @@ import Log from './Log/Log'
 import Header from '../../components/PageHeader/PageHeader'
 import { useState, useEffect } from 'react'
 import io from 'socket.io-client';
-const socket = io('http://localhost:3000')
+const socket = io('http://stockmight-backend.onrender.com')
 
 export default function History() {
     const [ data, setData ] = useState([])
@@ -16,7 +16,7 @@ export default function History() {
 
     useEffect(() => {
         async function getHistory() {
-            const res = await fetch('http://localhost:3000/api/transaction/', {method: 'GET'})
+            const res = await fetch('http://stockmight-backend.onrender.com/api/transaction/', {method: 'GET'})
             if (res.ok) {
                 const transaction = await res.json()
                 setData(transaction)

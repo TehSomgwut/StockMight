@@ -22,7 +22,7 @@ export default function AddMetric() {
         }
 
         try {
-            const res = await fetch('http://localhost:3000/api/metric/', {
+            const res = await fetch('http://stockmight-backend.onrender.com/api/metric/', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(resform)

@@ -43,7 +43,7 @@ export default function AddProduct() {
     //     setForm(payload);
     //     console.log("Data to send:", payload);
     //     try {
-    //         const res = fetch('http://localhost:3000/api/product/', {
+    //         const res = fetch('http://stockmight-backend.onrender.com/api/product/', {
     //             method: "POST",
     //             // headers: {"content-type": "application/json"},
     //             body: form
@@ -82,7 +82,7 @@ export default function AddProduct() {
         }
 
         try {
-            const res = await fetch('http://localhost:3000/api/product/', {
+            const res = await fetch('http://stockmight-backend.onrender.com/api/product/', {
                 method: "POST",
                 // Browser จะใส่ 'multipart/form-data' พร้อม Boundary ให้เอง
                 body: formData 
@@ -100,7 +100,7 @@ export default function AddProduct() {
     useEffect(()=> {
         async function getMetric() {
             try {
-                const res = await fetch("http://localhost:3000/api/metric/", {
+                const res = await fetch("http://stockmight-backend.onrender.com/api/metric/", {
                     method: "GET"
                 });
     
@@ -120,7 +120,7 @@ export default function AddProduct() {
 
         async function getCategories() {
             try {
-                const res = await fetch("http://localhost:3000/api/category", {
+                const res = await fetch("http://stockmight-backend.onrender.com/api/category", {
                     method: "GET"
                 })
                 if (res.ok) {

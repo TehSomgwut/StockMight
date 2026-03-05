@@ -6,7 +6,7 @@ import StyleExport from '../Request/Export/Export.module.css'
 import InputField from '../../components/InputField/InputField';
 import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
-const socket = io("http://localhost:3000");
+const socket = io("http://stockmight-backend.onrender.com");
 
 export default function Users() {
 
@@ -31,7 +31,7 @@ export default function Users() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const res = await fetch('http://localhost:3000/api/users/', {
+            const res = await fetch('http://stockmight-backend.onrender.com/api/users/', {
                 method: 'POST',
                 headers: {"content-type": "application/json"},
                 body: JSON.stringify(form)
@@ -51,7 +51,7 @@ export default function Users() {
     useEffect(() => {
         async function getUsers() {
             try {
-                const res = await fetch('http://localhost:3000/api/users/', {method: "GET"});
+                const res = await fetch('http://stockmight-backend.onrender.com/api/users/', {method: "GET"});
                 if (res.ok) {
                     const userD = await res.json()
                     setAllUser(userD) 
