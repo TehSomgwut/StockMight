@@ -40,7 +40,7 @@ export default function Side({ user }) {
 
     const handleLogout = async () => {
         try {
-            const res = await fetch('http://localhost:3000/api/users/logout', {
+            const res = await fetch('http://stockmight-backend.onrender.com/api/users/logout', {
                 method: "POST",
                 credentials: "include"
             });

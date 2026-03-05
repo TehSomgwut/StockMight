@@ -4,7 +4,7 @@ export default function Nav() {
         <nav className={navStyles.nav}>
             <div className={navStyles.logo}>
                 <img className={navStyles.logo} src="\Icon\Navigator\StockMight_Color_Hor.svg" alt="logo" />
-                <img className={navStyles.back} src="\Icon\Navigator\Icon-18.svg" alt="back" />
+                <img className={navStyles.back} src="\Icon\Navigator\Icon-18.svg" alt="back" onClick={() => window.history.back()} />
             </div>
             <div className={navStyles.date}>
                 <img src="\Icon\Navigator\Icon-7.svg" alt="bell" className={navStyles.bell} />

@@ -140,7 +140,7 @@ export default function UpdateProduct() {
     return (
          <div className={StyleAddProduct.addProduct}>
             <header>
-                <img src="\Icon\3-Inventory-addnew\inventory\Icon-12.svg" />
+                {/* <img src="\Icon\3-Inventory-addnew\inventory\Icon-12.svg" /> */}
                 <Header header={`แก้ไขสินค้า ${product.name}`} description={`แก้ไขสินค้า ${product.name} ลงสู่ระบบ`} />
             </header>
             <form onSubmit={handleSubmit}>
@@ -212,7 +212,7 @@ export default function UpdateProduct() {
                     </select>
                 </div>
                 <div className={StyleAddProduct["input-container"]}>
-                    <button type="reset">ยกเลิก</button>
+                    <button type="reset" onClick={() => navigate('/pages/inventory')}>ยกเลิก</button>
                     <button type="submit">แก้ไขสินค้า</button>
                 </div>
             </form>

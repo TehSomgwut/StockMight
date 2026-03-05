@@ -66,7 +66,7 @@ export default function User({_id , src, username, realname, email, role, status
                 <p className={styleUser.thin}>{lastLogin ? new Date(lastLogin).toLocaleDateString('th-TH') : "-"}</p>
                 <div>
                     <img src="/Icon/6-Categories/Icon-1.svg" onClick={() => setShowEdit(!showEdit)} style={{cursor: 'pointer'}} />
-                    <img src="/Icon/6-Categories/Icon.svg" onClick={handleDelete} style={{cursor: 'pointer'}} />
+                    <img src="/Icon/6-Categories/Icon.svg" onClick={handleDelete} style={{cursor: 'pointer', borderRadius: '0'}} />
                 </div>
                 <DeleteComponent isShow={isShow} setIsShow={setIsShow} h3="ยืนยันการลบผู้ใช้" p={`คุณแน่ใจหรือไม่ว่าต้องการลบผู้ใช้ "${user.username}" (${user.role})? การดำเนินการนี้ไม่สามารถยกเลิกได้`} onConfirm={confirmDelete} />
             </div>
