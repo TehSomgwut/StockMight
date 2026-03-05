@@ -1,4 +1,4 @@
-import stylePH from './PageHeader.module.css'
+import stylePH from './pageHeader.module.css'
 
 export default function PageHeader({header, description}) {
     return (
