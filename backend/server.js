@@ -16,18 +16,20 @@ const productRouter = require('./routes/productRouter')
 const TransactionRouter = require('./routes/transactionRouter')
 
 const app = express();
+app.use("proxy", "https://stockmight-backend.onrender.com")
 app.use(cors({
-    origin: true,
-    credentials: true
+    origin: 'https://stockmight-backend.onrender.com',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH']
 }));
 app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 app.use(session({
-    secret: "supersecret",
+    secret: process.env.SESSION_SECRET || "supersecret",
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false, maxAge: 1000*60*60*12}
+    cookie: { secure: true, maxAge: 1000*60*60*12 }
 }))
 
 app.use("/api/users", userRoutes);

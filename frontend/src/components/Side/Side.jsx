@@ -12,7 +12,7 @@ export default function Side({ user }) {
     const data = [
         { src: '/Icon/Navigator/Icon-17.svg', alt: 'dashboard', text: 'แดชบอร์ด', linkTo:'/pages/home' },
         { src: '/Icon/Navigator/Icon-16.svg', alt: 'stock', text: 'สินค้าคงคลัง', linkTo:'/pages/inventory' },
-        { src: '/Icon/Navigator/Icon-15.svg', alt: 'add-menu', text: 'เพิ่มเมนู', linkTo:'/pages/add-product' },
+        // { src: '/Icon/Navigator/Icon-15.svg', alt: 'add-menu', text: 'เพิ่มเมนู', linkTo:'/pages/add-product' },
         { src: '/Icon/Navigator/Icon-15.svg', alt: 'imported-exported', text: 'รับเข้า / เบิกออก', linkTo:'/pages/request' },
         { src: '/Icon/Navigator/Icon-14.svg', alt: 'history', text: 'ประวัติการเคลื่อนไหว', linkTo:'/pages/history' },
         { src: '/Icon/Navigator/Icon-13.svg', alt: 'category', text: 'หมวดหมู่สินค้า', linkTo:'/pages/categories' },
