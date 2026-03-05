@@ -16,9 +16,9 @@ const productRouter = require('./routes/productRouter')
 const TransactionRouter = require('./routes/transactionRouter')
 
 const app = express();
-app.use("proxy", "https://stockmight-backend.onrender.com")
+app.set("trust proxy", 1)
 app.use(cors({
-    origin: 'https://stockmight-backend.onrender.com',
+    origin: 'https://stockmight.vercel.app',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH']
 }));
@@ -29,7 +29,7 @@ app.use(session({
     secret: process.env.SESSION_SECRET || "supersecret",
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: true, maxAge: 1000*60*60*12 }
+    cookie: { secure: true, maxAge: 1000*60*60*12, httpOnly: true, }
 }))
 
 app.use("/api/users", userRoutes);
