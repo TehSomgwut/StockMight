@@ -17,8 +17,7 @@ const TransactionRouter = require('./routes/transactionRouter')
 
 const app = express();
 app.use(cors({
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    origin: true,
     credentials: true
 }));
 app.use(express.json());
@@ -50,6 +49,8 @@ app.get("/", (req, res) => {
     res.send("API Working");
 });
 
-server.listen(3000, () => {
-    console.log("Server running at PORT 3000");
-})
+const PORT = process.env.PORT || 3000;
+
+server.listen(PORT, () => {
+    console.log(`Server running at PORT ${PORT}`);
+});
