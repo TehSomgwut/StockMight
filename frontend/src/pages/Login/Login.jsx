@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import loginStyles from "./Login.module.css";
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,29 @@ export default function Login() {
         username: "",
         password: ""
     });
+    const [ currentUser, setCurrentUser ] = useState(null);
+    useEffect(() => {
+        async function checkLogin() {
+            try {
+                const res = await fetch("https://stockmight-backend.onrender.com/api/users/me", {
+                    credentials: "include"
+                });
+                const data = await res.json();
+                if (data.user) {
+                    setCurrentUser(data.user);
+                }
+            } catch (error) {
+                console.error("Fetch Error:", error);
+            }
+        }
+        checkLogin();
+    }, []);
+
+    useEffect(() => {
+        if (currentUser) {
+            navigate('/pages/home');
+        }
+    }, [currentUser, navigate]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -42,10 +65,7 @@ export default function Login() {
             const data = await res.json();
             console.log(data)
             if (data.message === "Login สำเร็จ") {
-                setTimeout(() => {
-                    navigate("/pages/home");
-                }, 1500); // เพิ่มดีเลย์รอให้เซิร์ฟเวอร์ตอบกลับและตั้งค่า session ก่อนเปลี่ยนหน้า
-                 //   navigate("/pages/home");
+                navigate("/pages/home");
             }
             else {
                 setMessage(data.message);
