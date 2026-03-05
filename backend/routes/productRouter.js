@@ -21,9 +21,9 @@ router.get("/", async (req, res) => {
         product = await Supply.find().populate('metric', 'name').populate('category', 'name');
         res.json(product)
     }
-    catch {
+    catch (err) {
         console.log("Err")
-        res.json({message: "NOT Found"})
+        res.json({message: "NOT Found", error: err})
     }
 })
 
