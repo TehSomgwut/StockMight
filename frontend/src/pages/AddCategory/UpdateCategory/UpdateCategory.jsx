@@ -12,13 +12,12 @@ export default function UpdateCategory() {
     const [ category, setCategory ] = useState({})
     const { id } = useParams()
 
-    // if (!_id) {
-    //     navigate('pages/categories')
-    // }
-
     const handleConfirm = async () => {
         alert.current.style.display = 'none';
-        let statusRes = from.status=="ใช้งาน" ? "active" : "inactive";
+        
+        // 🟢 แก้ไข: เปลี่ยนจาก from.status เป็นเช็คจาก State `active` โดยตรง
+        let statusRes = active === "ใช้งาน" ? "active" : "inactive";
+        
         const resFrom = {
             name: from.ชื่อหมวดหมู่ ?  from.ชื่อหมวดหมู่ : category.name,
             status: statusRes
@@ -39,13 +38,22 @@ export default function UpdateCategory() {
 
     useEffect(() => {
         async function getCategory() {
-            const res = await fetch(`https://stockmight-backend.onrender.com/api/category/${id}`, {method: "GET"})
-            const target = await res.json()
-            setCategory(target)
+            try {
+                const res = await fetch(`https://stockmight-backend.onrender.com/api/category/${id}`, {method: "GET"})
+                if (res.ok) {
+                    const target = await res.json()
+                    setCategory(target)
+                    
+                    // 🟢 เพิ่มเติม: เซ็ตสถานะเริ่มต้นให้ปุ่มตรงกับฐานข้อมูลตอนโหลดหน้า
+                    setActive(target.status === 'active' ? "ใช้งาน" : "ไม่ใช้งาน");
+                }
+            } catch (err) {
+                console.error("Fetch Error:", err);
+            }
         }
 
         getCategory()
-    })
+    }, [id]) // 🟢 แก้ไข: ใส่ [id] เพื่อป้องกัน Infinite Loop (ยิง API ซ้ำรัวๆ)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -83,7 +91,7 @@ export default function UpdateCategory() {
                     <div className={styleC.note}><h4>หมายเหตุ</h4>: การเพิ่มหมวดหมู่จะสามารถสร้างได้แค่จากหน้านี้</div>
                 </div>
                 <div className={styleC.button}>
-                    <button onClick={handleSubmit} type="submit"><img src="/Icon/10-Save-Category/Icon-1.svg" /><p>บันทึกการแก้ไข</p></button>
+                    <button onClick={handleSubmit} type="button"><img src="/Icon/10-Save-Category/Icon-1.svg" /><p>บันทึกการแก้ไข</p></button>
                     <button type="reset" onClick={() => handleReset()}><p>ยกเลิก</p></button>
                 </div>
             </form>
