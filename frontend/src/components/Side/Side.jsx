@@ -1,5 +1,5 @@
 import React, { useState, useRef, useLayoutEffect } from 'react';
-import Menu from "./menu/menu";
+import Menu from "./menu/Menu.jsx";
 import sideStyles from './Side.module.css';
 import gsap from 'gsap';
 import { useNavigate } from 'react-router-dom'
@@ -36,19 +36,6 @@ export default function Side({ user }) {
             }
         }
 
-        async function authen() {
-            const res = await fetch('http://localhost:3000/api/users/me', {method: "GET", credentials: "include"})
-            if (res.status == 401) {
-                return null
-            }
-            else {
-                const target = await res.json();
-                setUser(target)
-            }
-        }
-
-        authen()
-
     }, []);
 
     const handleLogout = async () => {
@@ -73,11 +60,11 @@ export default function Side({ user }) {
                 <div>
                     <div className={sideStyles["profile-container"]}>
                         <div className={sideStyles["profile-text"]}>
-                            {user.username ? user.username.slice(0, 1) : "U"}
+                            {user?.username ? user.username.slice(0, 1) : "U"}
                         </div>
                         <div>
-                            <p className={sideStyles.username}>{user.username}</p>
-                            <p className={sideStyles.role}>{ user.role }</p>
+                            <p className={sideStyles.username}>{user?.username}</p>
+                            <p className={sideStyles.role}>{ user?.role }</p>
                         </div>
                     </div>
 
