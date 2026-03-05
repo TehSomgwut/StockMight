@@ -1,5 +1,5 @@
 import React, { useState, useRef, useLayoutEffect } from 'react';
-import Menu from "./menu/menu.jsx";
+import Menu from "./menu/menu";
 import sideStyles from './Side.module.css';
 import gsap from 'gsap';
 import { useNavigate } from 'react-router-dom'
