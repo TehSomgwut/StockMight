@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import menuStyles from './Menu.module.css';
+import menuStyles from './menu.module.css';
 import gsap from 'gsap';
 import { Route, Link } from 'react-router-dom'
 
