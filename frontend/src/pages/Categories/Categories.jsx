@@ -5,7 +5,7 @@ import { Link, Route, Routes } from 'react-router-dom'
 import AddCategory from '../AddCategory/AddCategory'
 import { useState, useEffect } from 'react'
 import { io } from 'socket.io-client'
-const socket = io("http://stockmight-backend.onrender.com")
+const socket = io("https://stockmight-backend.onrender.com")
 
 export default function Categories() {
 
@@ -14,7 +14,7 @@ export default function Categories() {
     useEffect(() => {
         async function getC() {
             try {
-                const res = await fetch('http://stockmight-backend.onrender.com/api/category/', {
+                const res = await fetch('https://stockmight-backend.onrender.com/api/category/', {
                     method: "GET"
                 })
                 if (res.ok) {

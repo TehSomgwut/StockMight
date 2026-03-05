@@ -17,7 +17,7 @@ export default function User({_id , src, username, realname, email, role, status
 
     async function handleSubmit(e) {
         e.preventDefault()
-        const res = fetch(`http://stockmight-backend.onrender.com/api/users/${_id}`, {
+        const res = fetch(`https://stockmight-backend.onrender.com/api/users/${_id}`, {
             method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(user)
@@ -44,7 +44,7 @@ export default function User({_id , src, username, realname, email, role, status
 
     async function confirmDelete() {
         try {
-            await fetch(`http://stockmight-backend.onrender.com/api/users/${_id}`, {method: "DELETE"})
+            await fetch(`https://stockmight-backend.onrender.com/api/users/${_id}`, {method: "DELETE"})
             console.log("confirm")
             setIsShow(!isShow)
         } catch {

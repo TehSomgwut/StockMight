@@ -9,7 +9,7 @@ export default function Unit({_id, name, description, status}) {
     const [ metric, setMetric] = useState({})
     useEffect(() => {
         async function getMetric() {
-            const target = await fetch(`http://stockmight-backend.onrender.com/api/metric/${_id}`, {method: "GET"})
+            const target = await fetch(`https://stockmight-backend.onrender.com/api/metric/${_id}`, {method: "GET"})
             const C = await target.json()
             setMetric(C)
         }
@@ -19,7 +19,7 @@ export default function Unit({_id, name, description, status}) {
 
     async function confirmDelete() {
         try {
-            await fetch(`http://stockmight-backend.onrender.com/api/metric/${_id}`, {method: "DELETE"})
+            await fetch(`https://stockmight-backend.onrender.com/api/metric/${_id}`, {method: "DELETE"})
             setIsShow(!isShow)
         } catch {
             alert("การลบล้มเหลว")

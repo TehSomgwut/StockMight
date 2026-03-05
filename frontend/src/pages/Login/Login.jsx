@@ -32,7 +32,7 @@ export default function Login() {
         if (!isSubmitable) return;
 
         try {
-            const res = await fetch("http://stockmight-backend.onrender.com/api/users/login", {
+            const res = await fetch("https://stockmight-backend.onrender.com/api/users/login", {
                 method: "POST", // ปกติ Login หรือตรวจสอบข้อมูลควรใช้ POST
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",

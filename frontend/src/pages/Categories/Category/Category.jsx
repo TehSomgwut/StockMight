@@ -8,7 +8,7 @@ export default function Category({name, amount, status, _id}) {
     const [ isShow, setIsShow ] = useState(false)
 
     async function onConfirm() {
-        await fetch(`http://stockmight-backend.onrender.com/api/category/${_id}`, {
+        await fetch(`https://stockmight-backend.onrender.com/api/category/${_id}`, {
             method: "DELETE"
         })
         setIsShow(!isShow)

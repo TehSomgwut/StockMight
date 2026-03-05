@@ -55,7 +55,7 @@ export default function Export({ type, productsData }) {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const resMe = await fetch('http://stockmight-backend.onrender.com/api/users/me', {
+            const resMe = await fetch('https://stockmight-backend.onrender.com/api/users/me', {
                 method: 'GET',
                 credentials: 'include'
             });
@@ -70,7 +70,7 @@ export default function Export({ type, productsData }) {
             };
             const promises = select.map(item => {
                 const payload = { ...resForm, product: item._id }; 
-                return fetch(`http://stockmight-backend.onrender.com/api/transaction/${item._id}`, {
+                return fetch(`https://stockmight-backend.onrender.com/api/transaction/${item._id}`, {
                     method: "PATCH",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)

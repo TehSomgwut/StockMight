@@ -15,7 +15,7 @@ export default function App() {
   const [ user, setUser ] = useState({})
   useEffect(() => { // Login
     async function aut() {
-      const res = await fetch('http://stockmight-backend.onrender.com/api/users/me', {
+      const res = await fetch('https://stockmight-backend.onrender.com/api/users/me', {
         method: 'GET',
         credentials: 'include'
       })

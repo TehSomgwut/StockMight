@@ -19,7 +19,7 @@ export default function AddCategory() {
         }
 
         try {
-            const res = await fetch('http://stockmight-backend.onrender.com/api/category/', {
+            const res = await fetch('https://stockmight-backend.onrender.com/api/category/', {
                 method: "POST",
                 headers: {"Content-Type" : "application/json"},
                 body: JSON.stringify(resFrom)

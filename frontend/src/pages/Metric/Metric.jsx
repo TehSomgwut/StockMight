@@ -5,7 +5,7 @@ import Header from '../../components/PageHeader/PageHeader'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { io } from 'socket.io-client'
-const socket = io('http://stockmight-backend.onrender.com')
+const socket = io('https://stockmight-backend.onrender.com')
 
 export default function Metric() {
     
@@ -14,7 +14,7 @@ export default function Metric() {
     useEffect(() => {
         async function getMetric() {
             try {
-                const res = await fetch("http://stockmight-backend.onrender.com/api/metric/", {
+                const res = await fetch("https://stockmight-backend.onrender.com/api/metric/", {
                     method: "GET"
                 });
     

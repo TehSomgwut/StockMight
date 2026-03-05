@@ -25,7 +25,7 @@ export default function UpdateMetric() {
         }
 
         try {
-            const res = await fetch(`http://stockmight-backend.onrender.com/api/metric/${id}`, {
+            const res = await fetch(`https://stockmight-backend.onrender.com/api/metric/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(resForm)
@@ -41,7 +41,7 @@ export default function UpdateMetric() {
 
     useEffect(() => {
         async function getMetric() {
-            const res = await fetch(`http://stockmight-backend.onrender.com/api/metric/${id}`, { method: "GET" })
+            const res = await fetch(`https://stockmight-backend.onrender.com/api/metric/${id}`, { method: "GET" })
             const target = await res.json()
             setMetric(target)
             setActive(target.status === "inactive" ? "ไม่ใช้งาน" : "ใช้งาน")

@@ -58,7 +58,7 @@ export default function Report({ productsData = [] }) {
     useEffect(() => {
         async function fetchTransactions() {
             try {
-                const res = await fetch('http://stockmight-backend.onrender.com/api/transaction/');
+                const res = await fetch('https://stockmight-backend.onrender.com/api/transaction/');
                 if (res.ok) {
                     const transactions = await res.json();
                     if (!Array.isArray(transactions)) return;

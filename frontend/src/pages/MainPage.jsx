@@ -1,7 +1,7 @@
 import { Link, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
-const socket = io('http://stockmight-backend.onrender.com');
+const socket = io('https://stockmight-backend.onrender.com');
 
 import Nav from '../components/Nav/Nav';
 import Side from '../components/Side/Side';
@@ -27,7 +27,7 @@ export default function MainPage({ authentication }) {
     useEffect(() => {
         async function fetchProducts() {
             try {
-                const res = await fetch('http://stockmight-backend.onrender.com/api/product/', { method: "GET" });
+                const res = await fetch('https://stockmight-backend.onrender.com/api/product/', { method: "GET" });
                 if (res.ok) {
                     const data = await res.json();
                     setGlobalProducts(data);
