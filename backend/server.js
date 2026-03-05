@@ -17,10 +17,22 @@ const TransactionRouter = require('./routes/transactionRouter')
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://stockmight.vercel.app"
+];
+
 app.use(cors({
-    origin: 'https://stockmight.vercel.app',
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH']
+  origin: function(origin, callback){
+    if(!origin) return callback(null,true);
+    if(allowedOrigins.includes(origin)){
+      return callback(null,true);
+    }else{
+      return callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+  methods: ["GET","POST","PUT","DELETE","PATCH"]
 }));
 app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "public/images")));
