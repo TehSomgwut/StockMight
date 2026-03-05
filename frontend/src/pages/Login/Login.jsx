@@ -42,10 +42,10 @@ export default function Login() {
             const data = await res.json();
             console.log(data)
             if (data.message === "Login สำเร็จ") {
-                // setTimeout(() => {
-                //     navigate("/pages/home");
-                // }, 1500); // เพิ่มดีเลย์รอให้เซิร์ฟเวอร์ตอบกลับและตั้งค่า session ก่อนเปลี่ยนหน้า
+                setTimeout(() => {
                     navigate("/pages/home");
+                }, 1500); // เพิ่มดีเลย์รอให้เซิร์ฟเวอร์ตอบกลับและตั้งค่า session ก่อนเปลี่ยนหน้า
+                 //   navigate("/pages/home");
             }
             else {
                 setMessage(data.message);
