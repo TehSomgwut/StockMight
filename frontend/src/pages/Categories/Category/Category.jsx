@@ -10,7 +10,7 @@ export default function Category({name, amount, status, _id, productsData}) {
 
     useEffect(() => {
         if (productsData && Array.isArray(productsData)) {
-            const count = productsData.filter(p => p.category && p.category === _id).length;
+            const count = productsData.filter(p => p.category && p.category.$oid === _id).length;
             setProductCount(count);
         } else {
             setProductCount(amount || 0);
