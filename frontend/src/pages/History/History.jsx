@@ -8,18 +8,14 @@ const socket = io('https://stockmight-backend.onrender.com')
 
 export default function History() {
     const [ data, setData ] = useState([])
-    // const data = [
-    //     {date: new Date(), manager:{name: "สมชาย ใจดี", role:"พนักงานคลัง"}, type: "import", product: {productID: "ELC-001", pname: "เครื่องพิมพ์เลเซอร์ HP LaserJet"}, amount: 5, stock:10, remain: 15, note: {noteName: "ซื้อเพิ่ม", noteDescription: "รับสินค้าจากซัพพลายเออร์"}},
-    //     {date: new Date(), manager:{name: "สมหญิง รักงาน", role:"พนักงานคลัง"}, type: "export", product: {productID: "OFF-001", pname: "กระดาษ A4 Double A 80 แกรม"}, amount: 2, stock:5, remain: 3, note: {noteName: "ขาย", noteDescription: "ส่งให้ลูกค้า บจก.ABC"}},
-    //     {date: new Date(), manager:{name: "สมชาย ใจดี", role:"พนักงานคลัง"}, type:"export", product: {productID: "ELC-002", pname: "หมึกพิมพ์ Canon 810 สีดำ"}, amount: 3, stock:8, remain: 5, note: {noteName: "ขาย", noteDescription: ""}},
-    // ]
+    const [ searchQuery, setSearchQuery ] = useState('');
 
     useEffect(() => {
         async function getHistory() {
             const res = await fetch('https://stockmight-backend.onrender.com/api/transaction/', {method: 'GET'})
             if (res.ok) {
                 const transaction = await res.json()
-                setData(transaction)
+                setData(transaction.reverse())
             }
             else {
                 window.alert('ไม่พบข้อมูล โปรดลองอีกครั้งภายหลัง')
@@ -30,6 +26,15 @@ export default function History() {
         socket.on('updateTransaction', () => getHistory())
         return () => {socket.off('updateTransaction')}
     }, [])
+    const filteredData = data.filter((item) => {
+        if (!searchQuery) return true; // ถ้าช่องค้นหาว่าง ให้แสดงทั้งหมด
+        
+        const lowerCaseQuery = searchQuery.toLowerCase();
+        const sku = item.product?.code?.toLowerCase() || item.code?.toLowerCase() || "";
+        const name = item.product?.name?.toLowerCase() || item.name?.toLowerCase() || "";
+
+        return sku.includes(lowerCaseQuery) || name.includes(lowerCaseQuery);
+    });
 
     return (
          <div className={StyleHistory.History}>
@@ -38,7 +43,12 @@ export default function History() {
                 <p>เลือกสินค้า</p>
                 <label htmlFor="search-request">
                     <img src="/Icon/4-Receive-issue/Icon.svg" />
-                    <input type='text' placeholder='ค้นหาด้วย SKU หรือชื่อสินค้า' required />
+                    <input 
+                        type='text' 
+                        placeholder='ค้นหาด้วย SKU หรือชื่อสินค้า' 
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
                 </label>
             </div>
             <div className={StyleHistory.Thead}>
@@ -53,9 +63,15 @@ export default function History() {
             </div>
             <div className={StyleHistory.table}>
                 {
-                    data.map((item) => {
-                        return <Log {...item} key={item._id} />
-                    })
+                    filteredData.length > 0 ? (
+                        filteredData.map((item) => {
+                            return <Log {...item} key={item._id} />
+                        })
+                    ) : (
+                        <p style={{textAlign: 'center', marginTop: '30px', color: 'var(--gray)', width: '100%', gridColumn: '1 / -1'}}>
+                            ไม่พบรายการที่ค้นหา
+                        </p>
+                    )
                 }
             </div>
          </div>

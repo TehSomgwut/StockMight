@@ -65,7 +65,8 @@ export default function Login() {
             const data = await res.json();
             console.log(data)
             if (data.message === "Login สำเร็จ") {
-                navigate("/pages/home");
+                // เปลี่ยนจาก navigate เป็นการใช้ window.location.href
+                window.location.href = "/pages/home"; 
             }
             else {
                 setMessage(data.message);
