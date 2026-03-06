@@ -6,6 +6,9 @@
     border: var(--card-border);
     padding: 20px;
     box-sizing: border-box;
+    flex-shrink: 400px;
+    flex-basis: 500px;
+    flex-grow: 1;
     header {
         display: flex;
         align-items: center;
