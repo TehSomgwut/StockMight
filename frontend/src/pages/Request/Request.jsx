@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 export default function Request({ productsData }) {
     const [active, setActive] = useState("import");
+    const activeProducts = productsData.filter(product => product.status === "active");
     
     return (
          <div className={StyleRequest.Request}>
@@ -34,7 +35,7 @@ export default function Request({ productsData }) {
                 <Routes>
                     <Route path="/" element={<Export productsData={productsData} />} />
                     <Route path="import" element={<Export type={"import"} productsData={productsData} />} />
-                    <Route path="export" element={<Export type={"export"} productsData={productsData} />} />
+                    <Route path="export" element={<Export type={"export"} productsData={activeProducts} />} />
                 </Routes>
             </div>
          </div>

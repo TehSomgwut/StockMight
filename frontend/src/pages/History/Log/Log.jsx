@@ -25,8 +25,8 @@ export default function Log({ date, user, type, product, quantity, previous, cur
             <p className={StyleLog.normalText}>{previous}</p>
             <p>{current}</p>
             <div>
-                <p>{note}</p>
-                <p className={StyleLog.normalText}>{reason}</p>
+                <p>{reason}</p>
+                <p className={StyleLog.normalText}>{note}</p>
             </div>
         </div>
     );

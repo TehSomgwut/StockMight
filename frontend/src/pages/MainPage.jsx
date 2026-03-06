@@ -60,19 +60,24 @@ export default function MainPage({ authentication }) {
                     <Route path={"/add-product"} element={ <AddProduct /> } />
                     <Route path={"/request/*"} element={ <Request productsData={globalProducts} /> } />
                     <Route path={"/history"} element={ <History /> } />
-                    <Route path={"/categories/*"} element={ <Categories productsData={globalProducts} /> } />
-                    <Route path={"/metric/*"} element={ <Metric productsData={globalProducts} /> } />
                     <Route path={"/reports"} element={ <Reports productsData={globalProducts} /> } />
                     
                     { user?.role === 'admin' && (
                         <Route path={"/users"} element={ <Users /> } />
                     )}
 
-                    <Route path={"/categories/add"} element={ <AddCategory />} />
-                    <Route path={"/metric/add"} element={ <AddMetric />} />
-                    <Route path={`/categories/update/:id`} element={ <UpdateCategory /> } />
-                    <Route path={`/unit/:id`} element={ <UpdateMetric /> } />
+                    { (user?.role === 'admin' || user?.role === 'manager') && (
+                        <>
+                            <Route path={"/categories/*"} element={ <Categories productsData={globalProducts} /> } />
+                            <Route path={"/metric/*"} element={ <Metric productsData={globalProducts} /> } />
+                            <Route path={"/categories/add"} element={ <AddCategory />} />
+                            <Route path={"/metric/add"} element={ <AddMetric />} />
+                            <Route path={`/categories/update/:id`} element={ <UpdateCategory /> } />
+                            <Route path={`/unit/:id`} element={ <UpdateMetric /> } />
+                        </>
+                    )}
                     <Route path={`/inventory/:id`} element={ <UpdateProduct /> } />
+
                 </Routes>
             </div>
         </div>

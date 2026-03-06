@@ -9,91 +9,77 @@ export default function Inventory({ productsData }) {
     const [ products, setProducts] = useState([]);
     const [ showCheckbox, setShowCheckbox ] = useState(false);
     const [ allProducts, setAllProducts ] = useState([]);
+    
     const [ selectedFilters, setSelectedFilters] = useState([]);
+    const [ searchQuery, setSearchQuery ] = useState("");
+    const [ sortOption, setSortOption ] = useState("");
 
-    // อัปเดต State เมื่อ Props (productsData) เปลี่ยนแปลง
     useEffect(() => {
         setProducts(productsData || []);
         setAllProducts(productsData || []);
     }, [productsData]);
 
-    function sortProduct(e) {
-        const option = e.target.value;
-        switch (option) {
-            case "1": {
-                const sorted = [...products].sort((a, b) => (a.category?.name || "").localeCompare(b.category?.name || ""));
-                setProducts(sorted);
-                break;
-            }
-            case "2": {
-                const sorted = [...products].sort((a, b) => (a.metric?.name || "").localeCompare(b.metric?.name || ""));
-                setProducts(sorted);
-                break;
-            }
-            case "3": {
-                const sorted = [...products].sort((a, b) => a.name.localeCompare(b.name));
-                setProducts(sorted);
-                break;
-            }
-            case "4": {
-                const sorted = [...products].sort((a, b) => a.quantity - b.quantity);
-                setProducts(sorted);
-                break;
-            }
-            case "5": {
-                const sorted = [...products].sort((a, b) => a.code.localeCompare(b.code));
-                setProducts(sorted);
-                break;
-            }
-            default:
-                break;
+    useEffect(() => {
+        let result = [...allProducts];
+
+        if (searchQuery) {
+            result = result.filter((item) => 
+                item.name.toLowerCase().includes(searchQuery) || 
+                item.code.toLowerCase().includes(searchQuery)
+            );
         }
+
+        if (selectedFilters.length > 0) {
+            result = result.filter(item => {
+                return selectedFilters.every(filterOption => {
+                    if (filterOption === "1") return item.status === 'active';
+                    if (filterOption === "4") return item.status === 'inactive';
+                    if (filterOption === "2") return item.quantity < item.minStock;
+                    if (filterOption === "3") return item.quantity >= item.minStock;
+                    return true; 
+                });
+            });
+        }
+        if (sortOption) {
+            result.sort((a, b) => {
+                switch (sortOption) {
+                    case "1": return (a.category?.name || "").localeCompare(b.category?.name || "");
+                    case "2": return (a.metric?.name || "").localeCompare(b.metric?.name || "");
+                    case "3": return a.name.localeCompare(b.name);
+                    case "4": return a.quantity - b.quantity;
+                    case "5": return a.code.localeCompare(b.code);
+                    default: return 0;
+                }
+            });
+        }
+
+        setProducts(result);
+
+    }, [allProducts, searchQuery, selectedFilters, sortOption]); 
+
+    function sortProduct(e) {
+        setSortOption(e.target.value);
     }
 
     function filterProduct(e) {
         const isChecked = e.target.checked;
         const option = e.target.value;
-        
-        let newFilters;
         if (isChecked) {
-            newFilters = [...selectedFilters, option]; 
+            setSelectedFilters(prev => [...prev, option]); 
         } else {
-            newFilters = selectedFilters.filter(val => val !== option); 
+            setSelectedFilters(prev => prev.filter(val => val !== option)); 
         }
-        
-        setSelectedFilters(newFilters);
-
-        if (newFilters.length === 0) {
-            setProducts(allProducts); 
-            return;
-        }
-
-        const filteredData = allProducts.filter(item => {
-            return newFilters.every(filterOption => {
-                if (filterOption === "1") return item.status === 'active';
-                if (filterOption === "2") return item.quantity < item.minStock;
-                if (filterOption === "3") return item.quantity >= item.minStock;
-                return true; 
-            });
-        });
-
-        setProducts(filteredData);
     }
 
     function searchSupply(e) {
-        const target = e.target.value.toLowerCase();
-        const searched = allProducts.filter((item) => 
-            item.name.toLowerCase().includes(target) || 
-            item.code.toLowerCase().includes(target)
-        );
-        setProducts(searched);
+        setSearchQuery(e.target.value.toLowerCase());
     }
     
     const cards = [
-        {text: "สินค้าทั้งหมด", value: products.length, src:"/Icon/2-Inventory/Icon-7.svg", CN:"blue"},
-        {text: "สินค้าใช้งาน", value: products.filter((item) => item.status === 'active').length, src:"/Icon/2-Inventory/Icon-6.svg", CN:"green"},
-        {text: "สต๊อกต่ำ", value: products.filter((item) => item.quantity < item.minStock).length, src:"/Icon/2-Inventory/Icon.svg", CN: "orange"},
-        {text: "หมดสต๊อก", value: products.filter((item) => item.quantity === 0).length, src:"/Icon/2-Inventory/Icon-20.svg", CN:"red"}
+        {text: "สินค้าทั้งหมด", value: allProducts.length, src:"/Icon/2-Inventory/Icon-7.svg", CN:"blue"},
+        {text: "สินค้าใช้งาน", value: allProducts.filter((item) => item.status === 'active').length, src:"/Icon/2-Inventory/Icon-6.svg", CN:"green"},
+        {text: "สต๊อกต่ำ", value: allProducts.filter((item) => item.quantity < item.minStock).length, src:"/Icon/2-Inventory/Icon.svg", CN: "orange"},
+        {text: "หมดสต๊อก", value: allProducts.filter((item) => item.quantity === 0).length, src:"/Icon/2-Inventory/Icon-20.svg", CN:"red"}
     ];
 
     return (
@@ -117,11 +103,11 @@ export default function Inventory({ productsData }) {
             <form onSubmit={(e) => e.preventDefault()}>
                 <label htmlFor='product-search'>
                     <img src="/Icon/2-Inventory/Icon-4.svg" alt="search"/>
-                    <input type='text' id='product-search' name='product-search' placeholder='ค้นหารหัสสินค้า หรือชื่อสินค้า' onChange={searchSupply} />
+                    <input type='text' id='product-search' name='product-search' placeholder='ค้นหารหัสสินค้า หรือชื่อสินค้า' value={searchQuery} onChange={searchSupply} />
                 </label>
                 <label htmlFor="search-filter">
                     <img src="/Icon/2-Inventory/Icon-3.svg" alt="filter"/>
-                    <select id="search-filter" name="search-filter" onChange={sortProduct}>
+                    <select id="search-filter" name="search-filter" value={sortOption} onChange={sortProduct}>
                         <option value="">เรียงลำดับตาม</option>
                         <option value="1">ตามหมวดหมู่</option>
                         <option value="2">ตามหน่วยนับ</option>
@@ -136,6 +122,8 @@ export default function Inventory({ productsData }) {
                     <span id="filter1" name="filter1">
                         <div className={styleI["checkbox-container"]} style={ showCheckbox ? {display: 'block'} : {display: 'none'}}>
                             <label><input type='checkbox' onChange={filterProduct} value="1" name="activeCheckbox" />สถานะใช้งาน</label>
+                            <label><input type='checkbox' onChange={filterProduct} value="4" name="lowStockCheckbox" />สถานะไม่ใช้งาน</label>
+                            <hr style={{border: 'var(--card-border)', backgroundColor: 'var(--gray)'}}/>
                             <label><input type='checkbox' onChange={filterProduct} value="2" name="lowStockCheckbox" />ต่ำกว่าจุดสั่งซื้อ</label>
                             <label><input type='checkbox' onChange={filterProduct} value="3" name="normalCheckbox" />สถานะปกติ</label>
                         </div>

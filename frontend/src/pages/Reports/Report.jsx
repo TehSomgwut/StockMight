@@ -10,7 +10,7 @@ export default function Report({ productsData = [] }) {
     
     // -- รายการใกล้หมดสต็อก ---
     const dynamicLowStock = safeProducts
-        .filter(item => (item.quantity || 0) <= (item.minStock || 0))
+        .filter(item => (item.quantity || 0) < (item.minStock || 0))
         .map(item => ({ ...item, type: "LowStock" }));
 
     const totalReport = dynamicLowStock.length;
