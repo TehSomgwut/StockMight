@@ -10,7 +10,8 @@ const productSchema = new mongoose.Schema({
   minStock: {type: Number, default: 10},
   image: {type: String, default: "/"},
   MFG: {type: Date, default: Date.now},
-  EXP: {type: Date, default: Date.now},
+  EXP: {type: Date},
+  clearStock: {type: Date, default: () => Date.now() + 365 * 24 * 60 * 60 * 1000 * 10},
   status: {type: String, Enum: ["active", "inactive"]},
   createdAt: {type: Date, default: Date.now}
 

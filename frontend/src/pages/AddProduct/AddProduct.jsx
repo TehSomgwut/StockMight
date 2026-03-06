@@ -13,6 +13,7 @@ export default function AddProduct() {
     const [metric, setMetric] = useState([])
     const [isShow, setIsShow] = useState(false)
     const [image, setImage] = useState(null)
+    const [showDate, setShowDate] = useState({showMFG: false, showEXP: false, showClearStock: false})
     const navigate = useNavigate()
     
     const addA = () => setAlertValue(prev => prev + 1);
@@ -24,6 +25,11 @@ export default function AddProduct() {
     function handleChange(e) {
         const { value, name } = e.target
         setForm(prev => ({...prev, [name]: value}))
+    }
+
+    function handleCheckBoxChange(e) {
+        const { name } = e.target
+        setShowDate(prev => ({...prev, [name]: !prev[name]}))
     }
 
     function handleImageChange(e) {
@@ -67,16 +73,20 @@ export default function AddProduct() {
 
         //ใช้ FormData แทน Object ปกติ
         const formData = new FormData();
-        formData.append("code", form.code);
-        formData.append("name", form.name);
-        formData.append("description", form.description);
-        formData.append("category", form.category);
-        formData.append("metric", form.metric);
-        formData.append("quantity", starterValue);
-        formData.append("minStock", alertValue);
-        formData.append("MFG", form.MFG);
-        formData.append("EXP", form.EXP);
-        formData.append("status", form.status);
+        formData.append("code", form.code || "");
+        formData.append("name", form.name || "");
+        formData.append("description", form.description || "");
+        formData.append("category", form.category || "");
+        formData.append("metric", form.metric || "");
+        formData.append("quantity", starterValue || 0);
+        formData.append("minStock", alertValue || 0);
+        
+        formData.append("MFG", (showDate.showMFG && form.MFG) ? form.MFG : "");
+        formData.append("EXP", (showDate.showEXP && form.EXP) ? form.EXP : "");
+        formData.append("clearStock", (showDate.showClearStock && form.clearStock) ? form.clearStock : "");
+        
+        formData.append("status", form.status || "active");
+        
         if (image) {
             formData.append("image", image);
         }
@@ -87,10 +97,15 @@ export default function AddProduct() {
                 // Browser จะใส่ 'multipart/form-data' พร้อม Boundary ให้เอง
                 body: formData 
             });
-
+            
             if (res.ok) {
                 window.alert("บันทึกเสร็จสิ้น");
                 navigate('/pages/inventory')
+            }
+            else {
+                const resJson = await res.json()
+                console.log(resJson)
+                window.alert(resJson.message)
             }
         } catch (err) {
             console.log("ERR : ", err);
@@ -188,6 +203,7 @@ export default function AddProduct() {
                             <input type="number" min={0} required value={starterValue} onChange={(e) => setStarterValue(Number(e.target.value))} name="quantity" />
                             <span onClick={addS}>+</span>
                         </div>
+                        <p className={StyleAddProduct.description}>จำนวนที่รับเข้ามาครั้งแรก หรือจำนวนเริ่มต้นเมื่อเพิ่มสินค้าเข้ามา</p>
                     </div>
                     <div className={StyleInputField["input-field"]}>
                         <p>จุดแจ้งเตือนสต๊อกต่ำ</p>
@@ -200,13 +216,36 @@ export default function AddProduct() {
                     </div>
                 </div>
                 <div className={StyleAddProduct["input-container"]}>
-                    <div className={StyleInputField["input-field"]}>
-                        <p>วันผลิต</p>
-                        <input type="date" required name='MFG' onChange={handleChange} />
+                    <div className={StyleAddProduct["checkbox-container"]} style={{}}>
+                        <p>สินค้านี้มี</p>
+                        <div>
+                            <label htmlFor='showMFG'>
+                                วันผลิต
+                            </label>
+                                <input id='showMFG' name='showMFG' value="showMFG" type='checkbox' onChange={handleCheckBoxChange} />
+
+                            <label htmlFor='showEXP'>
+                                วันหมดอายุ
+                            </label>
+                                <input id='showEXP' name='showEXP' value="showEXP" type='checkbox' onChange={handleCheckBoxChange} />
+
+                            <label htmlFor='showClearStock'>
+                                วันที่ควรล้าง Stock
+                            </label>
+                                <input id='showClearStock' name='showClearStock' value="showClearStock" type='checkbox' onChange={handleCheckBoxChange} />
+                        </div>
                     </div>
-                    <div className={StyleInputField["input-field"]}>
+                    <div className={StyleInputField["input-field"]} style={{display: showDate.showMFG ? '' : 'none'}}>
+                        <p>วันผลิต</p>
+                        <input type="date" name='MFG' onChange={handleChange} />
+                    </div>
+                    <div className={StyleInputField["input-field"]} style={{display: showDate.showEXP ? '' : 'none'}}>
                         <p>วันหมดอายุ</p>
-                        <input type="date" required name='EXP' onChange={handleChange} />
+                        <input type="date" name='EXP' onChange={handleChange} />
+                    </div>
+                    <div className={StyleInputField["input-field"]} style={{display: showDate.showClearStock ? '' : 'none'}}>
+                        <p>วันล้างสต๊อกสินค้า</p>
+                        <input type="date" name='clearStock' onChange={handleChange} />
                     </div>
                 </div>
                 <div className={StyleInputField["input-field"]}>

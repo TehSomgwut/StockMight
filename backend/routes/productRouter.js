@@ -82,14 +82,13 @@ router.post("/", upload.single('image'), async (req, res) => {
             ...req.body,
             image: imagePath
         });
-        
         await newProduct.save();
         const io = req.app.get('io')
         io.emit("updateSupply")
         res.status(200).json({ message: "เพิ่มสำเร็จ" });
     } catch (err) {
         console.log("POST Error", err);
-        res.status(500).json({ message: "การเพิ่มล้มเหลว" });
+        res.status(500).json({ message: "การเพิ่มล้มเหลว โปรดใส่รหัสสินค้าไม่ซ้ำกับสินค้าอื่น" });
     }
 });
 
