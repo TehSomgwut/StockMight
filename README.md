@@ -32,8 +32,9 @@
   <br><img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Vite-Dark.svg" width="30"> <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/React-Dark.svg" width="30"> 
 * **Backend** และ **Database** : Node.js + Express + MongoDB, cors/dotenv
   <br> <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/NodeJS-Dark.svg" width="30"> <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/ExpressJS-Dark.svg" width="30"> <img src="https://github.com/tandpfun/skill-icons/raw/main/icons/MongoDB.svg" width="30">
-* **Deploy** : Vercel
+* **Deploy** : Vercel(Frontend)) + Render(Backend)
   <br><img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Vercel-Dark.svg" width="30">
+  <img src="https://cdn.sanity.io/images/34ent8ly/production/ec37a3660704e1fa2b4246c9a01ab34e145194ad-824x824.png" width="30">
 * **UX/UI Design** : Figma
   <br><img src="https://github.com/tandpfun/skill-icons/raw/main/icons/Figma-Dark.svg" width="30">
 
