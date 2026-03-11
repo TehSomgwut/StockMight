@@ -65,7 +65,7 @@ export default function Metric( {productsData} ) {
                     <p>ชื่อหน่วย</p>
                     <p>คำอธิบาย</p>
                     <p>สถานะ</p>
-                    <p>การกระทำ</p>
+                    <p>จัดการ</p>
                 </div>
                 <div className={StyleCategories.Tbody}>
                     { data.length == 0 ? <p style={{fontSize: "0.9em", color: "var(--gray)"}}>ไม่พบหน่วยนับ ลองเพิ่มดูสิ</p> :

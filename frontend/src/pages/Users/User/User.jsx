@@ -55,7 +55,7 @@ export default function User({_id , src, username, realname, email, role, status
     return(
         <div className={styleUser.User}>
             <div className={styleUser.content}>
-                <div>
+                <div className={styleUser.profileBox}>
                     {img}
                     <p className={styleUser.thin}>{username}</p>
                 </div>
@@ -64,9 +64,9 @@ export default function User({_id , src, username, realname, email, role, status
                 <p className={styleUser[roleC]} style={roleColor()}>{role}</p>
                 <p className={styleUser[statusC]}>{status}</p>
                 <p className={styleUser.thin}>{lastLogin ? new Date(lastLogin).toLocaleDateString('th-TH') : "-"}</p>
-                <div>
-                    <img src="/Icon/6-Categories/Icon-1.svg" onClick={() => setShowEdit(!showEdit)} style={{cursor: 'pointer'}} />
-                    <img src="/Icon/6-Categories/Icon.svg" onClick={handleDelete} style={{cursor: 'pointer', borderRadius: '0'}} />
+                <div className={styleUser.manage}>
+                    <img src="/Icon/6-Categories/Icon-1.svg" onClick={() => setShowEdit(!showEdit)} />
+                    <img src="/Icon/6-Categories/Icon.svg" onClick={handleDelete} />
                 </div>
                 <DeleteComponent isShow={isShow} setIsShow={setIsShow} h3="ยืนยันการลบผู้ใช้" p={`คุณแน่ใจหรือไม่ว่าต้องการลบผู้ใช้ "${user.username}" (${user.role})? การดำเนินการนี้ไม่สามารถยกเลิกได้`} onConfirm={confirmDelete} />
             </div>
@@ -94,9 +94,9 @@ export default function User({_id , src, username, realname, email, role, status
                         <div>
                             <p>บทบาท</p>
                             <select name="role" onChange={handleChange}>
-                                <option value="staff">staff</option>
-                                <option value="admin">admin</option>
-                                <option value="manager">manager</option>
+                                <option value="staff">Staff</option>
+                                <option value="admin">Admin</option>
+                                <option value="manager">Manager</option>
                             </select>
                         </div>
                         <div>

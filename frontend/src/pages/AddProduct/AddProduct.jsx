@@ -158,13 +158,13 @@ export default function AddProduct() {
     return (
          <div className={StyleAddProduct.addProduct}>
             <header>
-                <img src="\Icon\3-Inventory-addnew\inventory\Icon-12.svg" />
+                {/* <img src="\Icon\3-Inventory-addnew\inventory\Icon-12.svg" /> */}
                 <Header header="เพิ่มสินค้าใหม่" description="เพิ่มสินค้าใหม่เข้าสู่ระบบ" />
             </header>
             <form onSubmit={handleSubmit}>
                 <InputField name="รหัสสินค้า (SKU/GTIN)" placeholder="เช่น ELC-001" description="รหัสต้องไม่ซ้ำกับสินค้าอื่น" isReq={true} formName="code" onChange={handleChange} />
                 <InputField name="ชื่อสินค้า" placeholder="ระบุชื่อสินค้า" isReq={true} formName="name" onChange={handleChange} />
-                <InputField name="คำอธิบายสินค้า" placeholder="ระบุรายระเอียดสินค้า" isReq={true} addClass={StyleInputField.long} formName="description" onChange={handleChange} />
+                {/* <InputField name="คำอธิบายสินค้า" placeholder="ระบุรายระเอียดสินค้า" isReq={true} addClass={StyleInputField.long} formName="description" onChange={handleChange} /> */}
                 <div>
                     <p>รูปสินค้า</p>
                     <label htmlFor='input-product-image'>

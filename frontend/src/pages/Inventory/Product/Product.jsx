@@ -10,8 +10,8 @@ export default function Product({ name, image, metric, code, category, quantity,
     // 1. renderStatus: ย้าย Logic มาไว้ข้างบนให้ดูง่าย
     const renderStatus = () => {
         switch (status) {
-            case "active": return <div className={styleP.pending}>ใช้งาน</div>;
-            case "inactive": return <div className={styleP["not-pending"]}>ไม่ใช้งาน</div>;
+            case "active": return <div className={styleP.pending}><img src="/Icon/2-Inventory/checkmark.svg" alt="checkmark" />ใช้งาน</div>;
+            case "inactive": return <div className={styleP["not-pending"]}><img src="/Icon/2-Inventory/non-checkmark.svg" alt="non-checkmark" />ไม่ใช้งาน</div>;
             default: return <div>{status}</div>;
         }
     };

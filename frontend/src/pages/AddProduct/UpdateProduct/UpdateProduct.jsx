@@ -158,8 +158,8 @@ export default function UpdateProduct() {
             <form onSubmit={handleSubmit}>
                 <InputField name="รหัสสินค้า (SKU/GTIN)" placeholder={product.code} description="รหัสต้องไม่ซ้ำกับสินค้าอื่น" formName="code" onChange={handleChange} value={form.code} />
                 <InputField name="ชื่อสินค้า" placeholder={product.name} formName="name" onChange={handleChange} value={form.name} />
-                <InputField name="คำอธิบายสินค้า" placeholder="ระบุรายละเอียดสินค้า" addClass={StyleInputField.long} formName="description" onChange={handleChange} value={form.description} />
-                
+                {/* <InputField name="คำอธิบายสินค้า" placeholder="ระบุรายละเอียดสินค้า" addClass={StyleInputField.long} formName="description" onChange={handleChange} value={form.description} /> */}
+
                 <div>
                     <p>รูปสินค้า</p>
                     <label htmlFor='input-product-image'>

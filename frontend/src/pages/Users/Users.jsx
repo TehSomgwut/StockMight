@@ -133,8 +133,8 @@ export default function Users() {
 
             <div className={StyleUsers["card-container"]}>
                 <Card text="ผู้ใช้งานทั้งหมด" value={allUser.length} src='/Icon/9-Users/Icon-6.svg' CN="blue" />
-                <Card text="ใช้งาน" value={allUser.filter((item) => item.status === "ใช้งาน").length} src='/Icon/9-Users/Icon-5.svg' CN="green" />
-                <Card text="ปิดการใช้งาน" value={allUser.filter((item) => item.status === "ปิดการใช้งาน").length} src='/Icon/9-Users/Icon-4.svg' />
+                <Card text="ใช้งาน" value={allUser.filter((item) => item.status === "ใช้งาน").length} src='/Icon/2-Inventory/checkmark.svg' CN="green" />
+                <Card text="ปิดการใช้งาน" value={allUser.filter((item) => item.status === "ปิดการใช้งาน").length} src='/Icon/2-Inventory/non-checkmark.svg' CN="red" />
             </div>
 
             <div className={`${StyleExport.search} ${StyleUsers.search}`}>
@@ -169,7 +169,7 @@ export default function Users() {
                 <p className={StyleUsers.Thead}>อีเมล</p>
                 <p className={StyleUsers.Thead}>บทบาท</p>
                 <p className={StyleUsers.Thead}>สถานะ</p>
-                <p className={StyleUsers.Thead}>เข้าสู่ระบบล่าสุด</p>
+                <p className={StyleUsers.Thead}>หมายเหตุ</p>
                 <p className={StyleUsers.Thead}>จัดการ</p>
 
                 { userData.length != 0 ? userData.map((item, index) => {

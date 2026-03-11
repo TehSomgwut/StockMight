@@ -1,58 +1,88 @@
 .User {
     display: contents;
     text-align: center;
-    padding: 15px 5px;
+    padding: 15px 50px;
     width: 100%;
     box-sizing: border-box;
+
     .content {
         display: contents;
-        div {
+        .profileBox {
             display: flex;
             gap: 10px;
-            h4, img {
-                border-radius: 50%;
+
+            /* ใช้ > เพื่อจำกัดขอบเขตให้มีผลเฉพาะ h4 และ img ที่เป็นลูกติดกับ div เท่านั้น */
+            > h4, > img {
+                border-radius: 100%;
                 width: 25px;
                 height: 25px;
                 align-items: center;
                 margin-left: 20px;
                 margin-bottom: 20px;
             }
-            img {
+            > img {
                 background-size: cover;
             }
-            h4 {
+            > h4 {
                 background-color: var(--main);
                 color: white;
                 padding: 5px;
             }
         }
     }
+
     .thin {
         font-size: 0.9em;
         color: var(--gray);
     }
+
     .green {
         color: var(--safe);
         background-color: var(--safe10);
         padding: 5px;
-        width: fit-content;
+        width: auto;
         height: fit-content;
-        border-radius: 10px;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
+
     .gray {
         color: var(--gray);
         background-color: var(--light-gray);
         padding: 5px;
-        width: fit-content;
+        width: auto; /* แก้ไขจาก auto% เป็น auto */
         height: fit-content;
-        border-radius: 10px;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
+
     .blue {
         color: var(--main);
         background-color: var(--main10);
         padding: 5px;
-        width: fit-content;
+        width: auto;
         height: fit-content;
-        border-radius: 10px;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .manage {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        place-self: center;
+        img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            border-radius: 0; 
+        }
     }
 }

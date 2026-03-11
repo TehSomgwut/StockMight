@@ -62,7 +62,7 @@ export default function Categories({productsData}) {
                     <p>ชื่อหมวดหมู่</p>
                     <p>จำนวนสินค้า</p>
                     <p>สถานะ</p>
-                    <p>การกระทำ</p>
+                    <p>จัดการ</p>
                 </div>
                 <div className={StyleCategories.Tbody}>
                     { data.length == 0 ? <p style={{fontSize: "0.9em", color: "var(--gray)"}}>ไม่พบหมวดหมู่ใดๆ ลองเพิ่มดูสิ</p> : data.map((item, index) => {
