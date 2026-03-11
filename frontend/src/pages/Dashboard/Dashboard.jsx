@@ -12,6 +12,7 @@ export default function Dashboard({ productsData }) {
     const [todayImport, setTodayImport] = useState(0);
     const [todayExport, setTodayExport] = useState(0);
     const [chartData, setChartData] = useState([]);
+    const [ExpiringSoon, setExpiringSoon] = useState(0); // กำหนดค่าเริ่มต้นเป็น 0
 
     useEffect(() => {
         const safeProductData = Array.isArray(productsData) ? productsData : [];
@@ -23,6 +24,20 @@ export default function Dashboard({ productsData }) {
 
         const lowStockCount = safeProductData.filter(item => (item.quantity || 0) < (item.minStock || 0)).length;
         setLowStock(lowStockCount);
+
+        setExpiringSoon(safeProductData.filter(item => {
+            // 🟢 แก้ไขตรงนี้: ใช้ item.EXP ให้ตรงกับฐานข้อมูล
+            const expValue = item.EXP;
+            if (!expValue) return false;
+            const expDate = new Date(expValue);
+            if (isNaN(expDate.getTime())) return false;
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const next30Days = new Date();
+            next30Days.setDate(today.getDate() + 30);
+            next30Days.setHours(23, 59, 59, 999);
+            return expDate >= today && expDate <= next30Days;
+        }).length);
 
         async function fetchTransactions() {
             try {
@@ -91,7 +106,8 @@ export default function Dashboard({ productsData }) {
         { src: '/Icon/1-Home/Icon-6.svg', text: "จำนวนรายการสินค้า (SKU)", data: sum },
         { src: '/Icon/1-Home/Icon-5.svg', text: "จำนวนคงเหลือรวม", data: `${amountAllProduct} หน่วย` },
         { src: '/Icon/1-Home/Icon-4.svg', text: "รายการใกล้หมด", data: lowStock, alert: lowStock > 0 ? "true" : null },
-        { src: '/Icon/1-Home/Icon-2.svg', text: "จำนวนรายการใกล้หมดอายุ (30 วัน)", data: "0" },
+        // 🟢 แก้ไขตรงนี้: ลบปีกกา {} ออกจาก ExpiringSoon
+        { src: '/Icon/1-Home/Icon-2.svg', text: "จำนวนรายการใกล้หมดอายุ (30 วัน)", data: ExpiringSoon, alert: ExpiringSoon > 0 ? "true" : null },
         { src: '/Icon/1-Home/Icon-1.svg', text: "รับเข้าสินค้าวันนี้", data: `${todayImport} หน่วย` },
         { src: '/Icon/1-Home/Icon-10.svg', text: "เบิกออกสินค้าวันนี้", data: `${todayExport} หน่วย` }
     ];
