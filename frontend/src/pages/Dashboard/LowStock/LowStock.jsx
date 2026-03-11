@@ -16,7 +16,7 @@ export default function LowStock({items}) {
         <div className={LowStockStyles["low-stock"]}>
             <div className={LowStockStyles.status}>
                 <h2>รายการใกล้หมด</h2>
-                <p>3 รายการ</p>
+                <p>{items.length} รายการ</p>
             </div>
             <div className={LowStockStyles.table}>
                 <div className={LowStockStyles.Thead}>
