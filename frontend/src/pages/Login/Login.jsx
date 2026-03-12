@@ -81,12 +81,16 @@ export default function Login() {
     return (
         <div className={loginStyles["login-container"]}>
             <div className={loginStyles.wrapper}> 
-                <div className={loginStyles["logo-container"]}>
-                    <img src="/Icon/0-Login/Icon-4.svg" alt="logo"/> 
+                {/*<div className={loginStyles["logo-container"]}>
+                    <img src="/Icon/0-Login/Icon-4.svg" alt="logo"/>
                     <div>
                         <h1>StockMight</h1>
                         <h4>ระบบจัดการคลังสินค้า</h4>
                     </div>
+                </div>*/}
+
+                <div className={loginStyles["logos-container"]}>
+                    <img src="/Logo/StockMight_White_Hor.svg" alt="logo-icon"/>
                 </div>
 
                 <form className={loginStyles["login-form"]} onSubmit={handleSubmit}>
@@ -116,6 +120,7 @@ export default function Login() {
                             <input type="password" id="password" name="password" placeholder="กรอกรหัสผ่าน" onChange={handleChange} />
                         </div>
                     </div>
+
                     <button 
                         type="submit" 
                         className={loginStyles["login-button"]} 
@@ -127,7 +132,10 @@ export default function Login() {
                     </button>
                 </form>
             </div>
-            <footer className={loginStyles["login-footer"]}>© 2026 StockMight. ระบบจัดการคลังสินค้า</footer>
+            <footer className={loginStyles["login-footer"]}>
+                © 2026 StockMight. <br/>
+                ระบบจัดการสต็อกสินค้าขนาดเล็ก (กลุ่มที่ 25)
+            </footer>
         </div>
     );
 }
