@@ -12,8 +12,7 @@ export default function Nav() {
                 <span className={navStyles.announcements}>ประกาศ: </span>
                 <span>หากไม่มีข้อมูลแสดงผล </span>
                 <a href="https://stockmight-backend.onrender.com/" target="_blank" rel="noopener noreferrer">
-                    "คลิกที่นี่เพื่อเริ่มการทำงานของเซิร์ฟเวอร์"
-                </a>
+                    "คลิกที่นี่เพื่อเริ่มการทำงานของเซิร์ฟเวอร์"</a>
                 <span> ให้ "API Working" พร้อมทำงาน</span>
             </div>
 

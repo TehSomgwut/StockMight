@@ -62,7 +62,7 @@ div.logo {
     margin-right: auto;
     margin-left: 20px;
 
-    /* animation: pulseAlert 2s infinite; */
+    animation: pulseAlert 2s infinite;
 }
 
 .announcement a {
@@ -82,7 +82,7 @@ div.logo {
         transform: scale(1);
     }
     50% {
-        box-shadow: 0 0 0 8px rgba(225, 29, 72, 0);
+        box-shadow: 0 0 0 4px rgba(225, 29, 72, 0);
         transform: scale(1);
     }
     100% {
