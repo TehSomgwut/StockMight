@@ -185,10 +185,10 @@ export default function Report({ productsData = [] }) {
          <div className={StyleReport.Report}>
             <header>
                 <Header header="รายงานและการแจ้งเตือน" description="ภาพรวมและรายงานความสำคัญของระบบสินค้า" />
-                <div className={StyleReport["export-report"]}>
+                {/*<div className={StyleReport["export-report"]}>
                     <img src="/Icon/8-Reports/Icon-2.svg" alt="export" />
                     <p>ส่งออกรายงาน (CSV)</p>
-                </div>
+                </div>*/}
             </header>
             
             {/* 🟢 แสดงผลข้อมูล LowStock ทั้ง 3 กล่องเรียงกัน */}

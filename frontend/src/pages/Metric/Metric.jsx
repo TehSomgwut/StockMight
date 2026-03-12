@@ -1,6 +1,6 @@
 import StyleMetric from './Metric.module.css'
 import Unit from './Unit/Unit'
-import StyleCategories from '../Categories/Categories.module.css'
+import StyleCategories from './Metric.module.css'
 import Header from '../../components/PageHeader/PageHeader'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -52,7 +52,7 @@ export default function Metric( {productsData} ) {
     return (
          <div className={StyleCategories.Categories}>
             <div className={StyleCategories.header}>
-                <Header header="หน่วยนับ" description="แก้ไขข้อมูลสินค้า" />
+                <Header header="หน่วยนับ" description="เพิ่มหรือแก้ไขข้อมูลหน่วยนับที่เหมาะสมสำหรับคุณได้เลย!" />
                 <Link to='add'>
                     <div className={StyleCategories["add-button"]}>
                         <img src="\Icon\6-Categories\Icon-2.svg" />

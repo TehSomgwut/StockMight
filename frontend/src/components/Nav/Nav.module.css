@@ -41,8 +41,60 @@ div.logo {
     font-size: 0.8rem;
     gap: 8px;
     align-items: center;
-    color: #4A5565;
+    color: #000000;
+    margin: 0 10px 0 0;
     img {
         width: 25px;
     }
+}
+
+.announcement {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    font-size: 0.7rem;
+    background-color: #fff1f2;
+    color: #be123c;
+    padding: 4px 10px;
+    border-radius: 15px;
+    border: 1px solid #fecdd3;
+    
+    margin-right: auto;
+    margin-left: 20px;
+
+    /* animation: pulseAlert 2s infinite; */
+}
+
+.announcement a {
+    color: #e11d48;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.announcement a:hover {
+    color: #9f1239;
+}
+
+@keyframes pulseAlert {
+    0% {
+        box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.4);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(225, 29, 72, 0);
+        transform: scale(1);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(225, 29, 72, 0);
+        transform: scale(1);
+    }
+}
+
+.announcements {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-weight: bold;
+    color: #e11d48;
 }
