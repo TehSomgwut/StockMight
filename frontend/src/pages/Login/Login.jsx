@@ -81,6 +81,15 @@ export default function Login() {
     return (
         <div className={loginStyles["login-container"]}>
             <div className={loginStyles.wrapper}> 
+            {/* แจ็คขอเพิ่มประกาศไว้ตรงนี้เพื่อปลุก Backend */}
+                <div className={loginStyles.announcement}>
+                        <span className={loginStyles.announcements}>โปรดทราบ: </span>
+                        <span>หากการเข้าสู่ระบบไม่ตอบสนอง </span>
+                        <a href="https://stockmight-backend.onrender.com/" target="_blank" rel="noopener noreferrer">
+                            "คลิกที่นี่เพื่อเริ่มการทำงานของเซิร์ฟเวอร์"</a>
+                        <span> ให้ "API Working" พร้อมทำงาน</span>
+                    </div>
+
                 {/*<div className={loginStyles["logo-container"]}>
                     <img src="/Icon/0-Login/Icon-4.svg" alt="logo"/>
                     <div>
