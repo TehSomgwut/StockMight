@@ -82,6 +82,13 @@ export default function Login() {
         <div className={loginStyles["login-container"]}>
             <div className={loginStyles.wrapper}> 
             {/* แจ็คขอเพิ่มประกาศไว้ตรงนี้เพื่อปลุก Backend */}
+            <div className={loginStyles.announcement2}>
+                        <span className={loginStyles.announcements2}>Tutorial: </span>
+                        <span>รับชมวิดีโอการใช้งาน </span>
+                        <a href="https://youtu.be/owKRCX38QKw" target="_blank" rel="noopener noreferrer">
+                            "รับชมวิดีโอ"</a>
+                    </div>
+
                 <div className={loginStyles.announcement}>
                         <span className={loginStyles.announcements}>โปรดทราบ: </span>
                         <span>หากการเข้าสู่ระบบไม่ตอบสนอง </span>
@@ -89,6 +96,8 @@ export default function Login() {
                             "คลิกที่นี่เพื่อเริ่มการทำงานของเซิร์ฟเวอร์"</a>
                         <span> ให้ "API Working" พร้อมทำงาน</span>
                     </div>
+
+                    
 
                 {/*<div className={loginStyles["logo-container"]}>
                     <img src="/Icon/0-Login/Icon-4.svg" alt="logo"/>

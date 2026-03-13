@@ -1,9 +1,32 @@
 # 📦 StockMight – ระบบจัดการสต็อกสินค้าขนาดเล็ก
 
 # **[MINI-PROJECT | Web Application Development]**
-<br><img src="./frontend/public/Logo/StockMight_Color_Hor.svg">
+<br><img src="./frontend/public/Logo/StockMight_Color_Hor.svg" alt="StockMight Logo">
 **StockMight** คือเว็บแอปสำหรับจัดการสต็อกสินค้าขนาดเล็ก
 ออกแบบมาเพื่อช่วยให้การบริหารจัดการสินค้าในคลังเป็นเรื่องง่าย ลดความผิดพลาดของตัวเลข และรองรับการทำงานพื้นฐานที่จำเป็นต่อระบบคลังสินค้า
+
+## 🌐 Live Demo
+
+ทดลองใช้งานระบบ **StockMight** ได้ที่นี่
+**Username:** github , **Password:** 123 (สิทธิ์ระดับผู้จัดการ)
+### 🔗 **Website:** https://stockmight.vercel.app
+**Username:** github , **Password:** 123 (สิทธิ์ระดับผู้จัดการ)
+
+
+---
+
+## 🎬 Tutorial
+
+รับชมวิดีโอการใช้งานและเบื้องหลังการพัฒนา **StockMight**  
+📺 ดูวิดีโอเต็มได้ที่ YouTube ของพวกเรา
+
+### ▶️ **ดูวิดีโอที่นี่:** https://youtu.be/owKRCX38QKw
+
+---
+
+### ▶️ หรือคลิกดูผ่าน Thumbnail
+
+[![StockMight Tutorial](https://img.youtube.com/vi/owKRCX38QKw/maxresdefault.jpg)](https://youtu.be/owKRCX38QKw)
 
 ---
 

@@ -16,6 +16,14 @@ export default function Nav() {
                 <span> ให้ "API Working" พร้อมทำงาน</span>
             </div>
 
+            <div className={navStyles.announcement2}>
+                <span className={navStyles.announcements2}>Tutorial: </span>
+                <span>รับชมวิดีโอการใช้งานและเบื้องหลัง </span>
+                <a href="https://youtu.be/owKRCX38QKw" target="_blank" rel="noopener noreferrer">
+                    "ได้ที่นี่เลย"</a>
+                <span> บน YouTube ของพวกเรา</span>
+            </div>
+
             <div className={navStyles.date}>
                 <img src="\Icon\Navigator\Icon-7.svg" alt="bell" className={navStyles.bell} />
                 <p>{ new Date().toLocaleDateString('th-TH', {year: 'numeric',month: 'long',day: 'numeric' })}</p>
