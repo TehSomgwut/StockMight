@@ -69,7 +69,17 @@ export default function App() {
     return ( 
     <div className="loading-screen"> 
     <img src="/Logo/StockMight_Color_Hor.svg" width="200"/> 
-    <div className="spinner"></div><p>กำลังเปิดประตูคลังสินค้า...</p></div> 
+    <div className="spinner">
+    </div>
+      <p>กำลังเปิดประตูคลังสินค้า...</p>
+      <div className="announcement">
+        <span>หากการเข้าสู่ระบบไม่ตอบสนอง </span>
+        <a href="https://stockmight-backend.onrender.com/" target="_blank" rel="noopener noreferrer">
+          "คลิกที่นี่เพื่อเริ่มการทำงานของเซิร์ฟเวอร์"
+        </a>
+        <span> ให้ "API Working" พร้อมทำงาน (1-3 นาที)</span>
+      </div>
+    </div> 
     ) 
   }
 
